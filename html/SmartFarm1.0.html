@@ -210,8 +210,7 @@
 						  {valveName:"MiddleLeftValve", motor1Port:6, motor2Port:13, valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:2},
 						  {valveName:"BackRightValve", motor1Port:14, motor2Port:15, valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:3},
 						  {valveName:"BackLeftValve", motor1Port:18, motor2Port:23, valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:4},
-						  {valveName:"BackMiddle1Valve", motor1Port:24, motor2Port:25, valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:3},
-						  {valveName:"BackMiddle2Valve", motor1Port:12, motor2Port:16, valveImage:"back_middle2_valve-image", waterImage:"back_middle2_water-image", executionOrder:4}];
+						  {valveName:"BackMiddle1Valve", motor1Port:24, motor2Port:25, valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:3}];
 						  
         var sensorArray = [{sensorName:"FontRightSensor", analogPort:0}];
 
@@ -403,7 +402,7 @@
     window.gwd = window.gwd || {};
     
     gwd.OffImageClick = function(event) {	
-		webiopi().callMacro("ExecutionAuto", [600,1, onOffButtonArray.relayPort], null);
+		webiopi().callMacro("ExecutionAuto", [1200,1, onOffButtonArray.relayPort], null);
 		gwd.actions.events.setInlineStyle(onOffButtonArray.autoImage, 'visibility: visible; ');
 		gwd.actions.events.setInlineStyle(onOffButtonArray.onImage, 'visibility: hidden; ');
 		gwd.actions.events.setInlineStyle(onOffButtonArray.offImage, 'visibility: hidden; ');																
@@ -498,16 +497,6 @@
     };
     
     
-    gwd.BackMiddle2ValveOpenClick = function(event) 
-    {
-			OpenValve(valveArray[7].valveName);
-    };
-    
-    gwd.BackMiddle2ValveCloseClick = function(event) 
-    {
-		CloseValve(valveArray[7].valveName);
-    };
-    
   </script>
   <script type="text/javascript" gwd-events="registration">
     // Support code for event handling in Google Web Designer
@@ -536,9 +525,6 @@
      
       gwd.actions.events.addHandler(valveArray[6].valveImage, 'click', gwd.BackMiddle1ValveOpenClick, false);
       gwd.actions.events.addHandler(valveArray[6].waterImage, 'click', gwd.BackMiddle1ValveCloseClick, false);
-     
-      gwd.actions.events.addHandler(valveArray[7].valveImage, 'click', gwd.BackMiddle2ValveOpenClick, false);
-      gwd.actions.events.addHandler(valveArray[7].waterImage, 'click', gwd.BackMiddle2ValveCloseClick, false);
       
     };
     gwd.actions.events.deregisterEventHandlers = function(event) {
@@ -567,9 +553,6 @@
       gwd.actions.events.removeHandler(valveArray[6].valveImage, 'click', gwd.BackMiddle1ValveOpenClick, false);
       gwd.actions.events.removeHandler(valveArray[6].waterImage, 'click', gwd.BackMiddle1ValveCloseClick, false);
       
-      gwd.actions.events.removeHandler(valveArray[7].valveImage, 'click', gwd.BackMiddle2ValveOpenClick, false);
-      gwd.actions.events.removeHandler(valveArray[7].waterImage, 'click', gwd.BackMiddle2ValveCloseClick, false);
-      
     };
     document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
     document.addEventListener("unload", gwd.actions.events.deregisterEventHandlers);
@@ -586,7 +569,6 @@
           <img is="gwd-image" source="assets/Water_Droplet_Pin.PNG" id="font_right_valve-image" class="gwd-img-mood gwd-img-tqpw gwd-img-1fse">
           <img is="gwd-image" source="assets/Water_Droplet_Pin.PNG" id="font_left_valve-image" class="gwd-img-mood gwd-img-1u3h">
           <img is="gwd-image" source="assets/Water_Droplet_Pin.PNG" id="middle_left_valve-image" class="gwd-img-mood gwd-img-1u3h gwd-img-1q6m">
-          <img is="gwd-image" source="assets/Water_Droplet_Pin.PNG" id="back_middle2_valve-image" class="gwd-img-mood gwd-img-pwgz">
           <img is="gwd-image" source="assets/Water_Droplet_Pin.PNG" id="back_middle1_valve-image" class="gwd-img-mood gwd-img-1bdg">
           <img is="gwd-image" source="assets/Water_Droplet_Pin.PNG" id="middle_right_valve-image" class="gwd-img-mood gwd-img-1itq">
           <img is="gwd-image" source="assets/Water_Droplet_Pin.PNG" id="back_right_valve-image" class="gwd-img-mood gwd-img-tqpw gwd-img-8f5r">
@@ -595,7 +577,6 @@
           <img is="gwd-image" source="assets/watering.gif" id="middle_left_water-image" class="gwd-img-u0v9 gwd-img-1908">
           <img is="gwd-image" source="assets/watering.gif" id="middle_right_water-image" class="gwd-img-u0v9 gwd-img-16s1">
           <img is="gwd-image" source="assets/watering.gif" id="back_middle1_water-image" class="gwd-img-u0v9 gwd-img-162d">
-          <img is="gwd-image" source="assets/watering.gif" id="back_middle2_water-image" class="gwd-img-u0v9 gwd-img-1xfe">
           <img is="gwd-image" source="assets/watering.gif" id="back_right_water-image" class="gwd-img-u0v9 gwd-img-ds25">
           <img is="gwd-image" source="assets/watering.gif" id="back_left_water-image" class="gwd-img-u0v9 gwd-img-91eq">
           <img is="gwd-image" source="assets/watering.gif" id="font_right_water-image" class="gwd-img-u0v9 gwd-img-1m3g">
