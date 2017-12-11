@@ -42,10 +42,10 @@ def GetSensorValue(a_sensorName):
         
 #Add valve macro
 @webiopi.macro
-def AddValve(a_valveName, a_relayPort1, a_relayPort2, a_executionOrder):
+def AddValve(a_valveName, a_relayPort1, a_relayPort2, a_executionOrder, a_isNewValve):
     global g_valveDict
     if(a_valveName not in g_valveDict):
-        g_valveDict[a_valveName] = ValveImp(int(a_relayPort1),int(a_relayPort2), a_executionOrder)
+        g_valveDict[a_valveName] = ValveImp(int(a_relayPort1),int(a_relayPort2), a_executionOrder, a_isNewValve)
     
 #Open valve macro
 @webiopi.macro
@@ -62,7 +62,7 @@ def OpenValve(a_valveName):
                 if(int(l_valveObj.GetValveState()) == ValveImp.m_valveStateList['Open']):
                     l_valveCount = l_valveCount +1
                     
-            if(l_valveCount >= 2):
+            if(l_valveCount >= 1):
                 StartMachine(2)
                 
     return l_valveState
@@ -134,6 +134,13 @@ def DoExecutionAuto(a_delayTime, a_startOrder, a_machinePort):
         else:
             webiopi.debug('Auto mode not found execution!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             StopMachine(a_machinePort)
+
+            l_previousOrderIndex = l_orderIndex - 1
+            for l_valveName, l_valveObj in g_valveDict.items():
+                if(l_valveObj.executionOrder == l_previousOrderIndex):
+                    l_valveObj.CloseValve()
+                    webiopi.sleep(0.5)
+            
             g_state = g_stateList['Close']
             return True
 

@@ -204,13 +204,13 @@
   <script type="text/javascript">
 		
 		var onOffButtonArray = {buttonName:"OnOffButton", relayPort:2, onImage:"on_button-image", offImage:"off_button-image", autoImage:"auto_button-image"};
-		var valveArray = [{valveName:"FontRightValve", motor1Port:3, motor2Port:4, valveImage:"font_right_valve-image", waterImage:"font_right_water-image", executionOrder:1},
-						  {valveName:"FontLeftValve", motor1Port:17, motor2Port:27, valveImage:"font_left_valve-image", waterImage:"font_left_water-image", executionOrder:1},
-						  {valveName:"MiddleRightValve", motor1Port:22, motor2Port:5, valveImage:"middle_right_valve-image", waterImage:"middle_right_water-image", executionOrder:2},
-						  {valveName:"MiddleLeftValve", motor1Port:6, motor2Port:13, valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:2},
-						  {valveName:"BackRightValve", motor1Port:14, motor2Port:15, valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:3},
-						  {valveName:"BackLeftValve", motor1Port:18, motor2Port:23, valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:4},
-						  {valveName:"BackMiddle1Valve", motor1Port:24, motor2Port:25, valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:3}];
+		var valveArray = [{valveName:"FontRightValve", motor1Port:3, motor2Port:4, valveImage:"font_right_valve-image", waterImage:"font_right_water-image", executionOrder:4, isNewValve:false},
+						  {valveName:"FontLeftValve", motor1Port:17, motor2Port:27, valveImage:"font_left_valve-image", waterImage:"font_left_water-image", executionOrder:4, isNewValve:false},
+						  {valveName:"MiddleRightValve", motor1Port:22, motor2Port:5, valveImage:"middle_right_valve-image", waterImage:"middle_right_water-image", executionOrder:2, isNewValve:true},
+						  {valveName:"MiddleLeftValve", motor1Port:6, motor2Port:13, valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:4, isNewValve:false},
+						  {valveName:"BackRightValve", motor1Port:14, motor2Port:15, valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:3, isNewValve:false},
+						  {valveName:"BackLeftValve", motor1Port:18, motor2Port:23, valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:1, isNewValve:true},
+						  {valveName:"BackMiddle1Valve", motor1Port:24, motor2Port:25, valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:3, isNewValve:false}];
 						  
         var sensorArray = [{sensorName:"FontRightSensor", analogPort:0}];
 
@@ -220,7 +220,7 @@
 				var valveLen = valveArray.length;
 				for(index = 0; index < valveLen; index++)
 				{
-					webiopi().callMacro("AddValve", [valveArray[index].valveName, valveArray[index].motor1Port, valveArray[index].motor2Port, valveArray[index].executionOrder] , null);
+					webiopi().callMacro("AddValve", [valveArray[index].valveName, valveArray[index].motor1Port, valveArray[index].motor2Port, valveArray[index].executionOrder, valveArray[index].isNewValve] , null);
 					webiopi().callMacro("GetValveState", valveArray[index].valveName, UpdateValveStateCallback);
 				}
 				
@@ -295,17 +295,23 @@
 		
 		function OpenValve(valveName)
 		{
+			window.alert("Open valve call");
 			webiopi().callMacro("OpenValve", valveName, OpenValveCallback);
 		}
 		
 		function CloseValve(valveName)
 		{	
+			window.alert("Close valve call");
 			webiopi().callMacro("CloseValve", valveName, CloseValveCallback);											
 			
 		}
 		
 		function OpenValveCallback(macro, args, data)
 		{
+			if(data == 2)
+			{
+				window.alert("Open valve error!");
+			}
 			UpdateValveState(args,data);
 			
 			webiopi().callMacro("IsMachineOpennig", [], function(lMacro, lAargs, lData){
@@ -321,6 +327,10 @@
 		
 		function CloseValveCallback(macro, args, data)
 		{
+			if(data == 2)
+			{
+				window.alert("Close valve error!");
+			}
 			UpdateValveState(args,data);
 				
 			webiopi().callMacro("IsMachineClosing", [], function(lMacro, lAargs, lData){
