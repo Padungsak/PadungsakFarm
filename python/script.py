@@ -21,13 +21,17 @@ def setup():
 # loop function is repeatedly called by WebIOPi 
 def loop():
     # gives CPU some time before looping again
+    mcp0 = webiopi.deviceInstance("mcp0")
+    webiopi.debug('read I2C channel  %d' % mcp0.digitalRead(0))
     webiopi.sleep(0.5)
 
 # destroy function is called at WebIOPi shutdown
 def destroy():
     global g_valveDict
     g_valveDict.clear()
-    GPIO.digitalWrite(LIGHT, GPIO.LOW)
+    global g_sensorDict
+    g_sensorDict.clear()
+
 
 #Add sensor macro
 @webiopi.macro
@@ -42,10 +46,10 @@ def GetSensorValue(a_sensorName):
         
 #Add valve macro
 @webiopi.macro
-def AddValve(a_valveName, a_relayPort1, a_relayPort2, a_executionOrder, a_isNewValve):
+def AddValve(a_valveName, a_relayPort1, a_relayPort2, a_switchPort, a_executionOrder, a_isNewValve):
     global g_valveDict
     if(a_valveName not in g_valveDict):
-        g_valveDict[a_valveName] = ValveImp(int(a_relayPort1),int(a_relayPort2), a_executionOrder, a_isNewValve)
+        g_valveDict[a_valveName] = ValveImp(int(a_relayPort1),int(a_relayPort2), int(a_switchPort), a_executionOrder, a_isNewValve)
     
 #Open valve macro
 @webiopi.macro
