@@ -1,0 +1,97 @@
+import webiopi
+import time,sys
+sys.path.append('/home/pi/MyProject/python')
+from constantRate import ConstantRate
+
+
+GPIO = webiopi.GPIO
+
+class ChemicalTankImp:
+    s_mcp0 = webiopi.deviceInstance("mcp0")
+    s_TankStateList = {'Pumping':1,'Close':0,'Error':-1}
+    s_countingConfirmation = 4
+    s_constRateObj = ConstantRate()
+	
+    def __init__(self, a_name, a_motorPortNum, a_volumePortNum, a_rateTime):
+        webiopi.debug('ChemicalTankImp create!!')
+        self.m_name = a_name
+        self.m_motorPortNum = a_motorPortNum
+        self.m_volumePortNum = a_volumePortNum
+        self.m_constFlowRate = ChemicalTankImp.s_constRateObj.GetRate(self.m_name)
+        self.m_rateTime = a_rateTime
+        self.m_volume = 0
+        self.m_TankState = ChemicalTankImp.s_TankStateList['Close']
+        self.m_errorMessage = ''
+        ChemicalTankImp.s_mcp0.setFunction(self.m_volumePortNum, GPIO.IN)
+        ChemicalTankImp.s_mcp0.setFunction(self.m_motorPortNum, GPIO.OUT)    
+        ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+
+    def TestFlowRate(self):
+        ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.LOW)
+        webiopi.sleep(self.m_rateTime)
+        ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+        
+    def SetChemicalVolume(self, a_volume):
+        self.m_volume = a_volume
+        webiopi.debug('SetChemicalVolume %f' % self.m_volume)
+
+    def SetChemicalConstRate(self, a_value):
+        self.m_constFlowRate = a_value
+        ChemicalTankImp.s_constRateObj.UpdateRate(self.m_name, a_value)
+
+    def ResetChemicalVolume(self):
+        self.m_volume = 0
+
+    def GetChemicalVolume(self):
+        return str(self.m_volume) + "," + str(ChemicalTankImp.s_constRateObj.GetRate(self.m_name))
+
+    def StopPump(self):
+        ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+        
+    def GetErrorMessage(self):
+        return self.m_errorMessage
+
+    def Inspection(self):
+        if self.m_volume > 0 and self.m_constFlowRate <= 0:
+            self.m_errorMessage = 'Please fill constant flow rate for %s' % self.m_name
+            return False
+        return True
+        
+    def FillChemical(self):
+        webiopi.debug('Call FillChemical')
+        webiopi.debug('Volume = %d' % self.m_volume)
+        if self.m_volume > 0:
+            ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.LOW)
+            self.m_TankState = ChemicalTankImp.s_TankStateList['Pumping']
+
+            l_flowRateConst = float(self.m_constFlowRate) / float(self.m_rateTime)
+            l_rateCount = 0
+            while l_rateCount < self.m_volume:
+                l_rateCount += l_flowRateConst
+                webiopi.sleep(1)
+                webiopi.debug('Chemical rate count = %f' % l_rateCount)
+                    
+            ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+            self.m_TankState = ChemicalTankImp.s_TankStateList['Close']
+		
+    def IsChemicalTankError(self):
+        return self.m_TankState == ChemicalTankImp.s_TankStateList['Error']
+
+    def IsChemicalInTankEnough(self):    
+        return ChemicalTankImp.s_mcp0.digitalRead(self.m_volumePortNum) == GPIO.HIGH
+
+    def NeedToFillChemical(self):
+        if self.m_volume > 0:
+            if ChemicalTankImp.s_mcp0.digitalRead(self.m_volumePortNum) == GPIO.LOW:
+                return True
+            else:
+                #Work around for reding bug in MCP23017
+                l_countingConfirmation = 0
+                while l_countingConfirmation <= ChemicalTankImp.s_countingConfirmation:
+                    webiopi.sleep(0.5)
+                    webiopi.debug('Error mcp23017 in while loop!!!')
+                    if ChemicalTankImp.s_mcp0.digitalRead(self.m_volumePortNum) == GPIO.LOW:
+                        return True
+                    l_countingConfirmation = l_countingConfirmation +1
+                
+        return False

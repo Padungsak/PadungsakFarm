@@ -38,7 +38,7 @@
       background-color: rgb(255, 255, 255);
     }
     .gwd-page-size {
-      width: 728px;
+      width: 740px;
       height: 500px;
     }
     .gwd-img-j0w7 {
@@ -176,4 +176,330 @@
       left: 10px;
       top: 67px;
     }
+	.gwd-img-ur6m {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      top: 63px;
+      left: 646px;
+    }
+	.chemical-mixing-button-img
+	{
+		visibility: hidden
+	}
+	.chemical-pumping-button-img
+	{
+		visibility: hidden
+	}
+  .span-label-template
+  {
+      position: absolute;
+      left: 480px;
+      width: 82px;
+      height: 22px;
+      transform-origin: -176.036px 75.9949px 0px;
+	  background-image: none;
+      background-color: rgb(27, 221, 140);
+      border-color: rgb(14, 13, 13);
+      border-image-source: none;
+      border-image-width: initial;
+      border-image-outset: initial;
+      border-image-repeat: initial;
+      border-style: solid;
+      border-width: 1px;
+  }
+    .span-fungicides1-label {
+       top: 172px;
+    }
+	  .span-fungicides2-label {
+       top: 200px;
+    }
+	  .span-insect1-label {
+       top: 226px;
+    }
+      .span-insect2-label {
+       top: 253px;
+    }
+	  .span-fertilizer1-label {
+       top: 280px;
+    }
+	.span-fertilizer2-label{
+      top: 307px;
+    }
+    .span-surfactant-label{
+      top: 334px;
+    }
+    .span-water-label {
+      top: 361px;
+    }
+	
+	.input-volume-template {
+	  position: absolute;
+      left: 565px;
+      width: 40px;
+      height: 18px;
+	}
+	.input-fungicides1 {
+	  top: 172px;
+    }
+	.input-fungicides2 {
+	  top: 200px;
+    }
+	.input-insect1 {
+	  top: 226px;
+    }
+	.input-insect2 {
+	  top: 253px;
+    }
+	.input-fertilizer1 {
+	  top: 280px;
+    }
+	.input-fertilizer2 {
+	  top: 307px;
+    }
+	.input-surfactant {
+	  top: 334px;
+    }
+	.input-water {
+	  top: 361px;
+    }
+	.span-unit
+	{
+	  position: absolute;
+	  left: 610px;
+      width: 40px;
+      height: 22px;
+	  background-image: none;
+      background-color: rgb(27, 221, 140);
+      border-color: rgb(14, 13, 13);
+      border-image-source: none;
+      border-image-width: initial;
+      border-image-outset: initial;
+      border-image-repeat: initial;
+      border-style: solid;
+      border-width: 1px;
+	}
+	.span-unit-fungicides1-input{
+	  top: 172px;
+    }
+	.span-unit-fungicides2-input{
+	  top: 200px;
+    }
+	.span-unit-insect1-input{
+	  top: 226px;
+    }
+	.span-unit-insect2-input{
+	  top: 253px;
+    }
+	.span-unit-fertilizer1-input{
+	  top: 280px;
+    }
+	.span-unit-fertilizer2-input {
+	  top: 307px;
+    }
+	.span-unit-surfactant-input{
+	  top: 334px;
+    }
+	.span-unit-water-input{
+	  top: 361px;
+    }
+    
+    .button-test-constant-rate{
+	  background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+	  visibility: hidden;
+      cursor: pointer;
+      font-size: 10px;
+      height:23px;
+      width:38px
+    }
+    .button-test-constant-rate:hover {
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+	}
+   
+    .div-test-constant-rate-template {
+	  position: absolute;
+	  left: 655px;
+      width: 30px;
+      height: 22px;
+	}
+	.div-test-constant-rate-fungicides1{
+	  top: 172px;
+    }
+	.div-test-constant-rate-fungicides2{
+	  top: 200px;
+    }
+	.div-test-constant-rate-insect1{
+	  top: 226px;
+    }
+	.div-test-constant-rate-insect2{
+	  top: 253px;
+    }
+	.div-test-constant-rate-fertilizer1{
+	  top: 280px;
+    }
+	.div-test-constant-rate-fertilizer2 {
+	  top: 307px;
+    }
+	.div-test-constant-rate-surfactant{
+	  top: 334px;
+    }
+	.div-test-constant-rate-water{
+	  top: 361px;
+    }
+    .input-constant-template
+	{
+	  position: absolute;
+      left: 695px;
+      width: 40px;
+      height: 18px;
+	}
+	.constant-rate-input-fungicides1 {
+	  top: 172px;
+    }
+	.constant-rate-input-fungicides2 {
+	  top: 200px;
+    }
+	.constant-rate-input-insect1 {
+	  top: 226px;
+    }
+	.constant-rate-input-insect2 {
+	  top: 253px;
+    }
+	.constant-rate-input-fertilizer1 {
+	  top: 280px;
+    }
+	.constant-rate-input-fertilizer2 {
+	  top: 307px;
+    }
+	.constant-rate-input-surfactant {
+	  top: 334px;
+    }
+	.constant-rate-input-water {
+	  top: 361px;
+    }
+	
+	.div-constant-rate-button {
+	  position: absolute;
+	  left: 650px;
+      width: 90px;
+      height: 22px;
+      top: 140px;
+	}
+	.constant-rate-button {
+      background-color: rgb(27, 221, 140);
+	  font-size: 12px;
+	  text-align:center;
+	  border-radius: 8px;
+	  width: 90px;
+	  border: none;
+	  cursor: pointer;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+	}
+	
+	.constant-rate-button:hover {
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+	}
 
+	.gwd-img-xq63 {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 447px;
+      top: 257px;
+    }
+    .gwd-img-1m4z {
+      width: 15px;
+      height: 15px;
+      left: 450px;
+      top: 238px;
+    }
+    .gwd-img-1268 {
+      height: 20px;
+      left: 448px;
+      top: 259px;
+    }
+    .gwd-img-1y25 {
+      left: 308px;
+      top: 311px;
+    }
+    .gwd-img-132a {
+      left: 270px;
+      top: 310px;
+    }
+    .gwd-img-agym {
+      left: 271px;
+      top: 235px;
+    }
+    .gwd-img-tb4x {
+      width: 15px;
+      height: 15px;
+      top: 223px;
+    }
+    .gwd-img-dunx {
+      width: 15px;
+      height: 15px;
+      left: 449px;
+      top: 266px;
+    }
+    .gwd-img-ejuf {
+      width: 15px;
+      height: 15px;
+      top: 241px;
+      left: 271px;
+    }
+    .gwd-img-11gq {
+      top: 205px;
+      left: 271px;
+    }
+    .gwd-img-1cif {
+      width: 15px;
+      height: 15px;
+      left: 274px;
+      top: 313px;
+    }
+    .gwd-img-1uls {
+      width: 15px;
+      height: 15px;
+      left: 308px;
+      top: 313px;
+    }
+    .gwd-img-g3zi {
+      left: 179px;
+      top: 254px;
+    }
+    .gwd-img-1g4j {
+      left: 157px;
+    }
+    .gwd-img-xpvg {
+      top: 312px;
+      left: 133px;
+    }
+    .gwd-img-oc8t {
+      left: 41px;
+      top: 311px;
+    }
+    .gwd-img-rg3x {
+      left: 90px;
+      top: 290px;
+    }
+    .gwd-img-8e4n {
+      left: 61px;
+      top: 283px;
+    }
+    .gwd-img-bwcm {
+      top: 283px;
+      left: 86px;
+    }
+    .gwd-img-1wpf {
+      left: 34px;
+      top: 284px;
+    }
+	.img-hide{
+		visibility: hidden;
+	}

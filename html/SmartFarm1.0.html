@@ -23,27 +23,61 @@
   <script type="text/javascript" src="/webiopi.js"></script>
   <script type="text/javascript">
 		
-		var onOffButtonArray = {buttonName:"OnOffButton", relayPort:20, onImage:"on_button-image", offImage:"off_button-image", autoImage:"auto_button-image"};
-		var valveArray = [{valveName:"FontRightValve", motor1Port:12, motor2Port:16, switchPort:21, valveImage:"font_right_valve-image", waterImage:"font_right_water-image", executionOrder:4, isNewValve:false},
-						  {valveName:"FontLeftValve", motor1Port:27, motor2Port:22, switchPort:21, valveImage:"font_left_valve-image", waterImage:"font_left_water-image", executionOrder:4, isNewValve:false},
-						  {valveName:"MiddleRightValve", motor1Port:5, motor2Port:5, switchPort:21, valveImage:"middle_right_valve-image", waterImage:"middle_right_water-image", executionOrder:2, isNewValve:true},
-						  {valveName:"MiddleLeftValve", motor1Port:6, motor2Port:13, switchPort:21, valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:4, isNewValve:false},
-						  {valveName:"BackRightValve", motor1Port:19, motor2Port:26, switchPort:21, valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:3, isNewValve:false},
-						  {valveName:"BackLeftValve", motor1Port:18, motor2Port:18, switchPort:21, valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:1, isNewValve:true},
-						  {valveName:"BackMiddle1Valve", motor1Port:23, motor2Port:24, switchPort:21, valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:3, isNewValve:false}];
+		var engineArray = { mixEngineGpioPort:27, waterPumpGpioPort:22, windPumpGpioPort:17, chemicalPumpGpioPort:4}
+		
+		var onOffButtonArray = {buttonName:"OnOffButton",  waterDelay:10, onImage:"on_button-image", offImage:"off_button-image", autoImage:"auto_button-image"};
+		var valveArray = [{valveName:"FontRightValve", valvePort:0, valveImage:"font_right_valve-image", waterImage:"font_right_water-image", executionOrder:4},
+						  {valveName:"FontLeftValve", valvePort:1, valveImage:"font_left_valve-image", waterImage:"font_left_water-image", executionOrder:4},
+						  {valveName:"MiddleRightValve", valvePort:2, valveImage:"middle_right_valve-image", waterImage:"middle_right_water-image", executionOrder:2},
+						  {valveName:"MiddleLeftValve", valvePort:3, valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:4},
+						  {valveName:"BackRightValve", valvePort:4, valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:3},
+						  {valveName:"BackLeftValve", valvePort:5, valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:1},
+						  {valveName:"BackMiddle1Valve", valvePort:6, valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:3}];
 						  
         var sensorArray = [{sensorName:"FontRightSensor", analogPort:0}];
-        
-        var ultraSonicSensor = [{sensorName:"MixingTank", analogPort:1},
-								{sensorName:"PumpingTank", analogPort:2}];
-
+		
+		var chemicalButtonArray = {buttonName:"chemicalButton", stopImage:"chemical_stop_button-image", mixingImage:"chemical_mixing_button-image", pumpingImage:"chemical_pumping_button-image"};
+			
+		var chemicalValveArray = [{valveName:"FontLeftValve", chemicalPort:0, chemicalDelay:20, windPort:15, windDelay:20, valveCloseImage:"font_left_chemical-image", valveOpenImage:"font_left_chemical_running-image", executionOrder:1},
+								  {valveName:"FontRightLeftValve", chemicalPort:1, chemicalDelay:20, windPort:15, windDelay:20, valveCloseImage:"font_right_left_chemical-image", valveOpenImage:"font_right_left_chemical_running-image", executionOrder:2}/*,
+								  {valveName:"FontRightRightValve", chemicalPort:2, chemicalDelay:20, windPort:15, windDelay:20, valveCloseImage:"font_right_right_chemical-image", valveOpenImage:"font_right_right_chemical_running-image", executionOrder:3},	
+								  {valveName:"MiddleLeftValve", chemicalPort:3, valveCloseImage:"middle_left_chemical-image", valveOpenImage:"middle_left_chemical_running-image", executionOrder:4},
+								  {valveName:"MiddleRightLeftValve", chemicalPort:4, valveCloseImage:"middle_right_left_chemical-image", valveOpenImage:"middle_right_left_chemical_running-image", executionOrder:5},	
+								  {valveName:"MiddleRightMiddleValve", chemicalPort:5, valveCloseImage:"middle_right_middle_chemical-image", valveOpenImage:"middle_right_middle_chemical_running-image", executionOrder:6},	
+								  {valveName:"MiddleRightRightValve", chemicalPort:6, valveCloseImage:"middle_right_right_chemical-image", valveOpenImage:"middle_right_right_chemical_running-image", executionOrder:7},	
+								  {valveName:"BackMiddle1Valve", chemicalPort:7, valveCloseImage:"back_middle1_chemical-image", valveOpenImage:"back_middle1_chemical_running-image", executionOrder:8},	
+								  {valveName:"BackMiddle2Valve", chemicalPort:8, valveCloseImage:"back_middle2_chemical-image", valveOpenImage:"back_middle2_chemical_running-image", executionOrder:9},	
+								  {valveName:"BackLeft1Valve", chemicalPort:9, valveCloseImage:"back_left1_chemical-image", valveOpenImage:"back_left1_chemical_running-image", executionOrder:10},	
+								  {valveName:"BackLeft2Valve", chemicalPort:10, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},	
+								  {valveName:"BackRight1Valve", chemicalPort:11, valveCloseImage:"back_right1_chemical-image", valveOpenImage:"back_right1_chemical_running-image", executionOrder:12},	
+								  {valveName:"BackRight2Valve", chemicalPort:12, valveCloseImage:"back_right2_chemical-image", valveOpenImage:"back_right2_chemical_running-image", executionOrder:13},	
+								  {valveName:"BackRight3Valve", chemicalPort:13, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14}*/	];
+								  
+								  
+		var chemicalTankArray = [{tankName:"FungicidesValve1", mcpMotorPort:0, mcpVolumePort:15, rateTime:10, flowRateBox:"fungicides1-const-input", inputBox:"fungicides1-input", testFlowRateButton:"button-constant-test-fungicides1"},
+							  {tankName:"FungicidesValve2", mcpMotorPort:1, mcpVolumePort:14, rateTime:10, flowRateBox:"fungicides2-const-input", inputBox:"fungicides2-input", testFlowRateButton:"button-constant-test-fungicides2"}/*,
+							  {tankName:"InsectValve1",     mcpMotorPort:2, mcpVolumePort:13, rateTime:10, mixingPort:10, inputBox:"insect1-input", sensorPort:1, tankWidth:6, tankLen:6, tankHight:21},
+							  {tankName:"InsectValve2",     mcpMotorPort:3, mcpVolumePort:12, rateTime:10, mixingPort:10, inputBox:"insect2-input", sensorPort:1, tankWidth:6, tankLen:6, tankHight:21},
+							  {tankName:"FertilizerValve1", mcpMotorPort:4, mcpVolumePort:11, rateTime:10, mixingPort:10, inputBox:"fertilizer1-input", sensorPort:1, tankWidth:6, tankLen:6, tankHight:21},
+							  {tankName:"FertilizerValve2", mcpMotorPort:5, mcpVolumePort:10, rateTime:10, mixingPort:10, inputBox:"fertilizer2-input", sensorPort:1, tankWidth:6, tankLen:6, tankHight:21},
+							  {tankName:"SurfactantValve",  mcpMotorPort:6, mcpVolumePort:9, rateTime:10, mixingPort:10, inputBox:"surfactant-input", sensorPort:1, tankWidth:6, tankLen:6, tankHight:21}*/];
+							 
+		var mixingTank = {tankName:"Water", volumePort:26, rateTime:10, flowRateBox:"water-const-input", inputBox:"water-input", testFlowRateButton:"button-constant-test-water"};
+		
+		var constRateButtonArray = {buttonId:"button-constant-rate", editText:"To be saved", normalText:"edit rate(L/M)"};
+		
         webiopi().ready(function() {
+				webiopi().callMacro("InitialMachine", [engineArray.waterPumpGpioPort, 
+												  engineArray.chemicalPumpGpioPort, 
+												  engineArray.windPumpGpioPort,
+												  engineArray.mixEngineGpioPort] , null);
+				
 				//Add valves
 				var index;
 				var valveLen = valveArray.length;
 				for(index = 0; index < valveLen; index++)
 				{
-					webiopi().callMacro("AddValve", [valveArray[index].valveName, valveArray[index].motor1Port, valveArray[index].motor2Port, valveArray[index].switchPort, valveArray[index].executionOrder, valveArray[index].isNewValve] , null);
+					webiopi().callMacro("AddValve", [valveArray[index].valveName, valveArray[index].valvePort, valveArray[index].executionOrder] , null);
 					webiopi().callMacro("GetValveState", valveArray[index].valveName, UpdateValveStateCallback);
 				}
 				
@@ -83,12 +117,49 @@
 																						});
 				
 				
-				var ultrasonicLen = ultraSonicSensor.length
-				for(index = 0; index < ultrasonicLen; index++)
+				var chemicalValveLen = chemicalValveArray.length;
+				for(index = 0; index < chemicalValveLen; index++)
 				{
-					webiopi().callMacro("AddUltrasonic", [ultraSonicSensor[index].sensorName, ultraSonicSensor[index].analogPort] , null);
-				}	
+					webiopi().callMacro("AddChemicalValve", [chemicalValveArray[index].valveName, 
+															 chemicalValveArray[index].chemicalPort, 
+															 chemicalValveArray[index].chemicalDelay,
+															 chemicalValveArray[index].windPort,
+															 chemicalValveArray[index].windDelay,
+															 chemicalValveArray[index].executionOrder] , null);
+				}
 				
+				
+				var chemicalTankLen = chemicalTankArray.length;
+				var chemicalTankAddedCount = 0;
+				for(index = 0; index < chemicalTankLen; index++)
+				{
+					webiopi().callMacro("AddChemicalTank", [chemicalTankArray[index].tankName, 
+															chemicalTankArray[index].mcpMotorPort,
+															chemicalTankArray[index].mcpVolumePort,
+															chemicalTankArray[index].rateTime], function(acro, args, data){chemicalTankAddedCount++;});
+				}
+				
+				//Wait until adding chemical tank complete				
+				//To ensure all input are set
+				var chemicalAllTankSetHandle = setInterval(
+													function()
+													{
+														if(chemicalTankAddedCount == chemicalTankLen)
+														{	
+															UpdateChemicalTankStatus();
+															clearInterval(chemicalAllTankSetHandle);
+														}
+													}, 1000);
+				
+				
+				webiopi().callMacro("AddMixingTank", [mixingTank.tankName,
+													  mixingTank.volumePort,
+													  mixingTank.rateTime] , null);
+													  		
+				UpdateChemicalRunningStatus();
+				RestoreChemicalTankVolume();
+				RestoreMixingTankVolume();
+									
 				var sensorLen = sensorArray.length
 				for(index = 0; index < sensorLen; index++)
 				{
@@ -96,9 +167,7 @@
 				}
 				
 				setInterval(UpdateSensor, 2000);	
-				
-				
-				
+
                 // Refresh GPIO buttons
                 // pass true to refresh repeatedly of false to refresh once
                 webiopi().refreshGPIO(true);
@@ -116,15 +185,15 @@
 			var sensorLen = sensorArray.length
 			for(index = 0; index < sensorLen; index++)
 			{
-				webiopi().callMacro('GetSensorValue', sensorArray[index].sensorName, UpdateSensorCallback);
+				webiopi().callMacro('GetSensorValue', 
+									sensorArray[index].sensorName, 
+									function(lMacro, lAargs, lData)
+									{
+										document.getElementById('Font-Sensor-Text').innerHTML = 'ชื้น:' + lData;
+									});
 			}
 		}    
-		
-		function UpdateSensorCallback(macro, args, data)
-		{
-			document.getElementById('Font-Sensor-Text').innerHTML = 'ชื้น:' + data;
-		}
-		
+
 		function OpenValve(valveName)
 		{
 			window.alert("Open valve call");
@@ -237,6 +306,195 @@
 																	}, 3000);
 		}
 		
+		function UpdateChemicalRunningStatus()
+		{
+			var chemicalModeStatusHandle = setInterval(
+				function()
+				{
+					webiopi().callMacro("IsChemicalModePumping", 
+										[], 
+										function(acro, args, data)
+										{
+											if(data)
+											{
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.stopImage, 'visibility: hidden; ');
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.mixingImage, 'visibility: hidden; ');
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.pumpingImage, 'visibility: visible; ');
+												UpdateChemicalValveStatus();
+												UpdateChemicalTankStatus();
+											}
+										});
+					webiopi().callMacro("IsChemicalModeError", 
+										[], 
+										function(acro, args, data)
+										{
+											if(data)
+											{
+												//Change button to stopImage
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.stopImage, 'visibility: visible; ');
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.mixingImage, 'visibility: hidden; ');
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.pumpingImage, 'visibility: hidden; ');
+										
+												//Show error message
+												webiopi().callMacro("GetChemicalMessage", 
+																	 [], 
+																	 function(acro, args, data)
+																	 {
+																		 window.alert(data);																								
+																	 });
+												clearInterval(chemicalModeStatusHandle);
+											}
+										});
+					webiopi().callMacro("IsChemicalModeStop", 
+										[], 
+										function(acro, args, data)
+										{
+											if(data)
+											{
+												//Change button to stopImage
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.stopImage, 'visibility: visible; ');
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.mixingImage, 'visibility: hidden; ');
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.pumpingImage, 'visibility: hidden; ');
+												UpdateChemicalValveStatus();
+												clearInterval(chemicalModeStatusHandle);
+											}
+										});
+					
+					webiopi().callMacro("IsChemicalModeMixing", 
+										[], 
+										function(acro, args, data)
+										{
+											if(data)
+											{
+												//Change button to mixxing image
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.stopImage, 'visibility: hidden; ');
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.mixingImage, 'visibility: visible; ');
+												gwd.actions.events.setInlineStyle(chemicalButtonArray.pumpingImage, 'visibility: hidden; ');
+												UpdateChemicalTankStatus();
+												UpdateChemicalValveStatus();
+											}
+										});
+				}, 
+				3000);
+		}
+		
+		function UpdateChemicalValveStatus()
+		{
+			var index;
+			var chemicalValveLen = chemicalValveArray.length;
+			for(index = 0; index < chemicalValveLen; index++)
+			{
+				webiopi().callMacro("IsChemicalValveOpen", 
+									chemicalValveArray[index].valveName,
+									function(acro, args, data)
+									{										
+										for(index = 0; index < chemicalValveLength; index++)
+										{
+											if(chemicalValveArray[index].valveName == args)
+											{	
+												if(data)
+												{
+													gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveOpenImage, 'visibility: visible; ');
+													gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveCloseImage, 'visibility: hidden; ');
+												}
+												else
+												{
+													gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveOpenImage, 'visibility: hidden; ');
+													gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveCloseImage, 'visibility: visible; ');
+												}
+												return;
+											}
+										}
+									});
+			}
+																																
+		}
+		
+		function UpdateChemicalTankStatus()
+		{
+			var index;
+			var chemicalTankLen = chemicalTankArray.length;
+			for(index = 0; index < chemicalTankLen; index++)
+			{
+				webiopi().callMacro("IsChemicalInTankEnough", 
+										chemicalTankArray[index].tankName, 
+										function(acro, args, data)
+										{
+											for(index = 0; index < chemicalTankLen; index++)
+											{	
+												if(chemicalTankArray[index].tankName == args)
+												{
+													if(data)
+													{								
+														document.getElementById(chemicalTankArray[index].inputBox).disabled = false;
+														//document.getElementById(chemicalTankArray[index].inputBox).value = '0';
+													}
+													else
+													{	
+														//document.getElementById(chemicalTankArray[index].inputBox).value = 'None';
+														document.getElementById(chemicalTankArray[index].inputBox).disabled = true;
+													}	
+													return;						
+												}
+											}
+										});
+			}
+		}
+		
+		function RestoreChemicalTankVolume()
+		{
+			var index;
+			var chemicalTankLen = chemicalTankArray.length;
+			for(index = 0; index < chemicalTankLen; index++)
+			{
+				webiopi().callMacro("GetChemicalValumeComponent", 
+										chemicalTankArray[index].tankName, 
+										function(acro, args, data)
+										{
+											for(index = 0; index < chemicalTankLen; index++)
+											{	
+												if(chemicalTankArray[index].tankName == args)
+												{				 
+													var splitedOutput = data.split(',');
+													document.getElementById(chemicalTankArray[index].inputBox).value = splitedOutput[0];
+													document.getElementById(chemicalTankArray[index].flowRateBox).value = splitedOutput[1];
+													return;						
+												}
+											}
+										});
+			}
+		}
+		
+		function RestoreMixingTankVolume()
+		{
+			webiopi().callMacro("GetWaterVolumeComponent", 
+										null, 
+										function(acro, args, data)
+										{						
+											var splitedOutput = data.split(',');
+											document.getElementById(mixingTank.inputBox).value = splitedOutput[0];
+											document.getElementById(mixingTank.flowRateBox).value = splitedOutput[1];
+										});
+		}
+		
+		function ClearValveStatus()
+		{
+			var index;
+			var chemicalValveLen = chemicalTankArray.length;
+			for(index = 0; index < chemicalValveLen; index++)
+			{
+				gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveCloseImage, 'visibility: hidden; ');
+				gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveOpenImage, 'visibility: visible; ');
+			}
+		}
+		
+		function IsNumberKey(event)
+		{
+			var buffer = String.fromCharCode(event.which)
+			var regEx = /[0-9.]/g
+		
+			return regEx.test(buffer)
+		}
   </script>
         
   <script type="text/javascript" gwd-events="handlers">
@@ -244,7 +502,7 @@
     window.gwd = window.gwd || {};
     
     gwd.OffImageClick = function(event) {	
-		webiopi().callMacro("ExecutionAuto", [1200,1, onOffButtonArray.relayPort], null);
+		webiopi().callMacro("ExecutionAuto", [onOffButtonArray.waterDelay, 1], null);
 		gwd.actions.events.setInlineStyle(onOffButtonArray.autoImage, 'visibility: visible; ');
 		gwd.actions.events.setInlineStyle(onOffButtonArray.onImage, 'visibility: hidden; ');
 		gwd.actions.events.setInlineStyle(onOffButtonArray.offImage, 'visibility: hidden; ');																
@@ -252,16 +510,82 @@
     };
     
     gwd.OnImageClick = function(event) {
-		webiopi().callMacro('StopMachine', onOffButtonArray.relayPort, null);
+		webiopi().callMacro('StopWaterPump', null, null);
 		gwd.actions.events.setInlineStyle(onOffButtonArray.autoImage, 'visibility: hidden; ');
 		gwd.actions.events.setInlineStyle(onOffButtonArray.onImage, 'visibility: hidden; ');
 		gwd.actions.events.setInlineStyle(onOffButtonArray.offImage, 'visibility: visible; ');
     };
     
     gwd.AutoImageClick = function(event) {
+	
+    };
+	
+	gwd.AutoChemicalClick = function(event) {
 
+		var callingVolumeCount = 0;
+		var chemicalTankLen = chemicalTankArray.length;
+		for(index = 0; index < chemicalTankLen; index++)
+		{
+			webiopi().callMacro("SetChemicalVolumeComponent", 
+								[chemicalTankArray[index].tankName, document.getElementById(chemicalTankArray[index].inputBox).value, document.getElementById(chemicalTankArray[index].flowRateBox).value] , 
+								function(acro, args, data)
+								{
+									callingVolumeCount++;
+									
+								});
+		
+		}
+		
+		webiopi().callMacro("SetWaterVolumeComponent", 
+							[document.getElementById(mixingTank.inputBox).value, document.getElementById(mixingTank.flowRateBox).value], 
+							function(acro, args, data)
+							{
+								callingVolumeCount++;									
+							});
+		
+		//To ensure all input are set
+		var chemicalAllValueSetHandle = setInterval(
+													function()
+													{
+														if(callingVolumeCount >= chemicalTankLen + 1)
+														{
+															webiopi().callMacro("ExecutionChemicalAuto", 
+																				 null, 
+																				 function(acro, args, data)
+																				 {
+																					for(index = 0; index < chemicalTankLen; index++)
+																					{
+																						document.getElementById(chemicalTankArray[index].flowRateBox).disabled = true;
+																						document.getElementById(chemicalTankArray[index].testFlowRateButton).style.visibility = 'hidden';
+																					
+																					}
+																					document.getElementById(mixingTank.flowRateBox).disabled = true;
+																					document.getElementById(mixingTank.testFlowRateButton).style.visibility = 'hidden';
+																					document.getElementById(constRateButtonArray.buttonId).innerHTML = constRateButtonArray.normalText;
+									
+																					UpdateChemicalRunningStatus();
+																					clearInterval(chemicalAllValueSetHandle);
+																				 });
+															
+															
+														}
+													}, 1000);	
     };
     
+    gwd.MixingChemicalClick = function(event) {
+		if(confirm("Do you want to stop chemical process"))
+		{
+			webiopi().callMacro('StopChemical', null, null);
+		}
+	};
+	
+	gwd.PumpingChemicalClick = function(event) {
+		if(confirm("Do you want to stop chemical process"))
+		{
+			webiopi().callMacro('StopChemical', null, null);
+		}
+	};
+	
     gwd.FontRightValveOpenClick = function(event) {
 
 		OpenValve(valveArray[0].valveName);
@@ -286,7 +610,7 @@
 
     gwd.MiddleRightValveOpenClick = function(event) 
     {
-			OpenValve(valveArray[2].valveName);
+		OpenValve(valveArray[2].valveName);
     };
     
     gwd.MiddleRightValveCloseClick = function(event) 
@@ -319,7 +643,7 @@
 	
     gwd.BackLeftValveOpenClick = function(event) 
     {
-			OpenValve(valveArray[5].valveName);
+		OpenValve(valveArray[5].valveName);
     };
     
     gwd.BackLeftValveCloseClick = function(event) 
@@ -338,6 +662,59 @@
 		CloseValve(valveArray[6].valveName);
     };
     
+    gwd.constantRateButtonClick = function(event) 
+    {
+		if(document.getElementById(constRateButtonArray.buttonId).innerHTML == constRateButtonArray.normalText)
+		{
+			var chemicalTankLen = chemicalTankArray.length;
+			for(index = 0; index < chemicalTankLen; index++)
+			{
+				document.getElementById(chemicalTankArray[index].flowRateBox).disabled = false;
+				document.getElementById(chemicalTankArray[index].testFlowRateButton).style.visibility = 'visible';
+			}
+			
+			document.getElementById(mixingTank.flowRateBox).disabled = false;
+			document.getElementById(mixingTank.testFlowRateButton).style.visibility = 'visible';
+			
+			document.getElementById(constRateButtonArray.buttonId).innerHTML = constRateButtonArray.editText;
+		}
+	};
+	
+	gwd.Fungicides1FlowRateButtonClick = function(event) 
+    {
+		webiopi().callMacro("TestChemicalRate", chemicalTankArray[0].tankName, null);
+    };
+    
+    gwd.Fungicides2FlowRateButtonClick = function(event) 
+    {
+		webiopi().callMacro("TestChemicalRate", chemicalTankArray[1].tankName, null);
+    };
+    
+    gwd.Insect1FlowRateButtonClick = function(event) 
+    {
+		webiopi().callMacro("TestChemicalRate", chemicalTankArray[2].tankName, null);
+    };
+    
+    gwd.Insect2FlowRateButtonClick = function(event) 
+    {
+		webiopi().callMacro("TestChemicalRate", chemicalTankArray[3].tankName, null);
+    };
+    
+    gwd.Fertilizer1FlowRateButtonClick = function(event) 
+    {
+		webiopi().callMacro("TestChemicalRate", chemicalTankArray[4].tankName, null);
+    };
+    
+    gwd.Fertilizer2FlowRateButtonClick = function(event) 
+    {
+		webiopi().callMacro("TestChemicalRate", chemicalTankArray[5].tankName, null);
+    };
+    
+    gwd.WaterFlowRateButtonClick = function(event) 
+    {
+		webiopi().callMacro("TestWaterRate", null, null);
+    };
+    
   </script>
   
   <script type="text/javascript" gwd-events="registration">
@@ -347,6 +724,10 @@
 	  gwd.actions.events.addHandler(onOffButtonArray.offImage, 'click', gwd.OffImageClick, false);
 	  gwd.actions.events.addHandler(onOffButtonArray.onImage, 'click', gwd.OnImageClick, false);
 	  gwd.actions.events.addHandler(onOffButtonArray.autoImage, 'click', gwd.AutoImageClick, false);
+	  gwd.actions.events.addHandler(chemicalButtonArray.stopImage, 'click', gwd.AutoChemicalClick, false);
+      gwd.actions.events.addHandler(chemicalButtonArray.mixingImage, 'click', gwd.MixingChemicalClick, false);
+      gwd.actions.events.addHandler(chemicalButtonArray.pumpingImage, 'click', gwd.PumpingChemicalClick, false);
+      
       gwd.actions.events.addHandler(valveArray[0].valveImage, 'click', gwd.FontRightValveOpenClick, false);
       gwd.actions.events.addHandler(valveArray[0].waterImage, 'click', gwd.FontRightValveCloseClick, false);
       
@@ -368,11 +749,26 @@
       gwd.actions.events.addHandler(valveArray[6].valveImage, 'click', gwd.BackMiddle1ValveOpenClick, false);
       gwd.actions.events.addHandler(valveArray[6].waterImage, 'click', gwd.BackMiddle1ValveCloseClick, false);
       
+      gwd.actions.events.addHandler("button-constant-rate", 'click', gwd.constantRateButtonClick, false);
+      
+      gwd.actions.events.addHandler(chemicalTankArray[0].testFlowRateButton, 'click', gwd.Fungicides1FlowRateButtonClick, false);
+      gwd.actions.events.addHandler(chemicalTankArray[1].testFlowRateButton, 'click', gwd.Fungicides2FlowRateButtonClick, false);
+      gwd.actions.events.addHandler(chemicalTankArray[2].testFlowRateButton, 'click', gwd.Insect1FlowRateButtonClick, false);
+      gwd.actions.events.addHandler(chemicalTankArray[3].testFlowRateButton, 'click', gwd.Insect2FlowRateButtonClick, false);
+      gwd.actions.events.addHandler(chemicalTankArray[4].testFlowRateButton, 'click', gwd.Fertilizer1FlowRateButtonClick, false);
+      gwd.actions.events.addHandler(chemicalTankArray[5].testFlowRateButton, 'click', gwd.Fertilizer2FlowRateButtonClick, false);
+      gwd.actions.events.addHandler(chemicalTankArray[6].testFlowRateButton, 'click', gwd.SurfactantFlowRateButtonClick, false);
+      gwd.actions.events.addHandler(mixingTank.testFlowRateButton, 'click', gwd.WaterFlowRateButtonClick, false);
+      
+      
     };
     gwd.actions.events.deregisterEventHandlers = function(event) {
 	  gwd.actions.events.removeHandler(onOffButtonArray.offImage, 'click', gwd.OffImageClick, false);
 	  gwd.actions.events.removeHandler(onOffButtonArray.onImage, 'click', gwd.OnImageClick, false);
 	  gwd.actions.events.removeHandler(onOffButtonArray.autoImage, 'click', gwd.AutoImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalButtonArray.stopImage, 'click', gwd.AutoChemicalClick, false);
+	  gwd.actions.events.removeHandler(chemicalButtonArray.mixingImage, 'click', gwd.mixingChemicalClick, false);
+	  gwd.actions.events.removeHandler(chemicalButtonArray.pumpingImage, 'click', gwd.pumpingChemicalClick, false);
 	  
       gwd.actions.events.removeHandler(valveArray[0].valveImage, 'click', gwd.FontRightValveOpenClick, false);
       gwd.actions.events.removeHandler(valveArray[0].waterImage, 'click', gwd.FontRightValveCloseClick, false);
@@ -394,6 +790,17 @@
       
       gwd.actions.events.removeHandler(valveArray[6].valveImage, 'click', gwd.BackMiddle1ValveOpenClick, false);
       gwd.actions.events.removeHandler(valveArray[6].waterImage, 'click', gwd.BackMiddle1ValveCloseClick, false);
+      
+      gwd.actions.events.removeHandler("button-constant-rate", 'click', gwd.constantRateButtonClick, false);
+      
+      gwd.actions.events.removeHandler(chemicalTankArray[0].testFlowRateButton, 'click', gwd.Fungicides1FlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(chemicalTankArray[1].testFlowRateButton, 'click', gwd.Fungicides2FlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(chemicalTankArray[2].testFlowRateButton, 'click', gwd.Insect1FlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(chemicalTankArray[3].testFlowRateButton, 'click', gwd.Insect2FlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(chemicalTankArray[4].testFlowRateButton, 'click', gwd.Fertilizer1FlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(chemicalTankArray[5].testFlowRateButton, 'click', gwd.Fertilizer2FlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(chemicalTankArray[6].testFlowRateButton, 'click', gwd.SurfactantFlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(mixingTank.testFlowRateButton, 'click', gwd.WaterFlowRateButtonClick, false);
       
     };
     document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
@@ -425,8 +832,83 @@
           <img is="gwd-image" source="assets/OnButton.jpg" id="on_button-image" class="gwd-img-97wm">
           <img is="gwd-image" source="assets/AutoButton.jpg" id="auto_button-image" class="gwd-img-97wm">
           <img is="gwd-image" source="assets/OffButton.jpg" id="off_button-image" class="gwd-img-97wm">
+		  <img is="gwd-image" source="assets/ChemicalButton.jpg" id="chemical_stop_button-image" class="gwd-img-ur6m">
+		  <img is="gwd-image" source="assets/ChemicalMixing.gif" id="chemical_mixing_button-image" class="gwd-img-ur6m chemical-mixing-button-img">
+		  <img is="gwd-image" source="assets/ChemicalPumping.gif" id="chemical_pumping_button-image" class="gwd-img-ur6m chemical-pumping-button-img">
+		  <!--span class="span-constant-head">Rate(L/Min)</span-->
+		  <div class="div-constant-rate-button"><button class="constant-rate-button" id="button-constant-rate"><script type="text/javascript">document.getElementById(constRateButtonArray.buttonId).innerHTML = constRateButtonArray.normalText</script></button></div>		  
+		  <span class="span-label-template span-fungicides1-label">ยาเชื้อรา1</span> 
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides1-input" class="input-volume-template input-fungicides1"> 
+				<span class="span-unit span-unit-fungicides1-input ">CC</span>
+					<div class="div-test-constant-rate-template div-test-constant-rate-fungicides1"><button class="button-test-constant-rate" id="button-constant-test-fungicides1">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides1-const-input" class="input-constant-template constant-rate-input-fungicides1" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-fungicides2-label">ยาเชื้อรา2</span>
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides2-input" class="input-volume-template input-fungicides2"> 
+				<span class="span-unit span-unit-fungicides2-input ">CC</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-fungicides2"><button class="button-test-constant-rate" id="button-constant-test-fungicides2">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides2-const-input" class="input-constant-template constant-rate-input-fungicides2" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-insect1-label">ยาแมลง1</span> 
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect1-input" class="input-volume-template input-insect1"> 
+				<span class="span-unit span-unit-insect1-input ">CC</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-insect1"><button class="button-test-constant-rate" id="button-constant-test-insect1">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect1-const-input" class="input-constant-template constant-rate-input-insect1" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-insect2-label">ยาแมลง2</span> 
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect2-input" class="input-volume-template input-insect2"> 
+				<span class="span-unit span-unit-insect2-input ">CC</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-insect2"><button class="button-test-constant-rate" id="button-constant-test-insect2">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect2-const-input" class="input-constant-template constant-rate-input-insect2" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-fertilizer1-label">ปุ๋ย1</span> 
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fertilizer1-input" class="input-volume-template input-fertilizer1"> 
+				<span class="span-unit span-unit-fertilizer1-input ">CC</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-fertilizer1"><button class="button-test-constant-rate" id="button-constant-test-fertilizer1">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fertilizer1-const-input" class="input-constant-template constant-rate-input-fertilizer1" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-fertilizer2-label">ปุ๋ย2</span> 
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fertilizer2-input" class="input-volume-template input-fertilizer2"> 
+				<span class="span-unit span-unit-fertilizer2-input ">CC</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-fertilizer2"><button class="button-test-constant-rate" id="button-constant-test-fertilizer2">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fertilizer2-const-input" class="input-constant-template constant-rate-input-fertilizer2" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-surfactant-label">จับใบ</span> 
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="surfactant-input" class="input-volume-template input-surfactant"> 
+				<span class="span-unit span-unit-surfactant-input ">CC</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-surfactant"><button class="button-test-constant-rate" id="button-constant-test-surfactant">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="surfactant-const-input" class="input-constant-template constant-rate-input-surfactant" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-water-label">นํ้า</span> 
+			<input type="text" value="0" id="water-input" Onkeypress="return IsNumberKey(event)"  class="input-volume-template input-water"> 
+				<span class="span-unit span-unit-water-input ">ลิตร</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-water"><button class="button-test-constant-rate" id="button-constant-test-water">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="water-const-input" class="input-constant-template constant-rate-input-water" Onkeypress="return IsNumberKey(event)" disabled=true>
           <span class="gwd-span-srkn" id="Font-Sensor-Text">ชื้น:</span>
-        </div>
+		  <img is="gwd-image" source="assets/chemical.jpg" id="font_right_left_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-dunx">
+          <img is="gwd-image" source="assets/chemical.jpg" id="font_left_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-1uls">
+          <img is="gwd-image" source="assets/chemical.jpg" id="middle_left_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif">
+          <img is="gwd-image" source="assets/chemical.jpg" id="back_left1_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg">
+          <img is="gwd-image" source="assets/chemical.jpg" id="back_left2_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t">
+          <img is="gwd-image" source="assets/chemical.jpg" id="back_right3_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t gwd-img-1wpf">
+          <img is="gwd-image" source="assets/chemical.jpg" id="back_right1_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t gwd-img-rg3x gwd-img-bwcm">
+          <img is="gwd-image" source="assets/chemical.jpg" id="back_right2_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t gwd-img-rg3x gwd-img-8e4n">
+          <img is="gwd-image" source="assets/chemical.jpg" id="back_middle1_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-g3zi">
+          <img is="gwd-image" source="assets/chemical.jpg" id="back_middle2_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-g3zi gwd-img-1g4j">
+          <img is="gwd-image" source="assets/chemical.jpg" id="middle_right_left_chenical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-ejuf">
+          <img is="gwd-image" source="assets/chemical.jpg" id="middle_right_middle_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-tb4x">
+          <img is="gwd-image" source="assets/chemical.jpg" id="middle_right_right_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-tb4x gwd-img-11gq">
+          <img is="gwd-image" source="assets/chemical.jpg" id="font_right_right_chemical-image" class="gwd-img-xq63 gwd-img-1m4z">
+		  
+		  <img is="gwd-image" source="assets/chemical_running.gif" id="font_right_left_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-dunx img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="font_left_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-1uls img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="middle_left_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="back_left1_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="back_left2_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="back_right3_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t gwd-img-1wpf img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="back_right1_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t gwd-img-rg3x gwd-img-bwcm img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="back_right2_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t gwd-img-rg3x gwd-img-8e4n img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="back_middle1_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-g3zi img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="back_middle2_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-g3zi gwd-img-1g4j img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="middle_right_left_chenical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-ejuf img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="middle_right_middle_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-tb4x img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="middle_right_right_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-tb4x gwd-img-11gq img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="font_right_right_chemical_running-image" class="gwd-img-xq63 gwd-img-1m4z img-hide">
+        
+		</div>
       </div>
     </div>
   </gwd-doubleclick>
