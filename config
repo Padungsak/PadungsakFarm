@@ -4,11 +4,13 @@
 #23 = OUT 0
 #24 = OUT 0
 #25 = OUT 1
-4 = OUT 1
-17 = OUT 1
-27 = OUT 1
-22 = OUT 1
-
+5 = IN
+6 = OUT 1
+13 = OUT 1
+19 = OUT 1
+26 = OUT 1
+20 = OUT 1
+21 = OUT 1
 #------------------------------------------------------------------------#
 
 [~GPIO]
@@ -109,6 +111,7 @@ adc = MCP3208
 mcp0 = MCP23017 slave:0x20
 mcp1 = MCP23017 slave:0x21
 mcp2 = MCP23017 slave:0x22
+mcp3 = MCP23017 slave:0x23
 
 #------------------------------------------------------------------------#
 
@@ -117,7 +120,7 @@ mcp2 = MCP23017 slave:0x22
 # Use gpio-export to limit GPIO available through REST API  
 #gpio-export = 21, 23, 24, 25
 #gpio-export = 2, 3, 4, 17, 27, 22, 5, 6, 13, 14, 15, 18, 23, 24, 25, 12, 16
-gpio-export = 4, 17, 27, 22
+gpio-export = 5, 6, 13, 19, 26, 20, 21
 
 
 # Uncomment to forbid changing GPIO values 

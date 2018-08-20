@@ -7,14 +7,14 @@ from constantRate import ConstantRate
 GPIO = webiopi.GPIO
 
 class ChemicalTankImp:
-    s_mcp0 = webiopi.deviceInstance("mcp0")
     s_TankStateList = {'Pumping':1,'Close':0,'Error':-1}
     s_countingConfirmation = 4
     s_constRateObj = ConstantRate()
 	
-    def __init__(self, a_name, a_motorPortNum, a_volumePortNum, a_rateTime):
+    def __init__(self, a_name, a_chipNo, a_motorPortNum, a_volumePortNum, a_rateTime):
         webiopi.debug('ChemicalTankImp create!!')
         self.m_name = a_name
+        self.m_mcp = webiopi.deviceInstance("mcp%d" % a_chipNo)
         self.m_motorPortNum = a_motorPortNum
         self.m_volumePortNum = a_volumePortNum
         self.m_constFlowRate = ChemicalTankImp.s_constRateObj.GetRate(self.m_name)
@@ -22,14 +22,14 @@ class ChemicalTankImp:
         self.m_volume = 0
         self.m_TankState = ChemicalTankImp.s_TankStateList['Close']
         self.m_errorMessage = ''
-        ChemicalTankImp.s_mcp0.setFunction(self.m_volumePortNum, GPIO.IN)
-        ChemicalTankImp.s_mcp0.setFunction(self.m_motorPortNum, GPIO.OUT)    
-        ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+        self.m_mcp.setFunction(self.m_volumePortNum, GPIO.IN)
+        self.m_mcp.setFunction(self.m_motorPortNum, GPIO.OUT)    
+        self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
 
     def TestFlowRate(self):
-        ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.LOW)
+        self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.LOW)
         webiopi.sleep(self.m_rateTime)
-        ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+        self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
         
     def SetChemicalVolume(self, a_volume):
         self.m_volume = a_volume
@@ -46,7 +46,7 @@ class ChemicalTankImp:
         return str(self.m_volume) + "," + str(ChemicalTankImp.s_constRateObj.GetRate(self.m_name))
 
     def StopPump(self):
-        ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+        self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
         
     def GetErrorMessage(self):
         return self.m_errorMessage
@@ -61,7 +61,7 @@ class ChemicalTankImp:
         webiopi.debug('Call FillChemical')
         webiopi.debug('Volume = %d' % self.m_volume)
         if self.m_volume > 0:
-            ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.LOW)
+            self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.LOW)
             self.m_TankState = ChemicalTankImp.s_TankStateList['Pumping']
 
             l_flowRateConst = float(self.m_constFlowRate) / float(self.m_rateTime)
@@ -71,18 +71,18 @@ class ChemicalTankImp:
                 webiopi.sleep(1)
                 webiopi.debug('Chemical rate count = %f' % l_rateCount)
                     
-            ChemicalTankImp.s_mcp0.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+            self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
             self.m_TankState = ChemicalTankImp.s_TankStateList['Close']
 		
     def IsChemicalTankError(self):
         return self.m_TankState == ChemicalTankImp.s_TankStateList['Error']
 
     def IsChemicalInTankEnough(self):    
-        return ChemicalTankImp.s_mcp0.digitalRead(self.m_volumePortNum) == GPIO.HIGH
+        return self.m_mcp.digitalRead(self.m_volumePortNum) == GPIO.HIGH
 
     def NeedToFillChemical(self):
         if self.m_volume > 0:
-            if ChemicalTankImp.s_mcp0.digitalRead(self.m_volumePortNum) == GPIO.LOW:
+            if self.m_mcp.digitalRead(self.m_volumePortNum) == GPIO.LOW:
                 return True
             else:
                 #Work around for reding bug in MCP23017
@@ -90,7 +90,7 @@ class ChemicalTankImp:
                 while l_countingConfirmation <= ChemicalTankImp.s_countingConfirmation:
                     webiopi.sleep(0.5)
                     webiopi.debug('Error mcp23017 in while loop!!!')
-                    if ChemicalTankImp.s_mcp0.digitalRead(self.m_volumePortNum) == GPIO.LOW:
+                    if self.m_mcp.digitalRead(self.m_volumePortNum) == GPIO.LOW:
                         return True
                     l_countingConfirmation = l_countingConfirmation +1
                 

@@ -2,7 +2,7 @@ import webiopi
 GPIO = webiopi.GPIO
 
 class ChemicalValveImp:
-    s_mcp1 = webiopi.deviceInstance("mcp1") 
+    s_mcp1 = webiopi.deviceInstance("mcp2") 
     s_valveStateList = {'Open':1,'Close':0,'Error':-1}
     
     def __init__(self, a_chemicalPortNum, a_chemicalDelay, a_windPortNum, a_windDelay, a_executionOrder):

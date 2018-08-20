@@ -63,17 +63,17 @@ def InitialMachine(a_waterPumpGpioPort, a_chemicalPumpGpioPort, a_windPumpGpioPo
 
 #Add mixing tank
 @webiopi.macro
-def AddMixingTank(a_name, a_volumePort, a_rateTime):
+def AddMixingTank(a_name, a_volumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime):
     global g_mixingTank
     if g_mixingTank == 0:
-        g_mixingTank = MixingTankImp(a_name, int(a_volumePort), int(a_rateTime))
+        g_mixingTank = MixingTankImp(a_name, int(a_volumeGpioPort), int(a_waterValveGpioPort), int(a_drainValveGpioPort), int(a_rateTime))
 	
 #Add tank valve
 @webiopi.macro
-def AddChemicalTank(a_name, a_mcpMotorPort, a_mcpVolumePort, a_rateTime):
+def AddChemicalTank(a_name, a_chipNo, a_mcpMotorPort, a_mcpVolumePort, a_rateTime):
     global g_chemicalTankDict
     if(a_name not in g_chemicalTankDict):
-        g_chemicalTankDict[a_name] = ChemicalTankImp(a_name, int(a_mcpMotorPort), int(a_mcpVolumePort), int(a_rateTime))
+        g_chemicalTankDict[a_name] = ChemicalTankImp(a_name, int(a_chipNo), int(a_mcpMotorPort), int(a_mcpVolumePort), int(a_rateTime))
 		
 #Add chemical valve
 @webiopi.macro
@@ -272,6 +272,7 @@ def DoChemicalAuto():
                     g_chemicalState = g_chemicalStateList['Stop']
                     return
                 l_tankObj.FillChemical()
+                webiopi.sleep(1)
 
             #start motor for 10 min
             g_mixingTank.MixChemical()
@@ -303,6 +304,7 @@ def DoChemicalAuto():
                 break
 
     EngineImp.getInstance().CloseWindPump()
+    g_mixingTank.DrainChemical()
     g_chemicalState = g_chemicalStateList['Stop']
     ResetChemicalVolume()
 
@@ -328,6 +330,7 @@ def VerifyChemicalInputData():
     
 @webiopi.macro
 def StopChemical():
+    global g_chemicalStopEvent
     g_chemicalStopEvent.set()
     
 
