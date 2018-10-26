@@ -8,8 +8,8 @@ GPIO = webiopi.GPIO
 
 class MixingTankImp:
     s_TankStateList = {'Pumping':1, 'Mixing':2, 'Close':0,'Error':-1}
-    s_mixingTime = 30
-    s_drainTime = 30
+    s_mixingTime = 120
+    s_drainTime = 500 
     s_constRateObj = ConstantRate()
 
     def __init__(self, a_name, a_volumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime):
@@ -28,13 +28,25 @@ class MixingTankImp:
 
     def DrainChemical(self):
         GPIO.digitalWrite(self.m_drainValveGpioPort, GPIO.LOW)
+        while True:
+            if self.IsWaterEnough():
+                webiopi.sleep(1)
+                webiopi.debug("Draining water...")
+                continue
+            else:
+                break
+        
         webiopi.sleep(MixingTankImp.s_drainTime)
         GPIO.digitalWrite(self.m_drainValveGpioPort, GPIO.HIGH)  
         
     def TestFlowRate(self):
+        GPIO.digitalWrite(self.m_waterValveGpioPort, GPIO.LOW)
+        webiopi.sleep(1)
         EngineImp.getInstance().OpenWaterPump()
         webiopi.sleep(self.m_rateTime)
         EngineImp.getInstance().CloseWaterPump()
+        webiopi.sleep(1)
+        GPIO.digitalWrite(self.m_waterValveGpioPort, GPIO.HIGH)
         
     def SetWaterVolume(self, a_volume):
         self.m_volume = a_volume
@@ -70,9 +82,13 @@ class MixingTankImp:
                 
         return True
 
-    def MixChemical(self):
-        #Open water pump
-        self.m_TankState = MixingTankImp.s_TankStateList['Pumping']
+    def OpenMixingPump(self):
+        self.m_TankState = MixingTankImp.s_TankStateList['Mixing']
+        EngineImp.getInstance().OpenMixPump()
+        webiopi.sleep(MixingTankImp.s_mixingTime)
+        EngineImp.getInstance().CloseMixPump()
+        
+    def OpenWaterPump(self):
         GPIO.digitalWrite(self.m_waterValveGpioPort, GPIO.LOW)
         webiopi.sleep(1)
         EngineImp.getInstance().OpenWaterPump()
@@ -87,10 +103,13 @@ class MixingTankImp:
         webiopi.sleep(1)
         GPIO.digitalWrite(self.m_waterValveGpioPort, GPIO.HIGH)
         
-            
-        self.m_TankState = MixingTankImp.s_TankStateList['Mixing']
-        EngineImp.getInstance().OpenMixPump()
-        webiopi.sleep(MixingTankImp.s_mixingTime)
-        EngineImp.getInstance().CloseMixPump()
+    def MixChemical(self):
+        #Open water pump
+        self.m_TankState = MixingTankImp.s_TankStateList['Pumping']
+        self.OpenWaterPump()
         self.m_TankState = MixingTankImp.s_TankStateList['Close']
 
+    def CleanTank(self):
+        self.DrainChemical()
+        self.OpenWaterPump()
+        self.DrainChemical()

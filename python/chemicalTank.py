@@ -27,6 +27,7 @@ class ChemicalTankImp:
         self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
 
     def TestFlowRate(self):
+        webiopi.debug("TestFlowRate was called !!!!!!")
         self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.LOW)
         webiopi.sleep(self.m_rateTime)
         self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)

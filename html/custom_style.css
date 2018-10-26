@@ -187,6 +187,11 @@
 	{
 		visibility: hidden
 	}
+	
+	.chemical-pause-button-img
+	{
+		visibility: hidden
+	}
 	.chemical-pumping-button-img
 	{
 		visibility: hidden
@@ -488,16 +493,20 @@
       left: 90px;
       top: 290px;
     }
-    .gwd-img-8e4n {
-      left: 61px;
-      top: 283px;
-    }
     .gwd-img-bwcm {
       top: 283px;
-      left: 86px;
+      left: 90px;
+    }
+    .gwd-img-8e4n {
+      left: 75px;
+      top: 283px;
     }
     .gwd-img-1wpf {
-      left: 34px;
+      left: 60px;
+      top: 284px;
+    }
+    .gwd-img-back-right4 {
+      left: 45px;
       top: 284px;
     }
 	.img-hide{
