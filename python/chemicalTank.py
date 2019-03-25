@@ -11,7 +11,7 @@ class ChemicalTankImp:
     s_countingConfirmation = 4
     s_constRateObj = ConstantRate()
 	
-    def __init__(self, a_name, a_chipNo, a_motorPortNum, a_volumePortNum, a_rateTime):
+    def __init__(self, a_name, a_chipNo, a_motorPortNum, a_volumePortNum, a_rateTime, a_isNC):
         webiopi.debug('ChemicalTankImp create!!')
         self.m_name = a_name
         self.m_mcp = webiopi.deviceInstance("mcp%d" % a_chipNo)
@@ -19,6 +19,12 @@ class ChemicalTankImp:
         self.m_volumePortNum = a_volumePortNum
         self.m_constFlowRate = ChemicalTankImp.s_constRateObj.GetRate(self.m_name)
         self.m_rateTime = a_rateTime
+        if a_isNC == 0:
+            self.chemicalNeedLogic = GPIO.LOW
+        else:
+            self.chemicalNeedLogic = GPIO.HIGH
+        
+        self.m_isNC = a_isNC
         self.m_volume = 0
         self.m_TankState = ChemicalTankImp.s_TankStateList['Close']
         self.m_errorMessage = ''
@@ -57,6 +63,11 @@ class ChemicalTankImp:
             self.m_errorMessage = 'Please fill constant flow rate for %s' % self.m_name
             return False
         return True
+
+    def IsVolumeSet(self):
+        if self.m_volume > 0:
+            return True
+        return False
         
     def FillChemical(self):
         webiopi.debug('Call FillChemical')
@@ -79,11 +90,11 @@ class ChemicalTankImp:
         return self.m_TankState == ChemicalTankImp.s_TankStateList['Error']
 
     def IsChemicalInTankEnough(self):    
-        return self.m_mcp.digitalRead(self.m_volumePortNum) == GPIO.HIGH
+        return self.m_mcp.digitalRead(self.m_volumePortNum) != self.chemicalNeedLogic
 
     def NeedToFillChemical(self):
         if self.m_volume > 0:
-            if self.m_mcp.digitalRead(self.m_volumePortNum) == GPIO.LOW:
+            if self.m_mcp.digitalRead(self.m_volumePortNum) == self.chemicalNeedLogic:
                 return True
             else:
                 #Work around for reding bug in MCP23017
@@ -91,7 +102,7 @@ class ChemicalTankImp:
                 while l_countingConfirmation <= ChemicalTankImp.s_countingConfirmation:
                     webiopi.sleep(0.5)
                     webiopi.debug('Error mcp23017 in while loop!!!')
-                    if self.m_mcp.digitalRead(self.m_volumePortNum) == GPIO.LOW:
+                    if self.m_mcp.digitalRead(self.m_volumePortNum) == self.chemicalNeedLogic:
                         return True
                     l_countingConfirmation = l_countingConfirmation +1
                 

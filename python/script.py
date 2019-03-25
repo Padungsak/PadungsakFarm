@@ -33,6 +33,22 @@ s_mcp0.setFunction(10, GPIO.IN)
 # setup function is automatically called at WebIOPi startup
 def setup():
     l_test = 1
+    #InitialMachine(6,13,19,26)
+    #AddValve('a',4,1)
+    #webiopi.sleep(1)
+    #AddValve('b',2,1)
+    #webiopi.sleep(1)
+    #AddValve('c',3,2)
+    #webiopi.sleep(1)
+    #AddValve('d',6,3)
+    #webiopi.sleep(1)
+    #AddValve('e',0,4)
+    #webiopi.sleep(1)
+    #AddValve('f',1,4)
+    #webiopi.sleep(1)
+    #AddValve('g',5,5)
+    #webiopi.sleep(1)
+    #DoExecutionAuto(1200,1)
 
 # loop function is repeatedly called by WebIOPi 
 def loop():
@@ -63,17 +79,17 @@ def InitialMachine(a_waterPumpGpioPort, a_chemicalPumpGpioPort, a_windPumpGpioPo
 
 #Add mixing tank
 @webiopi.macro
-def AddMixingTank(a_name, a_volumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime):
+def AddMixingTank(a_name, a_volumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime, a_initialWater):
     global g_mixingTank
     if g_mixingTank == 0:
-        g_mixingTank = MixingTankImp(a_name, int(a_volumeGpioPort), int(a_waterValveGpioPort), int(a_drainValveGpioPort), int(a_rateTime))
+        g_mixingTank = MixingTankImp(a_name, int(a_volumeGpioPort), int(a_waterValveGpioPort), int(a_drainValveGpioPort), int(a_rateTime), int(a_initialWater))
     
 #Add tank valve
 @webiopi.macro
-def AddChemicalTank(a_name, a_chipNo, a_mcpMotorPort, a_mcpVolumePort, a_rateTime):
+def AddChemicalTank(a_name, a_chipNo, a_mcpMotorPort, a_mcpVolumePort, a_rateTime, a_isNC):
     global g_chemicalTankDict
     if(a_name not in g_chemicalTankDict):
-        g_chemicalTankDict[a_name] = ChemicalTankImp(a_name, int(a_chipNo), int(a_mcpMotorPort), int(a_mcpVolumePort), int(a_rateTime))
+        g_chemicalTankDict[a_name] = ChemicalTankImp(a_name, int(a_chipNo), int(a_mcpMotorPort), int(a_mcpVolumePort), int(a_rateTime), int(a_isNC))
 		
 #Add chemical valve
 @webiopi.macro
@@ -261,9 +277,14 @@ def DoChemicalAuto():
                 break
 
         if l_pumpingNow:
+            g_mixingTank.InitialWater()
+            
             for l_tankObj in g_chemicalTankDict.values():                
                 l_tankObj.FillChemical()
                 webiopi.sleep(1)
+                if l_tankObj.IsVolumeSet():
+                    g_mixingTank.OpenMixingPump()
+                    
 
             #start motor for 10 min
             g_mixingTank.MixChemical()
@@ -272,12 +293,6 @@ def DoChemicalAuto():
             g_chemicalState = g_chemicalStateList['Pumping']
             
             for l_valve in l_sortedValve:
-                while g_chemicalPauseEvent.is_set():
-                    ClearChemicalEngine()
-                    g_chemicalState = g_chemicalStateList['Pause']
-                    webiopi.debug('System pause')
-                    webiopi.sleep(5)
-                    
                 g_chemicalState = g_chemicalStateList['Pumping']      
                 if(l_valve.executionOrder > l_executionNumber):
                     l_executionNumber = l_valve.executionOrder
@@ -305,6 +320,13 @@ def DoChemicalAuto():
                  
             if l_executionNumber == l_sortedValve[-1].executionOrder:
                 break
+            
+            while g_chemicalPauseEvent.is_set():
+                    ClearChemicalEngine()
+                    g_chemicalState = g_chemicalStateList['Pause']
+                    webiopi.debug('System pause')
+                    webiopi.sleep(5)
+                    
 
     #EngineImp.getInstance().CloseWindPump()
     g_mixingTank.CleanTank()

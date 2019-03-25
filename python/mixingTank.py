@@ -8,17 +8,18 @@ GPIO = webiopi.GPIO
 
 class MixingTankImp:
     s_TankStateList = {'Pumping':1, 'Mixing':2, 'Close':0,'Error':-1}
-    s_mixingTime = 120
+    s_mixingTime = 180
     s_drainTime = 500 
     s_constRateObj = ConstantRate()
 
-    def __init__(self, a_name, a_volumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime):
+    def __init__(self, a_name, a_volumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime, a_initialWater):
         self.m_name = a_name
         self.m_volumeGpioPort = a_volumeGpioPort
         self.m_waterValveGpioPort = a_waterValveGpioPort
         self.m_drainValveGpioPort = a_drainValveGpioPort
         self.m_constFlowRate = MixingTankImp.s_constRateObj.GetRate(self.m_name)
         self.m_rateTime = a_rateTime
+        self.m_initialWater = a_initialWater
         self.m_volume = 0
         self.m_TankState = MixingTankImp.s_TankStateList['Close']
         self.m_errorMessage = ''
@@ -88,15 +89,16 @@ class MixingTankImp:
         webiopi.sleep(MixingTankImp.s_mixingTime)
         EngineImp.getInstance().CloseMixPump()
         
-    def OpenWaterPump(self):
+    def OpenWaterPump(self, a_volume):
         GPIO.digitalWrite(self.m_waterValveGpioPort, GPIO.LOW)
         webiopi.sleep(1)
         EngineImp.getInstance().OpenWaterPump()
             
         l_flowRateConst = float(self.m_constFlowRate) / float(self.m_rateTime)
         l_rateCount = 0
-        while l_rateCount < self.m_volume:
+        while l_rateCount < a_volume:
             l_rateCount += l_flowRateConst
+            webiopi.debug('OpenWaterPump %d' % l_rateCount)
             webiopi.sleep(1)
 
         EngineImp.getInstance().CloseWaterPump()
@@ -106,10 +108,17 @@ class MixingTankImp:
     def MixChemical(self):
         #Open water pump
         self.m_TankState = MixingTankImp.s_TankStateList['Pumping']
-        self.OpenWaterPump()
+        l_volume =self.m_volume-self.m_initialWater
+        self.OpenWaterPump(l_volume)
         self.m_TankState = MixingTankImp.s_TankStateList['Close']
+
+    def InitialWater(self):
+        self.m_TankState = MixingTankImp.s_TankStateList['Pumping']
+        self.OpenWaterPump(self.m_initialWater)
+        self.m_TankState = MixingTankImp.s_TankStateList['Close']
+        
 
     def CleanTank(self):
         self.DrainChemical()
-        self.OpenWaterPump()
+        self.OpenWaterPump(self.m_volume)
         self.DrainChemical()
