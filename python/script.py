@@ -202,6 +202,7 @@ def DoExecutionAuto(a_delayTime, a_startOrder):
             l_previousOrderIndex = l_orderIndex - 1
             for l_valveName, l_valveObj in g_valveDict.items():
                 if(l_valveObj.executionOrder == l_previousOrderIndex):
+                    webiopi.sleep(30)
                     l_valveObj.CloseValve()
                     webiopi.sleep(0.5)
                     if(int(l_valveObj.GetValveState()) == ValveImp.m_valveStateList['Error']):
@@ -288,33 +289,21 @@ def DoChemicalAuto():
                 webiopi.sleep(1)
                 break
             
-        #Check if chemical in feeder is enough  
-       # if l_pumpingNow == True:
-        #    for l_feederIndex, l_feederKey in enumerate(g_chemicalFeederDict):           
-         #       if g_chemicalFeederDict[l_feederKey].NeedToFillChemical():
-          #          webiopi.debug('NeedToFillChemical %d!!' % l_feederIndex)
-           #         l_pumpingNow = False
-            #        webiopi.sleep(1)
-        #            break
-            
         if l_pumpingNow:
             g_mixingTank.InitialWater()
 
-            for l_feederObj in g_chemicalFeederDict.values():                
+            for l_feederObj in g_chemicalFeederDict.values():
+                EngineImp.getInstance().OpenMixPump()
                 l_feederObj.FeedChemical()
-                webiopi.sleep(1)
-                if l_feederObj.IsVolumeSet():
-                    g_mixingTank.OpenMixingPump()
                     
-            for l_tankObj in g_chemicalTankDict.values():                
+            for l_tankObj in g_chemicalTankDict.values():
+                EngineImp.getInstance().OpenMixPump()
                 l_tankObj.FillChemical()
-                webiopi.sleep(1)
-                if l_tankObj.IsVolumeSet():
-                    g_mixingTank.OpenMixingPump()
-                    
+
+            EngineImp.getInstance().CloseMixPump()       
 
             #start motor for 10 min
-            g_mixingTank.MixChemical()
+            g_mixingTank.FillWater()
          
             #loop for openning all valve
             g_chemicalState = g_chemicalStateList['Pumping']
@@ -326,7 +315,7 @@ def DoChemicalAuto():
                     
                     EngineImp.getInstance().OpenWindPump()
                     webiopi.sleep(l_valve.GetWindCompressDelayTime())
-                    g_mixingTank.OpenMixingPump()
+                    g_mixingTank.MixChemical()
                     l_valve.OpenValve()
                     webiopi.sleep(1)
                     
