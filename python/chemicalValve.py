@@ -5,7 +5,7 @@ class ChemicalValveImp:
     s_mcp1 = webiopi.deviceInstance("mcp2")
     s_windCompressDelay = 720
     s_sleepModeDelay = 180
-    s_valveStateList = {'Open':1,'Close':0,'Error':-1}
+    s_valveStateList = {'Open':1,'Normal':0,'Disable':-1}
     
     def __init__(self, a_chemicalPortNum, a_chemicalDelay, a_windPortNum, a_windDelay, a_executionOrder):
         self.m_chemicalPortNum = a_chemicalPortNum
@@ -13,7 +13,7 @@ class ChemicalValveImp:
         self.m_windPortNum = a_windPortNum
         self.m_windDelay = a_windDelay
         self.executionOrder = a_executionOrder
-        self.m_valveState = ChemicalValveImp.s_valveStateList['Close']
+        self.m_valveState = ChemicalValveImp.s_valveStateList['Normal']
         ChemicalValveImp.s_mcp1.setFunction(self.m_chemicalPortNum, GPIO.OUT)
         ChemicalValveImp.s_mcp1.setFunction(self.m_windPortNum, GPIO.OUT)
         ChemicalValveImp.s_mcp1.digitalWrite(self.m_chemicalPortNum, GPIO.HIGH)
@@ -24,10 +24,10 @@ class ChemicalValveImp:
         return self.m_valveState == ChemicalValveImp.s_valveStateList['Open']
 
     def IsValveClose(self):
-        return self.m_valveState == ChemicalValveImp.s_valveStateList['Close']
+        return self.m_valveState == ChemicalValveImp.s_valveStateList['Normal']
 
-    def IsValveError(self):
-        return self.m_valveState == ChemicalValveImp.s_valveStateList['Error']
+    def IsValveDisable(self):
+        return self.m_valveState == ChemicalValveImp.s_valveStateList['Disable']
 
     def OpenValve(self):
         ChemicalValveImp.s_mcp1.digitalWrite(self.m_chemicalPortNum, GPIO.LOW)
@@ -36,7 +36,7 @@ class ChemicalValveImp:
 	
     def CloseValve(self):
         ChemicalValveImp.s_mcp1.digitalWrite(self.m_chemicalPortNum, GPIO.HIGH)
-        self.m_valveState = ChemicalValveImp.s_valveStateList['Close']
+        self.m_valveState = ChemicalValveImp.s_valveStateList['Normal']
         webiopi.debug('Close valve port %d' % self.m_chemicalPortNum)
 
 
@@ -47,7 +47,7 @@ class ChemicalValveImp:
     
     def CloseWindValve(self):
         ChemicalValveImp.s_mcp1.digitalWrite(self.m_windPortNum, GPIO.HIGH)
-        self.m_valveState = ChemicalValveImp.s_valveStateList['Close']
+        self.m_valveState = ChemicalValveImp.s_valveStateList['Normal']
         webiopi.debug('Close wind valve port %d' % self.m_windPortNum)
 
     def GetWindDelayTime(self):
@@ -61,3 +61,9 @@ class ChemicalValveImp:
 
     def GetSleepTime(self):
         return ChemicalValveImp.s_sleepModeDelay
+		
+	def SetDisableValve(self):
+		self.m_valveState = ChemicalValveImp.s_valveStateList['Disable']
+		
+	def SetNormalValve(self):
+		self.m_valveState = ChemicalValveImp.s_valveStateList['Normal']

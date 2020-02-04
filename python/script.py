@@ -144,8 +144,7 @@ def OpenValve(a_valveName):
                     
             if(l_valveCount >= 1):
                 EngineImp.getInstance().OpenWaterPump()
-                
-    return l_valveState
+				g_state = g_stateList['Open']
 
 #Close valve macro
 @webiopi.macro
@@ -158,13 +157,10 @@ def CloseValve(a_valveName):
 
     if(l_valveCount <= 2):
         EngineImp.getInstance().CloseWaterPump()
+		g_state = g_stateList['Close']
         
-    l_valveState = ValveImp.m_valveStateList['Open']
     if(a_valveName in g_valveDict):
         g_valveDict[a_valveName].CloseValve()
-        l_valveState = g_valveDict[a_valveName].GetValveState()
-
-    return l_valveState
 
 @webiopi.macro
 def GetValveState(a_valveName):
@@ -308,31 +304,32 @@ def DoChemicalAuto():
             #loop for openning all valve
             g_chemicalState = g_chemicalStateList['Pumping']
             
-            for l_valve in l_sortedValve:
-                g_chemicalState = g_chemicalStateList['Pumping']      
-                if(l_valve.executionOrder > l_executionNumber):
-                    l_executionNumber = l_valve.executionOrder
-                    
-                    EngineImp.getInstance().OpenWindPump()
-                    webiopi.sleep(l_valve.GetWindCompressDelayTime())
-                    g_mixingTank.MixChemical()
-                    l_valve.OpenValve()
-                    webiopi.sleep(1)
-                    
-                    EngineImp.getInstance().OpenChemicalPump()
-                    webiopi.sleep(l_valve.GetChemicalDelayTime())
-                    EngineImp.getInstance().CloseChemicalPump()
-                    webiopi.sleep(0.5)
-                    
-                    l_valve.OpenWindValve()
-                    webiopi.sleep(l_valve.GetWindDelayTime())
-                    l_valve.CloseValve()
-                    webiopi.sleep(1)
-                    l_valve.CloseWindValve()
-                    EngineImp.getInstance().CloseWindPump()
-                    webiopi.sleep(l_valve.GetSleepTime())
-                    if g_mixingTank.IsWaterEnough() == False:
-                        break
+            for l_valve in l_sortedValve:     
+                if l_valve.executionOrder > l_executionNumber:
+					if l_valve.IsValveDisable() == False:
+						g_chemicalState = g_chemicalStateList['Pumping'] 
+						l_executionNumber = l_valve.executionOrder
+						
+						EngineImp.getInstance().OpenWindPump()
+						webiopi.sleep(l_valve.GetWindCompressDelayTime())
+						g_mixingTank.MixChemical()
+						l_valve.OpenValve()
+						webiopi.sleep(1)
+						
+						EngineImp.getInstance().OpenChemicalPump()
+						webiopi.sleep(l_valve.GetChemicalDelayTime())
+						EngineImp.getInstance().CloseChemicalPump()
+						webiopi.sleep(0.5)
+						
+						l_valve.OpenWindValve()
+						webiopi.sleep(l_valve.GetWindDelayTime())
+						l_valve.CloseValve()
+						webiopi.sleep(1)
+						l_valve.CloseWindValve()
+						EngineImp.getInstance().CloseWindPump()
+						webiopi.sleep(l_valve.GetSleepTime())
+						if g_mixingTank.IsWaterEnough() == False:
+							break
                  
             if l_executionNumber == l_sortedValve[-1].executionOrder:
                 break
@@ -463,7 +460,26 @@ def IsChemicalValveOpen(a_valveName):
     if(a_valveName in g_chemicalValveDict):
         return g_chemicalValveDict[a_valveName].IsValveOpen()
     return False
-    
+
+@webiopi.macro
+def IsChemicalValveDisable(a_valveName):
+    global g_chemicalValveDict
+    if(a_valveName in g_chemicalValveDict):
+        return g_chemicalValveDict[a_valveName].IsValveDisable()
+    return False
+	
+@webiopi.macro
+def SetchemicalValveDisable(a_valveName):
+    global g_chemicalValveDict
+    if(a_valveName in g_chemicalValveDict):
+		g_chemicalValveDict[a_valveName].SetDisableValve()
+		
+@webiopi.macro
+def SetchemicalValveNormal(a_valveName):
+    global g_chemicalValveDict
+    if(a_valveName in g_chemicalValveDict):
+		g_chemicalValveDict[a_valveName].SetNormalValve()
+	
 @webiopi.macro
 def IsChemicalModeError():
     return (g_chemicalState == g_chemicalStateList['Error'])
