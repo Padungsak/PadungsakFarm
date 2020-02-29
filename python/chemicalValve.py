@@ -61,9 +61,10 @@ class ChemicalValveImp:
 
     def GetSleepTime(self):
         return ChemicalValveImp.s_sleepModeDelay
-		
-	def SetDisableValve(self):
-		self.m_valveState = ChemicalValveImp.s_valveStateList['Disable']
-		
-	def SetNormalValve(self):
-		self.m_valveState = ChemicalValveImp.s_valveStateList['Normal']
+
+    def SetDisableValve(self):
+        webiopi.debug('SetDisableValve %d' %self.m_chemicalPortNum )
+        self.m_valveState = ChemicalValveImp.s_valveStateList['Disable']
+
+    def SetNormalValve(self):
+        self.m_valveState = ChemicalValveImp.s_valveStateList['Normal']

@@ -38,21 +38,21 @@
 		
 		var chemicalButtonArray = {buttonName:"chemicalButton", stopImage:"chemical_stop_button-image", mixingImage:"chemical_mixing_button-image", pumpingImage:"chemical_pumping_button-image", pauseImage:"chemical_pause_button-image"};
 			
-		var chemicalValveArray = [/*{valveName:"FontLeftValve", chemicalPort:0, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"font_left_chemical-image", valveOpenImage:"font_left_chemical_running-image", executionOrder:1},
-								  {valveName:"FontRightLeftValve", chemicalPort:1, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"font_right_left_chemical-image", valveOpenImage:"font_right_left_chemical_running-image", executionOrder:2},
-								  {valveName:"FontRightRightValve", chemicalPort:2, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"font_right_right_chemical-image", valveOpenImage:"font_right_right_chemical_running-image", executionOrder:3},
+		var chemicalValveArray = [{valveName:"FontLeftValve", chemicalPort:0, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"font_left_chemical-image", valveOpenImage:"font_left_chemical_running-image", executionOrder:1},
+								  {valveName:"FontRightLeftValve", chemicalPort:1, chemicalDelay:80, windPort:15, windDelay:300, valveCloseImage:"font_right_left_chemical-image", valveOpenImage:"font_right_left_chemical_running-image", executionOrder:2},
+								  {valveName:"FontRightRightValve", chemicalPort:2, chemicalDelay:80, windPort:15, windDelay:300, valveCloseImage:"font_right_right_chemical-image", valveOpenImage:"font_right_right_chemical_running-image", executionOrder:3},
 								  {valveName:"MiddleLeftValve", chemicalPort:3, chemicalDelay:40, windPort:15, windDelay:300, valveCloseImage:"middle_left_chemical-image", valveOpenImage:"middle_left_chemical_running-image", executionOrder:4},
-								  {valveName:"MiddleRightLeftValve", chemicalPort:4, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"middle_right_left_chemical-image", valveOpenImage:"middle_right_left_chemical_running-image", executionOrder:5},*/
+								  {valveName:"MiddleRightLeftValve", chemicalPort:4, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"middle_right_left_chemical-image", valveOpenImage:"middle_right_left_chemical_running-image", executionOrder:5},
 								  {valveName:"MiddleRightMiddleValve", chemicalPort:5, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"middle_right_middle_chemical-image", valveOpenImage:"middle_right_middle_chemical_running-image", executionOrder:6},
-								  {valveName:"MiddleRightRightValve", chemicalPort:6, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"middle_right_right_chemical-image", valveOpenImage:"middle_right_right_chemical_running-image", executionOrder:7},/*
-								  {valveName:"BackMiddle1Valve", chemicalPort:7, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"back_middle1_chemical-image", valveOpenImage:"back_middle1_chemical_running-image", executionOrder:8},	*/
-								  {valveName:"BackMiddle2Valve", chemicalPort:8, chemicalDelay:60, windPort:15, windDelay:300, valveCloseImage:"back_middle2_chemical-image", valveOpenImage:"back_middle2_chemical_running-image", executionOrder:9},/*
+								  {valveName:"MiddleRightRightValve", chemicalPort:6, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"middle_right_right_chemical-image", valveOpenImage:"middle_right_right_chemical_running-image", executionOrder:7},
+								  {valveName:"BackMiddle1Valve", chemicalPort:8, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"back_middle1_chemical-image", valveOpenImage:"back_middle1_chemical_running-image", executionOrder:8},	
+								  {valveName:"BackMiddle2Valve", chemicalPort:7, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"back_middle2_chemical-image", valveOpenImage:"back_middle2_chemical_running-image", executionOrder:9},
 								  {valveName:"BackLeft1Valve", chemicalPort:9, chemicalDelay:50, windPort:15, windDelay:300, valveCloseImage:"back_left1_chemical-image", valveOpenImage:"back_left1_chemical_running-image", executionOrder:10},
-								  {valveName:"BackLeft2Valve", chemicalPort:10, chemicalDelay:80, windPort:15, windDelay:300, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},*/
-								  {valveName:"BackRight1Valve", chemicalPort:11, chemicalDelay:110, windPort:15, windDelay:300, valveCloseImage:"back_right1_chemical-image", valveOpenImage:"back_right1_chemical_running-image", executionOrder:12}/*,
-								  {valveName:"BackRight2Valve", chemicalPort:12, chemicalDelay:110, windPort:15, windDelay:300, valveCloseImage:"back_right2_chemical-image", valveOpenImage:"back_right2_chemical_running-image", executionOrder:13},
-								  {valveName:"BackRight3Valve", chemicalPort:13, chemicalDelay:80, windPort:15, windDelay:300, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
-								  {valveName:"BackRight4Valve", chemicalPort:14, chemicalDelay:60, windPort:15, windDelay:300, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15}*/];
+								  {valveName:"BackLeft2Valve", chemicalPort:14, chemicalDelay:80, windPort:15, windDelay:300, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},
+								  {valveName:"BackRight1Valve", chemicalPort:10, chemicalDelay:120, windPort:15, windDelay:300, valveCloseImage:"back_right1_chemical-image", valveOpenImage:"back_right1_chemical_running-image", executionOrder:12},
+								  {valveName:"BackRight2Valve", chemicalPort:11, chemicalDelay:120, windPort:15, windDelay:300, valveCloseImage:"back_right2_chemical-image", valveOpenImage:"back_right2_chemical_running-image", executionOrder:13},
+								  {valveName:"BackRight3Valve", chemicalPort:12, chemicalDelay:80, windPort:15, windDelay:300, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
+								  {valveName:"BackRight4Valve", chemicalPort:13, chemicalDelay:60, windPort:15, windDelay:300, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15}];
 								  
 								  
 		var chemicalTankArray = [{tankName:"Fungicides1", chipNo:0, mcpMotorPort:0, mcpVolumePort:8, rateTime:10, isNC:0, flowRateBox:"fungicides1-const-input", inputBox:"fungicides1-input", testFlowRateButton:"button-constant-test-fungicides1"},
@@ -69,57 +69,76 @@
 		var constRateButtonArray = {buttonId:"button-constant-rate", editText:"To be saved", normalText:"edit rate(L/M)"};
 		//window.alert("Auto");
         webiopi().ready(function() {
+				var isMachineInitialed = false;
 				webiopi().callMacro("InitialMachine", [engineArray.waterPumpGpioPort, 
 												  engineArray.chemicalPumpGpioPort, 
 												  engineArray.windPumpGpioPort,
-												  engineArray.mixEngineGpioPort] , null);			
+												  engineArray.mixEngineGpioPort] , function(acro, args, data){isMachineInitialed = true;});			
 				
 				//Add valves
 				var index;
+				var valveAddedCount = 0;
 				var valveLen = valveArray.length;
 				for(index = 0; index < valveLen; index++)
 				{
-					webiopi().callMacro("AddValve", [valveArray[index].valveName, valveArray[index].valvePort, valveArray[index].executionOrder] , null);
-					webiopi().callMacro("GetValveState", valveArray[index].valveName, UpdateValveStateCallback);
+					webiopi().callMacro("AddValve", [valveArray[index].valveName, valveArray[index].valvePort, valveArray[index].executionOrder] , function(acro, args, data){valveAddedCount++;});
+					//webiopi().callMacro("GetValveState", valveArray[index].valveName, UpdateValveStateCallback);
 				}
 				
-				webiopi().callMacro("IsAutoModeRunning", [], function(acro, args, data){
-																							if(data)
-																							{
-																								gwd.actions.events.setInlineStyle(onOffButtonArray.autoImage, 'visibility: visible; ');
-																								gwd.actions.events.setInlineStyle(onOffButtonArray.onImage, 'visibility: hidden; ');
-																								gwd.actions.events.setInlineStyle(onOffButtonArray.offImage, 'visibility: hidden; ');	
-																								UpdateAutoModeStatus();
-																							}
-																							else
-																							{
-																								//In case of running error
-																								webiopi().callMacro("IsAutoModeError", [], function(acro, args, data)
-																																			{
-																																				if(data)
-																																				{
-																																					window.alert("Auto mode failed. The engine ran off. Please try again!");
-																																				}
-																																				else
-																																				{
-																																					webiopi().callMacro("IsMachineOpennig", [], function(macro, args, data)
-																																																{
-																																																	if(data)
-																																																	{
-																																																		gwd.actions.events.setInlineStyle(onOffButtonArray.autoImage, 'visibility: hidden; ');
-																																																		gwd.actions.events.setInlineStyle(onOffButtonArray.onImage, 'visibility: visible; ');
-																																																		gwd.actions.events.setInlineStyle(onOffButtonArray.offImage, 'visibility: hidden; ');
-																																								
-																																																		}
-																																										});
-																																				}
-																																			});
-	
-																							}
-																						});
-				
-				
+				//Wait until all water object initial complete				
+				//To ensure all input are set
+				var waterAllSetHandle = setInterval( 
+													function()
+													{
+														if(isMachineInitialed && (valveAddedCount == valveLen))
+														{
+														
+															for(index = 0; index < valveLen; index++)
+															{
+																webiopi().callMacro("GetValveState", valveArray[index].valveName, UpdateValveStateCallback);
+															}
+															
+															webiopi().callMacro("IsAutoModeRunning", [], function(acro, args, data){
+																																		if(data)
+																																		{
+																																			gwd.actions.events.setInlineStyle(onOffButtonArray.autoImage, 'visibility: visible; ');
+																																			gwd.actions.events.setInlineStyle(onOffButtonArray.onImage, 'visibility: hidden; ');
+																																			gwd.actions.events.setInlineStyle(onOffButtonArray.offImage, 'visibility: hidden; ');	
+																																			UpdateAutoModeStatus();
+																																		}
+																																		else
+																																		{
+																																			//In case of running error
+																																			webiopi().callMacro("IsAutoModeError", [], function(acro, args, data)
+																																														{
+																																															if(data)
+																																															{
+																																																window.alert("Auto mode failed. The engine ran off. Please try again!");
+																																															}
+																																															else
+																																															{
+																																																webiopi().callMacro("IsMachineOpennig", [], function(macro, args, data)
+																																																											{
+																																																												if(data)
+																																																												{
+																																																													gwd.actions.events.setInlineStyle(onOffButtonArray.autoImage, 'visibility: hidden; ');
+																																																													gwd.actions.events.setInlineStyle(onOffButtonArray.onImage, 'visibility: visible; ');
+																																																													gwd.actions.events.setInlineStyle(onOffButtonArray.offImage, 'visibility: hidden; ');
+																																																			
+																																																													}
+																																																					});
+																																															}
+																																														});
+												
+																																		}
+																																	});
+														clearInterval(waterAllSetHandle);
+														}
+													}, 1000);
+															
+					
 				var chemicalValveLen = chemicalValveArray.length;
+				var chemicalValveAddedCount = 0;
 				for(index = 0; index < chemicalValveLen; index++)
 				{
 					webiopi().callMacro("AddChemicalValve", [chemicalValveArray[index].valveName, 
@@ -127,7 +146,7 @@
 															 chemicalValveArray[index].chemicalDelay,
 															 chemicalValveArray[index].windPort,
 															 chemicalValveArray[index].windDelay,
-															 chemicalValveArray[index].executionOrder] , null);
+															 chemicalValveArray[index].executionOrder] , function(acro, args, data){chemicalValveAddedCount++;});
 				}
 				
 				
@@ -142,18 +161,7 @@
 															chemicalTankArray[index].rateTime,
 															chemicalTankArray[index].isNC], function(acro, args, data){chemicalTankAddedCount++;});
 				}
-				
-				//Wait until adding chemical tank complete				
-				//To ensure all input are set
-				var chemicalAllTankSetHandle = setInterval(
-													function()
-													{
-														if(chemicalTankAddedCount == chemicalTankLen)
-														{	
-															UpdateChemicalTankStatus();
-															clearInterval(chemicalAllTankSetHandle);
-														}
-													}, 1000);
+	
 				
 				
 				var chemicalFeederLen = chemicalFeederArray.length;
@@ -169,37 +177,50 @@
 															chemicalFeederArray[index].rateTime], function(acro, args, data){chemicalFeederAddedCount++;});
 				}
 				
-				//Wait until adding chemical tank complete				
-				//To ensure all input are set
-				var chemicalAllFeederSetHandle = setInterval(
-													function()
-													{
-														if(chemicalFeederAddedCount == chemicalFeederLen)
-														{	
-															UpdateChemicalFeederStatus();
-															clearInterval(chemicalAllFeederSetHandle);
-														}
-													}, 1000);
-				
+			
+				var isMixingTankAdded = false;
 				webiopi().callMacro("AddMixingTank", [mixingTank.tankName,
 													  mixingTank.volumeGpioPort,
 													  mixingTank.waterValveGpioPort,
 													  mixingTank.drainValveGpioPort,
 													  mixingTank.rateTime,
-													  mixingTank.initialVolume] , null);
+													  mixingTank.initialVolume] , function(acro, args, data){isMixingTankAdded++;});
 													  		
-				UpdateChemicalRunningStatus();
-				RestoreChemicalTankVolume();
-				RestoreChemicalFeederVolume();
-				RestoreMixingTankVolume();
-									
-				var sensorLen = sensorArray.length
-				for(index = 0; index < sensorLen; index++)
-				{
-					webiopi().callMacro("AddSensor", [sensorArray[index].sensorName, sensorArray[index].analogPort] , null);
-				}
+				//Wait until all chemical object initial complete				
+				//To ensure all input are set
+				var chemicalAllSetHandle = setInterval(
+													function()
+													{
+														if(isMachineInitialed && isMixingTankAdded &&
+														   (chemicalFeederAddedCount == chemicalFeederLen) &&
+														   (chemicalTankAddedCount == chemicalTankLen) &&  
+														   (chemicalValveAddedCount == chemicalValveLen))
+														{	
+															UpdateChemicalTankStatus();
+															UpdateChemicalFeederStatus();
+															UpdateChemicalRunningStatus();
+															RestoreChemicalTankVolume();
+															RestoreChemicalFeederVolume();
+															RestoreMixingTankVolume();
+															clearInterval(chemicalAllSetHandle);
+														}
+													}, 1000);
 				
-				setInterval(UpdateSensor, 2000);	
+				
+				
+				
+				//UpdateChemicalRunningStatus();
+				//RestoreChemicalTankVolume();
+				//RestoreChemicalFeederVolume();
+				//RestoreMixingTankVolume();
+									
+				//var sensorLen = sensorArray.length
+				//for(index = 0; index < sensorLen; index++)
+				//{
+				//	webiopi().callMacro("AddSensor", [sensorArray[index].sensorName, sensorArray[index].analogPort] , null);
+				//}
+				
+				//setInterval(UpdateSensor, 2000);	
 
                 // Refresh GPIO buttons
                 // pass true to refresh repeatedly of false to refresh once
@@ -436,35 +457,113 @@
 			var chemicalValveLen = chemicalValveArray.length;
 			for(index = 0; index < chemicalValveLen; index++)
 			{
+				var valveName = chemicalValveArray[index].valveName;
 				webiopi().callMacro("IsChemicalValveDisable", 
-									chemicalValveArray[index].valveName,
-									function(acro, args, data)
-									{										
-										if(data)
+									valveName,
+									function(acro1, args1, data1)
+									{	
+										if(data1)
 										{
-											gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveOpenImage, 'grayscale:100%; ');
-											gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveCloseImage, 'grayscale:100%; ');
-										}
-									});
-									
-				webiopi().callMacro("IsChemicalValveOpen", 
-									chemicalValveArray[index].valveName,
-									function(acro, args, data)
-									{										
-										if(data)
-										{
-											gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveOpenImage, 'visibility: visible grayscale:0%;');
-											gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveCloseImage, 'visibility: hidden grayscale:0%;');
+											UpdateChemicalValveDisableStatus(args1);
 										}
 										else
 										{
-											gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveOpenImage, 'visibility: hidden grayscale:0%; ');
-											gwd.actions.events.setInlineStyle(chemicalValveArray[index].valveCloseImage, 'visibility: visible grayscale:0%; ');
+											webiopi().callMacro("IsChemicalValveClose", 
+											valveName,
+											function(acro2, args2, data2)
+											{							
+												if(data2)
+												{
+													UpdateChemicalValveCloseStatus(args2);
+												}
+												else
+												{
+													webiopi().callMacro("IsChemicalValveOpen", 
+													valveName,
+													function(acro3, args3, data3)
+													{							
+														if(data3)
+														{
+															UpdateChemicalValveOpenStatus(args3);
+														}
+													});
+													
+												}
+													
+											});
+											
 										}
+										
+										
 									});
+				
+				
+			
 			}
 																																
 		}
+		
+		function UpdateChemicalValveDisableStatus(valveName)
+		{
+			var chemicalValveLen = chemicalValveArray.length;
+			//window.alert('IsValveDisable');	
+			for(var nIndex = 0; nIndex < chemicalValveLen; nIndex++)
+			{								
+				if(chemicalValveArray[nIndex].valveName == valveName)
+				{
+					//gwd.actions.events.setInlineStyle(chemicalValveArray[nIndex].valveCloseImage, 'filter: grayscale(100%); ');
+					//document.getElementById(chemicalValveArray[nIndex].valveCloseImage).style.filter = "grayscale(100%)"; 			
+					document.getElementById(chemicalValveArray[nIndex].valveCloseImage).style.filter = "grayscale(100%)";
+					document.getElementById(chemicalValveArray[nIndex].valveCloseImage).style.visibility = "visible";
+					return;
+				}
+			}
+		}
+		
+		function UpdateChemicalValveOpenStatus(valveName)
+		{
+			var chemicalValveLen = chemicalValveArray.length;
+			//window.alert('IsValveDisable');
+			for(var nIndex = 0; nIndex < chemicalValveLen; nIndex++)
+			{
+				if(chemicalValveArray[nIndex].valveName == valveName)
+				{
+					//gwd.actions.events.setInlineStyle(chemicalValveArray[nIndex].valveOpenImage, 'visibility: visible; filter: grayscale(3)%; ');
+					//gwd.actions.events.setInlineStyle(chemicalValveArray[nIndex].valveCloseImage, 'visibility: hidden; filter: grayscale(3)%; ');
+					document.getElementById(chemicalValveArray[nIndex].valveOpenImage).style.filter = "grayscale(0%)";
+					document.getElementById(chemicalValveArray[nIndex].valveOpenImage).style.visibility = "visible";
+					document.getElementById(chemicalValveArray[nIndex].valveCloseImage).style.filter = "grayscale(0%)";
+					document.getElementById(chemicalValveArray[nIndex].valveCloseImage).style.visibility = "hidden";
+					
+					return;
+				}
+			}										
+							
+		}
+		
+		
+		function UpdateChemicalValveCloseStatus(valveName)
+		{
+			var chemicalValveLen = chemicalValveArray.length;
+			//window.alert('IsChemicalValveClose');
+			for(var nIndex = 0; nIndex < chemicalValveLen; nIndex++)
+			{
+				if(chemicalValveArray[nIndex].valveName == valveName)
+				{
+					//window.alert('UpdateChemicalValveCloseStatus');
+					//gwd.actions.events.setInlineStyle(chemicalValveArray[nIndex].valveOpenImage, 'visibility: hidden; filter: grayscale(3)%; ');
+					//gwd.actions.events.setInlineStyle(chemicalValveArray[nIndex].valveCloseImage, 'visibility: visible; filter: grayscale(3)%; ');
+					document.getElementById(chemicalValveArray[nIndex].valveOpenImage).style.filter = "grayscale(0%)";
+					document.getElementById(chemicalValveArray[nIndex].valveOpenImage).style.visibility = "hidden";
+					document.getElementById(chemicalValveArray[nIndex].valveCloseImage).style.filter = "grayscale(0%)";
+					document.getElementById(chemicalValveArray[nIndex].valveCloseImage).style.visibility = "visible";
+					return;
+				}
+					
+			}
+									
+		}
+		
 		
 		function UpdateChemicalTankStatus()
 		{
@@ -604,25 +703,28 @@
 		
 		function IsNumberKey(event)
 		{
-			var buffer = String.fromCharCode(event.which);
-			var regEx = "/[0-9.]/g";
+			//var buffer = String.fromCharCode(event.which);
+			//var regEx = "/[0-9.]/g";
 		
-			return regEx.test(buffer);
+			//return regEx.test(buffer);
 		}
 		
 		function ToggeChemicalValveState(valveName)
 		{
+			
 			webiopi().callMacro("IsChemicalValveDisable", 
 								valveName, 
 								function(acro, args, data)
 								{						
 									if(data)
 									{
-										webiopi().callMacro("SetchemicalValveNormal", valveName, null);
+										window.alert("SetchemicalValveNormal!");
+										webiopi().callMacro("SetchemicalValveNormal", valveName, function(acro2, args2, data2){UpdateChemicalValveCloseStatus(args2);});
 									}
 									else
 									{
-										webiopi().callMacro("SetchemicalValveDisable", valveName, null);
+										window.alert("SetchemicalValveDisable!");
+										webiopi().callMacro("SetchemicalValveDisable", valveName, function(acro2, args2, data2){UpdateChemicalValveDisableStatus(args2);});
 									}
 								});
 		}
@@ -888,77 +990,78 @@
     
 	gwd.FontLeftChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[0].valveCloseImage);
+		//window.alert("FontLeftChemicalImageClick");
+		ToggeChemicalValveState(chemicalValveArray[0].valveName);
     };
 
 	gwd.FontRightLeftChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[1].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[1].valveName);
     };
 	
 	gwd.FontRightRightChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[2].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[2].valveName);
     };
 	
 	gwd.MiddleLeftChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[3].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[3].valveName);
     };
 
 	gwd.MiddleRightLeftChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[4].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[4].valveName);
     };
 	
 	gwd.MiddleRightMiddleChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[5].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[5].valveName);
     };
 	
 	gwd.MiddleRightRightChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[6].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[6].valveName);
     };
 
 	gwd.BackMiddle1ChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[7].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[7].valveName);
     };
 	
 	gwd.BackMiddle2ChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[8].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[8].valveName);
     };
 	
 	gwd.BackLeft1ChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[9].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[9].valveName);
     };
 
 	gwd.BackLeft2ChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[10].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[10].valveName);
     };
 	
 	gwd.BackRight1ChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[11].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[11].valveName);
     };
 	
 	gwd.BackRight2ChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[12].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[12].valveName);
     };
 	
 	gwd.BackRight3ChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[13].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[13].valveName);
     };
 	
 	gwd.BackRight4ChemicalImageClick = function(event) 
     {
-		ToggeChemicalValveState(chemicalValveArray[14].valveCloseImage);
+		ToggeChemicalValveState(chemicalValveArray[14].valveName);
     };
 	
   </script>
@@ -1007,21 +1110,21 @@
       gwd.actions.events.addHandler(chemicalTankArray[4].testFlowRateButton, 'click', gwd.SurfactantFlowRateButtonClick, false);
       gwd.actions.events.addHandler(mixingTank.testFlowRateButton, 'click', gwd.WaterFlowRateButtonClick, false);
       
-	  gwd.actions.events.addHandler(chemicalValveArray[0].valveCloseImage, 'click', FontLeftChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[1].valveCloseImage, 'click', FontRightLeftChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[2].valveCloseImage, 'click', FontRightRightChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[3].valveCloseImage, 'click', MiddleLeftChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[4].valveCloseImage, 'click', MiddleRightLeftChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[5].valveCloseImage, 'click', MiddleRightMiddleChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[6].valveCloseImage, 'click', MiddleRightRightChemicalImageClick, false); 
-	  gwd.actions.events.addHandler(chemicalValveArray[7].valveCloseImage, 'click', BackMiddle1ChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[8].valveCloseImage, 'click', BackMiddle2ChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[9].valveCloseImage, 'click', BackLeft1ChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[10].valveCloseImage, 'click', BackLeft2ChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[11].valveCloseImage, 'click', BackRight1ChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[12].valveCloseImage, 'click', BackRight2ChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[13].valveCloseImage, 'click', BackRight3ChemicalImageClick, false);
-	  gwd.actions.events.addHandler(chemicalValveArray[14].valveCloseImage, 'click', BackRight4ChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[0].valveCloseImage, 'click', gwd.FontLeftChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[1].valveCloseImage, 'click', gwd.FontRightLeftChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[2].valveCloseImage, 'click', gwd.FontRightRightChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[3].valveCloseImage, 'click', gwd.MiddleLeftChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[4].valveCloseImage, 'click', gwd.MiddleRightLeftChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[5].valveCloseImage, 'click', gwd.MiddleRightMiddleChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[6].valveCloseImage, 'click', gwd.MiddleRightRightChemicalImageClick, false); 
+	  gwd.actions.events.addHandler(chemicalValveArray[7].valveCloseImage, 'click', gwd.BackMiddle1ChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[8].valveCloseImage, 'click', gwd.BackMiddle2ChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[9].valveCloseImage, 'click', gwd.BackLeft1ChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[10].valveCloseImage, 'click', gwd.BackLeft2ChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[11].valveCloseImage, 'click', gwd.BackRight1ChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[12].valveCloseImage, 'click', gwd.BackRight2ChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[13].valveCloseImage, 'click', gwd.BackRight3ChemicalImageClick, false);
+	  gwd.actions.events.addHandler(chemicalValveArray[14].valveCloseImage, 'click', gwd.BackRight4ChemicalImageClick, false);
 	  
     };
 	  gwd.actions.events.deregisterEventHandlers = function(event) {
@@ -1065,21 +1168,21 @@
       gwd.actions.events.removeHandler(chemicalTankArray[4].testFlowRateButton, 'click', gwd.SurfactantFlowRateButtonClick, false);
       gwd.actions.events.removeHandler(mixingTank.testFlowRateButton, 'click', gwd.WaterFlowRateButtonClick, false);
 	  
-	  gwd.actions.events.removeHandler(chemicalValveArray[0].valveCloseImage, 'click', FontLeftChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[1].valveCloseImage, 'click', FontRightLeftChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[2].valveCloseImage, 'click', FontRightRightChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[3].valveCloseImage, 'click', MiddleLeftChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[4].valveCloseImage, 'click', MiddleRightLeftChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[5].valveCloseImage, 'click', MiddleRightMiddleChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[6].valveCloseImage, 'click', MiddleRightRightChemicalImageClick, false); 
-	  gwd.actions.events.removeHandler(chemicalValveArray[7].valveCloseImage, 'click', BackMiddle1ChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[8].valveCloseImage, 'click', BackMiddle2ChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[9].valveCloseImage, 'click', BackLeft1ChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[10].valveCloseImage, 'click', BackLeft2ChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[11].valveCloseImage, 'click', BackRight1ChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[12].valveCloseImage, 'click', BackRight2ChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[13].valveCloseImage, 'click', BackRight3ChemicalImageClick, false);
-	  gwd.actions.events.removeHandler(chemicalValveArray[14].valveCloseImage, 'click', BackRight4ChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[0].valveCloseImage, 'click', gwd.FontLeftChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[1].valveCloseImage, 'click', gwd.FontRightLeftChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[2].valveCloseImage, 'click', gwd.FontRightRightChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[3].valveCloseImage, 'click', gwd.MiddleLeftChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[4].valveCloseImage, 'click', gwd.MiddleRightLeftChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[5].valveCloseImage, 'click', gwd.MiddleRightMiddleChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[6].valveCloseImage, 'click', gwd.MiddleRightRightChemicalImageClick, false); 
+	  gwd.actions.events.removeHandler(chemicalValveArray[7].valveCloseImage, 'click', gwd.BackMiddle1ChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[8].valveCloseImage, 'click', gwd.BackMiddle2ChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[9].valveCloseImage, 'click', gwd.BackLeft1ChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[10].valveCloseImage, 'click', gwd.BackLeft2ChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[11].valveCloseImage, 'click', gwd.BackRight1ChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[12].valveCloseImage, 'click', gwd.BackRight2ChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[13].valveCloseImage, 'click', gwd.BackRight3ChemicalImageClick, false);
+	  gwd.actions.events.removeHandler(chemicalValveArray[14].valveCloseImage, 'click', gwd.BackRight4ChemicalImageClick, false);
 	  
     };
     document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
@@ -1169,7 +1272,7 @@
           <img is="gwd-image" source="assets/chemical.jpg" id="back_right4_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t gwd-img-back-right4">
           <img is="gwd-image" source="assets/chemical.jpg" id="back_middle1_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-g3zi">
           <img is="gwd-image" source="assets/chemical.jpg" id="back_middle2_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-g3zi gwd-img-1g4j">
-          <img is="gwd-image" source="assets/chemical.jpg" id="middle_right_left_chenical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-ejuf">
+          <img is="gwd-image" source="assets/chemical.jpg" id="middle_right_left_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-ejuf">
           <img is="gwd-image" source="assets/chemical.jpg" id="middle_right_middle_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-tb4x">
           <img is="gwd-image" source="assets/chemical.jpg" id="middle_right_right_chemical-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-tb4x gwd-img-11gq">
           <img is="gwd-image" source="assets/chemical.jpg" id="font_right_right_chemical-image" class="gwd-img-xq63 gwd-img-1m4z">
@@ -1185,7 +1288,7 @@
           <img is="gwd-image" source="assets/chemical_running.gif" id="back_right4_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-xpvg gwd-img-oc8t gwd-img-back-right4 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="back_middle1_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-g3zi img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="back_middle2_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-1cif gwd-img-g3zi gwd-img-1g4j img-hide">
-          <img is="gwd-image" source="assets/chemical_running.gif" id="middle_right_left_chenical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-ejuf img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="middle_right_left_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-ejuf img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="middle_right_middle_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-tb4x img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="middle_right_right_chemical_running-image" class="gwd-img-xq63 gwd-img-1268 gwd-img-1y25 gwd-img-132a gwd-img-agym gwd-img-tb4x gwd-img-11gq img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="font_right_right_chemical_running-image" class="gwd-img-xq63 gwd-img-1m4z img-hide">

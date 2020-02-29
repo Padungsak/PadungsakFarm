@@ -131,37 +131,36 @@ def AddValve(a_valveName, a_valvePort, a_executionOrder):
 @webiopi.macro
 def OpenValve(a_valveName):
     #Open valve before start engine
-    l_valveState = ValveImp.m_valveStateList['Close']
+    global g_state
     if(a_valveName in g_valveDict):
         g_valveDict[a_valveName].OpenValve()
-        l_valveState = g_valveDict[a_valveName].GetValveState()
+        webiopi.sleep(0.5)
+        EngineImp.getInstance().OpenWaterPump()
+        g_state = g_stateList['Open']
+        return g_valveDict[a_valveName].GetValveState()
 
-        if(l_valveState == ValveImp.m_valveStateList['Open']):
-            l_valveCount = 0
-            for l_valveName, l_valveObj in g_valveDict.items():
-                if(int(l_valveObj.GetValveState()) == ValveImp.m_valveStateList['Open']):
-                    l_valveCount = l_valveCount +1
-                    
-            if(l_valveCount >= 1):
-                EngineImp.getInstance().OpenWaterPump()
-				g_state = g_stateList['Open']
+    return ValveImp.m_valveStateList['Error']
 
 #Close valve macro
 @webiopi.macro
 def CloseValve(a_valveName):
     #Short down engine before closing valve
+    global g_state
     l_valveCount = 0
     for l_valveName, l_valveObj in g_valveDict.items():
         if(int(l_valveObj.GetValveState()) == ValveImp.m_valveStateList['Open']):
             l_valveCount = l_valveCount +1
 
-    if(l_valveCount <= 2):
+    if(l_valveCount <= 1):
         EngineImp.getInstance().CloseWaterPump()
-		g_state = g_stateList['Close']
-        
+        g_state = g_stateList['Close']
+    
     if(a_valveName in g_valveDict):
         g_valveDict[a_valveName].CloseValve()
+        return g_valveDict[a_valveName].GetValveState()
 
+    return ValveImp.m_valveStateList['Error']
+        
 @webiopi.macro
 def GetValveState(a_valveName):
     if(a_valveName in g_valveDict):
@@ -271,80 +270,70 @@ def DoChemicalAuto():
     l_executionNumber = -1
     
     #EngineImp.getInstance().OpenWindPump()
-    
-    while True:
-        #Fill chemical
-        l_pumpingNow = True
-        g_chemicalState  = g_chemicalStateList['Mixing']
+    for l_valve in l_sortedValve:
+        if l_valve.IsValveClose() == True:
+            if g_mixingTank.IsWaterEnough() == False:
+                #Check if chemical in tank is enough
+                l_isChemicalEnough = False
+                while l_isChemicalEnough == False:
+                    for l_tankIndex, l_tankKey in enumerate(g_chemicalTankDict):           
+                        if g_chemicalTankDict[l_tankKey].NeedToFillChemical():
+                            webiopi.debug('NeedToFillChemical %d!!' % l_tankIndex)
+                            l_isChemicalEnough = False
+                            webiopi.sleep(1)
+                            break
+                        else:
+                            l_isChemicalEnough = True
 
-        #Check if chemical in tank is enough  
-        for l_tankIndex, l_tankKey in enumerate(g_chemicalTankDict):           
-            if g_chemicalTankDict[l_tankKey].NeedToFillChemical():
-                webiopi.debug('NeedToFillChemical %d!!' % l_tankIndex)
-                l_pumpingNow = False
-                webiopi.sleep(1)
-                break
-            
-        if l_pumpingNow:
-            g_mixingTank.InitialWater()
-
-            for l_feederObj in g_chemicalFeederDict.values():
-                EngineImp.getInstance().OpenMixPump()
-                l_feederObj.FeedChemical()
+                g_chemicalState  = g_chemicalStateList['Mixing']
+                
+                g_mixingTank.InitialWater()
+                for l_feederObj in g_chemicalFeederDict.values():
+                    EngineImp.getInstance().OpenMixPump()
+                    l_feederObj.FeedChemical()
                     
-            for l_tankObj in g_chemicalTankDict.values():
-                EngineImp.getInstance().OpenMixPump()
-                l_tankObj.FillChemical()
+                for l_tankObj in g_chemicalTankDict.values():
+                    EngineImp.getInstance().OpenMixPump()
+                    l_tankObj.FillChemical()
 
-            EngineImp.getInstance().CloseMixPump()       
-
-            #start motor for 10 min
-            g_mixingTank.FillWater()
+                EngineImp.getInstance().CloseMixPump()
+                #start motor for 10 min
+                g_mixingTank.FillWater()
          
             #loop for openning all valve
             g_chemicalState = g_chemicalStateList['Pumping']
-            
-            for l_valve in l_sortedValve:     
-                if l_valve.executionOrder > l_executionNumber:
-					if l_valve.IsValveDisable() == False:
-						g_chemicalState = g_chemicalStateList['Pumping'] 
-						l_executionNumber = l_valve.executionOrder
-						
-						EngineImp.getInstance().OpenWindPump()
-						webiopi.sleep(l_valve.GetWindCompressDelayTime())
-						g_mixingTank.MixChemical()
-						l_valve.OpenValve()
-						webiopi.sleep(1)
-						
-						EngineImp.getInstance().OpenChemicalPump()
-						webiopi.sleep(l_valve.GetChemicalDelayTime())
-						EngineImp.getInstance().CloseChemicalPump()
-						webiopi.sleep(0.5)
-						
-						l_valve.OpenWindValve()
-						webiopi.sleep(l_valve.GetWindDelayTime())
-						l_valve.CloseValve()
-						webiopi.sleep(1)
-						l_valve.CloseWindValve()
-						EngineImp.getInstance().CloseWindPump()
-						webiopi.sleep(l_valve.GetSleepTime())
-						if g_mixingTank.IsWaterEnough() == False:
-							break
-                 
-            if l_executionNumber == l_sortedValve[-1].executionOrder:
-                break
-            
-            while g_chemicalPauseEvent.is_set():
-                    ClearChemicalEngine()
-                    g_chemicalState = g_chemicalStateList['Pause']
-                    webiopi.debug('System pause')
-                    webiopi.sleep(5)
-                    
 
-    #EngineImp.getInstance().CloseWindPump()
-    g_mixingTank.CleanTank()
-    g_chemicalState = g_chemicalStateList['Stop']
-    ResetChemicalVolume()
+            EngineImp.getInstance().OpenWindPump()
+            webiopi.sleep(l_valve.GetWindCompressDelayTime())
+            g_mixingTank.MixChemical()
+            l_valve.OpenValve()
+            webiopi.sleep(1)
+
+            EngineImp.getInstance().OpenChemicalPump()
+            webiopi.sleep(l_valve.GetChemicalDelayTime())
+            EngineImp.getInstance().CloseChemicalPump()
+            webiopi.sleep(0.5)
+
+            l_valve.OpenWindValve()
+            webiopi.sleep(l_valve.GetWindDelayTime())
+            l_valve.CloseValve()
+            webiopi.sleep(1)
+            l_valve.CloseWindValve()
+            EngineImp.getInstance().CloseWindPump()
+            webiopi.sleep(l_valve.GetSleepTime())
+
+            while g_chemicalPauseEvent.is_set():
+                ClearChemicalEngine()
+                g_chemicalState = g_chemicalStateList['Pause']
+                webiopi.debug('System pause')
+                webiopi.sleep(5)
+    
+                    
+    if g_chemicalState != g_chemicalStateList['Stop']:
+        #EngineImp.getInstance().CloseWindPump()
+        g_mixingTank.CleanTank()
+        g_chemicalState = g_chemicalStateList['Stop']
+        ResetChemicalVolume()
 
 def VerifyChemicalInputData():
     global g_chemicalMessage
@@ -467,18 +456,25 @@ def IsChemicalValveDisable(a_valveName):
     if(a_valveName in g_chemicalValveDict):
         return g_chemicalValveDict[a_valveName].IsValveDisable()
     return False
+
+@webiopi.macro
+def IsChemicalValveClose(a_valveName):
+    global g_chemicalValveDict
+    if(a_valveName in g_chemicalValveDict):
+        return g_chemicalValveDict[a_valveName].IsValveClose()
+    return False
 	
 @webiopi.macro
 def SetchemicalValveDisable(a_valveName):
     global g_chemicalValveDict
     if(a_valveName in g_chemicalValveDict):
-		g_chemicalValveDict[a_valveName].SetDisableValve()
+        g_chemicalValveDict[a_valveName].SetDisableValve()
 		
 @webiopi.macro
 def SetchemicalValveNormal(a_valveName):
     global g_chemicalValveDict
     if(a_valveName in g_chemicalValveDict):
-		g_chemicalValveDict[a_valveName].SetNormalValve()
+        g_chemicalValveDict[a_valveName].SetNormalValve()
 	
 @webiopi.macro
 def IsChemicalModeError():
