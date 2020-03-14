@@ -56,7 +56,7 @@ class MixingTankImp:
         
     def SetWaterVolume(self, a_volume):
         self.m_volume = a_volume
-        webiopi.debug('SetWaterVolume %d' % self.m_volume)
+        webiopi.debug('SetWaterVolume %f' % self.m_volume)
 
     def SetWaterConstRate(self, a_value):
         self.m_constFlowRate = a_value

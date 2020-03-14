@@ -46,13 +46,13 @@
 								  {valveName:"MiddleRightMiddleValve", chemicalPort:5, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"middle_right_middle_chemical-image", valveOpenImage:"middle_right_middle_chemical_running-image", executionOrder:6},
 								  {valveName:"MiddleRightRightValve", chemicalPort:6, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"middle_right_right_chemical-image", valveOpenImage:"middle_right_right_chemical_running-image", executionOrder:7},
 								  {valveName:"BackMiddle1Valve", chemicalPort:8, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"back_middle1_chemical-image", valveOpenImage:"back_middle1_chemical_running-image", executionOrder:8},	
-								  {valveName:"BackMiddle2Valve", chemicalPort:7, chemicalDelay:70, windPort:15, windDelay:300, valveCloseImage:"back_middle2_chemical-image", valveOpenImage:"back_middle2_chemical_running-image", executionOrder:9},
-								  {valveName:"BackLeft1Valve", chemicalPort:9, chemicalDelay:50, windPort:15, windDelay:300, valveCloseImage:"back_left1_chemical-image", valveOpenImage:"back_left1_chemical_running-image", executionOrder:10},
-								  {valveName:"BackLeft2Valve", chemicalPort:14, chemicalDelay:80, windPort:15, windDelay:300, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},
-								  {valveName:"BackRight1Valve", chemicalPort:10, chemicalDelay:120, windPort:15, windDelay:300, valveCloseImage:"back_right1_chemical-image", valveOpenImage:"back_right1_chemical_running-image", executionOrder:12},
+								  {valveName:"BackMiddle2Valve", chemicalPort:7, chemicalDelay:90, windPort:15, windDelay:300, valveCloseImage:"back_middle2_chemical-image", valveOpenImage:"back_middle2_chemical_running-image", executionOrder:9},
+								  {valveName:"BackLeft1Valve", chemicalPort:9, chemicalDelay:60, windPort:15, windDelay:300, valveCloseImage:"back_left1_chemical-image", valveOpenImage:"back_left1_chemical_running-image", executionOrder:10},
+								  {valveName:"BackLeft2Valve", chemicalPort:14, chemicalDelay:60, windPort:15, windDelay:300, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},
+								  {valveName:"BackRight1Valve", chemicalPort:10, chemicalDelay:100, windPort:15, windDelay:300, valveCloseImage:"back_right1_chemical-image", valveOpenImage:"back_right1_chemical_running-image", executionOrder:12},
 								  {valveName:"BackRight2Valve", chemicalPort:11, chemicalDelay:120, windPort:15, windDelay:300, valveCloseImage:"back_right2_chemical-image", valveOpenImage:"back_right2_chemical_running-image", executionOrder:13},
-								  {valveName:"BackRight3Valve", chemicalPort:12, chemicalDelay:80, windPort:15, windDelay:300, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
-								  {valveName:"BackRight4Valve", chemicalPort:13, chemicalDelay:60, windPort:15, windDelay:300, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15}];
+								  {valveName:"BackRight3Valve", chemicalPort:12, chemicalDelay:120, windPort:15, windDelay:300, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
+								  {valveName:"BackRight4Valve", chemicalPort:13, chemicalDelay:90, windPort:15, windDelay:300, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15}];
 								  
 								  
 		var chemicalTankArray = [{tankName:"Fungicides1", chipNo:0, mcpMotorPort:0, mcpVolumePort:8, rateTime:10, isNC:0, flowRateBox:"fungicides1-const-input", inputBox:"fungicides1-input", testFlowRateButton:"button-constant-test-fungicides1"},
@@ -76,17 +76,16 @@
 												  engineArray.mixEngineGpioPort] , function(acro, args, data){isMachineInitialed = true;});			
 				
 				//Add valves
+				//To ensure all input are set
 				var index;
 				var valveAddedCount = 0;
 				var valveLen = valveArray.length;
 				for(index = 0; index < valveLen; index++)
 				{
 					webiopi().callMacro("AddValve", [valveArray[index].valveName, valveArray[index].valvePort, valveArray[index].executionOrder] , function(acro, args, data){valveAddedCount++;});
-					//webiopi().callMacro("GetValveState", valveArray[index].valveName, UpdateValveStateCallback);
 				}
 				
 				//Wait until all water object initial complete				
-				//To ensure all input are set
 				var waterAllSetHandle = setInterval( 
 													function()
 													{
@@ -207,13 +206,6 @@
 													}, 1000);
 				
 				
-				
-				
-				//UpdateChemicalRunningStatus();
-				//RestoreChemicalTankVolume();
-				//RestoreChemicalFeederVolume();
-				//RestoreMixingTankVolume();
-									
 				//var sensorLen = sensorArray.length
 				//for(index = 0; index < sensorLen; index++)
 				//{
