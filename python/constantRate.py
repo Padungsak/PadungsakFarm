@@ -25,7 +25,7 @@ class ConstantRate:
     def GetRate(a_rateName):
         for l_name, l_value in ConstantRate.s_constDict.items():
             if (l_name == a_rateName):
-                webiopi.debug('GetRate @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ %d' % l_value)
+                webiopi.debug('GetRate @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ %f' % l_value)
                 return l_value
         return 0
 
