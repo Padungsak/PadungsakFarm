@@ -89,7 +89,12 @@ class ChemicalTankImp:
     def IsChemicalTankError(self):
         return self.m_TankState == ChemicalTankImp.s_TankStateList['Error']
 
-    def IsChemicalInTankEnough(self):    
+    def IsChemicalInTankEnough(self):
+        webiopi.debug('IsChemicalInTankEnough %d = ' % self.m_volumePortNum)
+        if self.m_mcp.digitalRead(self.m_volumePortNum) == GPIO.LOW:
+            webiopi.debug('GPIO.LOW')
+        else:
+            webiopi.debug('GPIO.HIGH')
         return self.m_mcp.digitalRead(self.m_volumePortNum) != self.chemicalNeedLogic
 
     def NeedToFillChemical(self):

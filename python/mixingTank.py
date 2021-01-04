@@ -8,13 +8,14 @@ GPIO = webiopi.GPIO
 
 class MixingTankImp:
     s_TankStateList = {'Pumping':1, 'Mixing':2, 'Close':0,'Error':-1}
-    s_mixingTime = 120
-    s_drainTime = 800 
+    #s_mixingTime = 120
+    s_drainTime = 1000 
     s_constRateObj = ConstantRate()
 
-    def __init__(self, a_name, a_volumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime, a_initialWater):
+    def __init__(self, a_name, a_volumeGpioPort, a_maxVolumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime, a_initialWater):
         self.m_name = a_name
         self.m_volumeGpioPort = a_volumeGpioPort
+        self.m_maxVolumeGpioPort = a_maxVolumeGpioPort
         self.m_waterValveGpioPort = a_waterValveGpioPort
         self.m_drainValveGpioPort = a_drainValveGpioPort
         self.m_constFlowRate = MixingTankImp.s_constRateObj.GetRate(self.m_name)
@@ -24,6 +25,7 @@ class MixingTankImp:
         self.m_TankState = MixingTankImp.s_TankStateList['Close']
         self.m_errorMessage = ''
         GPIO.setFunction(self.m_volumeGpioPort, GPIO.IN)
+        GPIO.setFunction(self.m_maxVolumeGpioPort, GPIO.IN)
         GPIO.setFunction(self.m_waterValveGpioPort, GPIO.OUT)
         GPIO.setFunction(self.m_drainValveGpioPort, GPIO.OUT)
 
@@ -71,6 +73,9 @@ class MixingTankImp:
     def IsWaterEnough(self):
         return GPIO.digitalRead(self.m_volumeGpioPort) == GPIO.HIGH
 
+    def IsWaterOverflow(self):
+        return GPIO.digitalRead(self.m_maxVolumeGpioPort) == GPIO.LOW
+
     def IsMixingTankError(self):
         return self.m_TankState == MixingTankImp.s_TankStateList['Error']
 
@@ -88,10 +93,12 @@ class MixingTankImp:
                 
         return True
 
-    def MixChemical(self):
+    def CompressWind(self, a_delayTime):
         self.m_TankState = MixingTankImp.s_TankStateList['Mixing']
+        EngineImp.getInstance().OpenWindPump()
+        webiopi.sleep(1)
         EngineImp.getInstance().OpenMixPump()
-        webiopi.sleep(MixingTankImp.s_mixingTime)
+        webiopi.sleep(int(a_delayTime))
         EngineImp.getInstance().CloseMixPump()
         
     def OpenWaterPump(self, a_volume):
@@ -105,6 +112,10 @@ class MixingTankImp:
             l_rateCount += l_flowRateConst
             webiopi.debug('OpenWaterPump %d' % l_rateCount)
             webiopi.sleep(1)
+            if self.IsWaterOverflow() == True:
+                self.m_TankState = MixingTankImp.s_TankStateList['Error']
+                break
+                
 
         EngineImp.getInstance().CloseWaterPump()
         webiopi.sleep(1)
@@ -113,14 +124,16 @@ class MixingTankImp:
     def FillWater(self):
         #Open water pump
         self.m_TankState = MixingTankImp.s_TankStateList['Pumping']
+        EngineImp.getInstance().OpenMixPump()
         l_volume =self.m_volume-self.m_initialWater
         self.OpenWaterPump(l_volume)
-        self.m_TankState = MixingTankImp.s_TankStateList['Close']
+        #self.m_TankState = MixingTankImp.s_TankStateList['Close']
+        EngineImp.getInstance().CloseMixPump()
 
     def InitialWater(self):
         self.m_TankState = MixingTankImp.s_TankStateList['Pumping']
         self.OpenWaterPump(self.m_initialWater)
-        self.m_TankState = MixingTankImp.s_TankStateList['Close']
+        #self.m_TankState = MixingTankImp.s_TankStateList['Close']
         
 
     def CleanTank(self):
