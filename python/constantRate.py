@@ -19,7 +19,7 @@ class ConstantRate:
     def UpdateRate(self, a_rateName, a_value):
         ConstantRate.s_constDict[a_rateName] = a_value
         webiopi.debug('UpdateRate @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ %s' % a_rateName)
-        webiopi.debug('UpdateRate @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ %d' % a_value)
+        webiopi.debug('UpdateRate @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ %f' % a_value)
 
     @staticmethod
     def GetRate(a_rateName):

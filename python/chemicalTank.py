@@ -2,6 +2,7 @@ import webiopi
 import time,sys
 sys.path.append('/home/pi/MyProject/python')
 from constantRate import ConstantRate
+from chemicalOrderNum import ChemicalOrderNum
 
 
 GPIO = webiopi.GPIO
@@ -10,6 +11,7 @@ class ChemicalTankImp:
     s_TankStateList = {'Pumping':1,'Close':0,'Error':-1}
     s_countingConfirmation = 4
     s_constRateObj = ConstantRate()
+    s_orderNumObj = ChemicalOrderNum()
 	
     def __init__(self, a_name, a_chipNo, a_motorPortNum, a_volumePortNum, a_rateTime, a_isNC):
         webiopi.debug('ChemicalTankImp create!!')
@@ -18,6 +20,7 @@ class ChemicalTankImp:
         self.m_motorPortNum = a_motorPortNum
         self.m_volumePortNum = a_volumePortNum
         self.m_constFlowRate = ChemicalTankImp.s_constRateObj.GetRate(self.m_name)
+        self.m_orderNum = ChemicalTankImp.s_orderNumObj.GetOrder(self.m_name)
         self.m_rateTime = a_rateTime
         if a_isNC == 0:
             self.chemicalNeedLogic = GPIO.LOW
@@ -42,15 +45,16 @@ class ChemicalTankImp:
         self.m_volume = a_volume
         webiopi.debug('SetChemicalVolume %f' % self.m_volume)
 
-    def SetChemicalConstRate(self, a_value):
+    def SetChemicalConstRate(self, a_value, a_order):
         self.m_constFlowRate = a_value
         ChemicalTankImp.s_constRateObj.UpdateRate(self.m_name, a_value)
+        ChemicalTankImp.s_orderNumObj.UpdateOrder(self.m_name, a_order)
 
     def ResetChemicalVolume(self):
         self.m_volume = 0
 
     def GetChemicalVolume(self):
-        return str(self.m_volume) + "," + str(ChemicalTankImp.s_constRateObj.GetRate(self.m_name))
+        return str(self.m_volume) + "," + str(ChemicalTankImp.s_constRateObj.GetRate(self.m_name)) + "," + str(ChemicalTankImp.s_orderNumObj.GetOrder(self.m_name))
 
     def StopPump(self):
         self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)

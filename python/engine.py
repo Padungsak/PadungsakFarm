@@ -20,15 +20,17 @@ class EngineImp:
            EngineImp.s_instance = self
         
 
-    def Initialization(self, a_waterPumpGpioPort, a_chemicalPumpGpioPort, a_windPumpGpioPort, a_mixGpioPort):
+    def Initialization(self, a_waterPumpGpioPort, a_chemicalPumpGpioPort, a_windPumpGpioPort, a_mixGpioPort, a_coconutWaterPumpPort):
         self.m_waterPumpGpioPort = a_waterPumpGpioPort
         self.m_chemicalPumpGpioPort = a_chemicalPumpGpioPort
         self.m_windPumpGpioPort = a_windPumpGpioPort
         self.m_mixGpioPort = a_mixGpioPort
+        self.m_coconutWaterPumpPort = a_coconutWaterPumpPort
         GPIO.setFunction(self.m_waterPumpGpioPort, GPIO.OUT)
         GPIO.setFunction(self.m_chemicalPumpGpioPort, GPIO.OUT)
         GPIO.setFunction(self.m_windPumpGpioPort, GPIO.OUT)
         GPIO.setFunction(self.m_mixGpioPort, GPIO.OUT)
+        GPIO.setFunction(self.m_coconutWaterPumpPort, GPIO.OUT)
         
     def OpenWaterPump(self):
         GPIO.digitalWrite(self.m_waterPumpGpioPort, GPIO.LOW)        
@@ -54,6 +56,12 @@ class EngineImp:
     def CloseMixPump(self):
         GPIO.digitalWrite(self.m_mixGpioPort, GPIO.HIGH)
 
+    def OpenCoconutPump(self):
+        GPIO.digitalWrite(self.m_coconutWaterPumpPort, GPIO.LOW)
+
+    def CloseCoconutPump(self):
+        GPIO.digitalWrite(self.m_coconutWaterPumpPort, GPIO.HIGH)
+        
     def CloseAllEngine(self):
         self.CloseWaterPump()
         webiopi.sleep(0.5)
@@ -62,5 +70,7 @@ class EngineImp:
         self.CloseWindPump()
         webiopi.sleep(0.5)
         self.CloseMixPump()
+        webiopi.sleep(0.5)
+        self.CloseCoconutPump()
         webiopi.sleep(0.5)
         

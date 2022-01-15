@@ -9,7 +9,7 @@ GPIO = webiopi.GPIO
 class MixingTankImp:
     s_TankStateList = {'Pumping':1, 'Mixing':2, 'Close':0,'Error':-1}
     #s_mixingTime = 120
-    s_drainTime = 1000 
+    s_drainTime = 2000 
     s_constRateObj = ConstantRate()
 
     def __init__(self, a_name, a_volumeGpioPort, a_maxVolumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime, a_initialWater):
@@ -30,21 +30,20 @@ class MixingTankImp:
         GPIO.setFunction(self.m_drainValveGpioPort, GPIO.OUT)
 
     def DrainChemical(self):
-        EngineImp.getInstance().OpenMixPump()
-        webiopi.sleep(1)
         GPIO.digitalWrite(self.m_drainValveGpioPort, GPIO.LOW)
         while True:
             if self.IsWaterEnough():
+                EngineImp.getInstance().OpenMixPump()
                 webiopi.sleep(1)
                 webiopi.debug("Draining water...")
                 continue
             else:
                 break
         
+        EngineImp.getInstance().CloseMixPump()
         webiopi.sleep(MixingTankImp.s_drainTime)
         GPIO.digitalWrite(self.m_drainValveGpioPort, GPIO.HIGH)
-        webiopi.sleep(1)
-        EngineImp.getInstance().CloseMixPump()
+       
         
         
     def TestFlowRate(self):

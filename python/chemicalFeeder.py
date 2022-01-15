@@ -2,6 +2,7 @@ import webiopi
 import time,sys
 sys.path.append('/home/pi/MyProject/python')
 from constantRate import ConstantRate
+from chemicalOrderNum import ChemicalOrderNum
 
 GPIO = webiopi.GPIO
 
@@ -10,6 +11,7 @@ class ChemicalFeederImp:
     s_countingConfirmation = 4
     s_inFeedDelayOffset=4
     s_constRateObj = ConstantRate()
+    s_orderNumObj = ChemicalOrderNum()
     s_chemicalNeedLogic = GPIO.LOW
 	
     def __init__(self, a_name, a_chipNo, a_motorPortNum1, a_motorPortNum2, a_mcpMotorEnablePort, a_mcpShakePort, a_mcpShakeEnablePort, a_feedTime):
@@ -21,6 +23,7 @@ class ChemicalFeederImp:
         self.m_mcpShakePort = a_mcpShakePort
         self.m_mcpShakeEnablePort = a_mcpShakeEnablePort
         self.m_constFeedRate = ChemicalFeederImp.s_constRateObj.GetRate(self.m_name)
+        self.m_orderNum = ChemicalFeederImp.s_orderNumObj.GetOrder(self.m_name)
         self.m_feedTime = a_feedTime
 
         self.m_volume = 0
@@ -42,15 +45,16 @@ class ChemicalFeederImp:
         self.m_volume = a_volume
         webiopi.debug('SetChemicalVolume %f' % self.m_volume)
 		
-    def SetChemicalConstRate(self, a_value):
+    def SetChemicalConstRate(self, a_value, a_order):
         self.m_constFeedRate = a_value
         ChemicalFeederImp.s_constRateObj.UpdateRate(self.m_name, a_value)
+        ChemicalFeederImp.s_orderNumObj.UpdateOrder(self.m_name, a_order)
 		
     def ResetChemicalVolume(self):
         self.m_volume = 0
 		
     def GetChemicalVolume(self):
-        return str(self.m_volume) + "," + str(ChemicalFeederImp.s_constRateObj.GetRate(self.m_name))
+        return str(self.m_volume) + "," + str(ChemicalFeederImp.s_constRateObj.GetRate(self.m_name)) + "," + str(ChemicalFeederImp.s_orderNumObj.GetOrder(self.m_name))
 		
     def GetErrorMessage(self):
         return self.m_errorMessage
