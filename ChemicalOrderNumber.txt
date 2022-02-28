@@ -1,0 +1,7 @@
+Fertilizer1=3
+Surfactant=5
+Fertilizer2=2
+Fungicides2=6
+Insect2=7
+Insect1=4
+Fungicides1=0
