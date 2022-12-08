@@ -39,7 +39,7 @@
     }
     .gwd-page-size {
       width: 900px;
-      height: 500px;
+      height: 700px;
     }
     .gwd-img-j0w7 {
       position: absolute;
@@ -224,6 +224,7 @@
       left: 480px;
       width: 82px;
       height: 22px;
+      font-size: 13px;
       transform-origin: -176.036px 75.9949px 0px;
 	  background-image: none;
       background-color: rgb(27, 221, 140);
@@ -238,58 +239,124 @@
     .span-fungicides1-label {
        top: 172px;
     }
-	  .span-fungicides2-label {
+    .span-fungicides2-label {
        top: 200px;
     }
-	  .span-insect1-label {
-       top: 226px;
+    .span-fungicides3-label {
+       top: 227px;
     }
-      .span-insect2-label {
-       top: 253px;
+    .span-fungicides4-label {
+       top: 254px;
     }
-	  .span-fertilizer1-label {
-       top: 280px;
+    .span-insect1-label {
+       top: 281px;
     }
-	.span-fertilizer2-label{
-      top: 307px;
+    .span-insect2-label {
+       top: 308px;
+    }
+    .span-insect3-label {
+       top: 335px;
+    }
+    .span-insect4-label {
+       top: 363px;
+    }
+    .span-insect5-label {
+       top: 389px;
+    }
+    .span-fertilizer1-label {
+       top: 416px;
+    }
+    .span-fertilizer2-label{
+      top: 443px;
+    }
+    .span-fertilizer3-label{
+      top: 470px;
+    }
+    .span-fertilizer4-label{
+      top: 497px;
+    }
+    .span-fertilizer5-label{
+      top: 524px;
     }
     .span-surfactant-label{
-      top: 334px;
+      top: 551px;
     }
     .span-water-label {
-      top: 361px;
+      top: 578px;
     }
-	
+    .span-fungicides5-label {
+       top: 605px;
+    }
+    .span-insect6-label {
+       top: 632px;
+    }
+    .span-water-clean-tube-label{
+      top: 659px;
+    }
 	.input-volume-template {
 	  position: absolute;
       left: 565px;
       width: 40px;
       height: 18px;
 	}
-	.input-fungicides1 {
-	  top: 172px;
+    .input-fungicides1 {
+       top: 172px;
     }
-	.input-fungicides2 {
-	  top: 200px;
+    .input-fungicides2 {
+       top: 200px;
     }
-	.input-insect1 {
-	  top: 226px;
+    .input-fungicides3 {
+       top: 227px;
     }
-	.input-insect2 {
-	  top: 253px;
+    .input-fungicides4 {
+       top: 254px;
     }
-	.input-fertilizer1 {
-	  top: 280px;
+    .input-insect1 {
+       top: 281px;
     }
-	.input-fertilizer2 {
-	  top: 307px;
+    .input-insect2 {
+       top: 308px;
     }
-	.input-surfactant {
-	  top: 334px;
+    .input-insect3 {
+       top: 335px;
     }
-	.input-water {
-	  top: 361px;
+    .input-insect4 {
+       top: 363px;
     }
+    .input-insect5 {
+       top: 389px;
+    }
+    .input-fertilizer1 {
+       top: 416px;
+    }
+    .input-fertilizer2 {
+      top: 443px;
+    }
+    .input-fertilizer3 {
+      top: 470px;
+    }
+    .input-fertilizer4{
+      top: 497px;
+    }
+    .input-fertilizer5{
+      top: 524px;
+    }
+    .input-surfactant{
+      top: 551px;
+    }
+    .input-water{
+      top: 578px;
+    }
+    .input-fungicides5 {
+       top: 605px;
+    }
+    .input-insect6 {
+       top: 632px;
+    }
+    .input-water-clean-tube{
+      top: 659px;
+    }
+    
 	.span-unit
 	{
 	  position: absolute;
@@ -306,29 +373,63 @@
       border-style: solid;
       border-width: 1px;
 	}
-	.span-unit-fungicides1-input{
-	  top: 172px;
+
+    .span-unit-fungicides1-input {
+       top: 172px;
     }
-	.span-unit-fungicides2-input{
-	  top: 200px;
+    .span-unit-fungicides2-input {
+       top: 200px;
     }
-	.span-unit-insect1-input{
-	  top: 226px;
+    .span-unit-fungicides3-input {
+       top: 227px;
     }
-	.span-unit-insect2-input{
-	  top: 253px;
+    .span-unit-fungicides4-input {
+       top: 254px;
     }
-	.span-unit-fertilizer1-input{
-	  top: 280px;
+    .span-unit-insect1-input {
+       top: 281px;
     }
-	.span-unit-fertilizer2-input {
-	  top: 307px;
+    .span-unit-insect2-input {
+       top: 308px;
     }
-	.span-unit-surfactant-input{
-	  top: 334px;
+    .span-unit-insect3-input {
+       top: 335px;
     }
-	.span-unit-water-input{
-	  top: 361px;
+    .span-unit-insect4-input {
+       top: 363px;
+    }
+    .span-unit-insect5-input {
+       top: 389px;
+    }
+    .span-unit-fertilizer1-input {
+       top: 416px;
+    }
+    .span-unit-fertilizer2-input{
+      top: 443px;
+    }
+    .span-unit-fertilizer3-input{
+      top: 470px;
+    }
+    .span-unit-fertilizer4-input{
+      top: 497px;
+    }
+    .span-unit-fertilizer5-input{
+      top: 524px;
+    }
+    .span-unit-surfactant-input{
+      top: 551px;
+    }
+    .span-unit-water-input {
+      top: 578px;
+    }
+    .span-unit-fungicides5-input {
+       top: 605px;
+    }
+    .span-unit-insect6-input {
+       top: 632px;
+    }
+    .span-unit-water-clean-tube-input {
+      top: 659px;
     }
     
     .button-test-constant-rate{
@@ -354,30 +455,65 @@
       width: 30px;
       height: 22px;
 	}
-	.div-test-constant-rate-fungicides1{
-	  top: 172px;
+    
+    .div-test-constant-rate-fungicides1 {
+       top: 172px;
     }
-	.div-test-constant-rate-fungicides2{
-	  top: 200px;
+    .div-test-constant-rate-fungicides2 {
+       top: 200px;
     }
-	.div-test-constant-rate-insect1{
-	  top: 226px;
+    .div-test-constant-rate-fungicides3 {
+       top: 227px;
     }
-	.div-test-constant-rate-insect2{
-	  top: 253px;
+    .div-test-constant-rate-fungicides4 {
+       top: 254px;
     }
-	.div-test-constant-rate-fertilizer1{
-	  top: 280px;
+    .div-test-constant-rate-insect1 {
+       top: 281px;
     }
-	.div-test-constant-rate-fertilizer2 {
-	  top: 307px;
+    .div-test-constant-rate-insect2 {
+       top: 308px;
     }
-	.div-test-constant-rate-surfactant{
-	  top: 334px;
+    .div-test-constant-rate-insect3 {
+       top: 335px;
     }
-	.div-test-constant-rate-water{
-	  top: 361px;
+    .div-test-constant-rate-insect4 {
+       top: 363px;
     }
+    .div-test-constant-rate-insect5 {
+       top: 389px;
+    }
+    .div-test-constant-rate-fertilizer1 {
+       top: 416px;
+    }
+    .div-test-constant-rate-fertilizer2{
+      top: 443px;
+    }
+    .div-test-constant-rate-fertilizer3{
+      top: 470px;
+    }
+    .div-test-constant-rate-fertilizer4{
+      top: 497px;
+    }
+    .div-test-constant-rate-fertilizer5{
+      top: 524px;
+    }
+    .div-test-constant-rate-surfactant{
+      top: 551px;
+    }
+    .div-test-constant-rate-water {
+      top: 578px;
+    }
+    .div-test-constant-rate-fungicides5 {
+       top: 605px;
+    }
+    .div-test-constant-rate-insect6 {
+       top: 632px;
+    }
+    .div-test-constant-rate-water-clean-tube {
+      top: 659px;
+    }
+    
     .input-constant-template
 	{
 	  position: absolute;
@@ -385,30 +521,65 @@
       width: 40px;
       height: 18px;
 	}
-	.constant-rate-input-fungicides1 {
-	  top: 172px;
+
+    .constant-rate-input-fungicides1 {
+       top: 172px;
     }
-	.constant-rate-input-fungicides2 {
-	  top: 200px;
+    .constant-rate-input-fungicides2 {
+       top: 200px;
     }
-	.constant-rate-input-insect1 {
-	  top: 226px;
+    .constant-rate-input-fungicides3 {
+       top: 227px;
     }
-	.constant-rate-input-insect2 {
-	  top: 253px;
+    .constant-rate-input-fungicides4 {
+       top: 254px;
     }
-	.constant-rate-input-fertilizer1 {
-	  top: 280px;
+    .constant-rate-input-insect1 {
+       top: 281px;
     }
-	.constant-rate-input-fertilizer2 {
-	  top: 307px;
+    .constant-rate-input-insect2 {
+       top: 308px;
     }
-	.constant-rate-input-surfactant {
-	  top: 334px;
+    .constant-rate-input-insect3 {
+       top: 335px;
     }
-	.constant-rate-input-water {
-	  top: 361px;
+    .constant-rate-input-insect4 {
+       top: 363px;
     }
+    .constant-rate-input-insect5 {
+       top: 389px;
+    }
+    .constant-rate-input-fertilizer1 {
+       top: 416px;
+    }
+    .constant-rate-input-fertilizer2{
+      top: 443px;
+    }
+    .constant-rate-input-fertilizer3{
+      top: 470px;
+    }
+    .constant-rate-input-fertilizer4{
+      top: 497px;
+    }
+    .constant-rate-input-fertilizer5{
+      top: 524px;
+    }
+    .constant-rate-input-surfactant{
+      top: 551px;
+    }
+    .constant-rate-input-water {
+      top: 578px;
+    }
+    .constant-rate-input-fungicides5 {
+       top: 605px;
+    }
+    .constant-rate-input-insect6 {
+       top: 632px;
+    }
+    .constant-rate-input-water-clean-tube {
+      top: 659px;
+    }
+    
 	.input-order-template
 	{
 	  position: absolute;
@@ -416,27 +587,63 @@
       width: 40px;
       height: 18px;
 	}
-	.order-input-fungicides1 {
-	  top: 172px;
+
+    
+    .order-input-fungicides1 {
+       top: 172px;
     }
-	.order-input-fungicides2 {
-	  top: 200px;
+    .order-input-fungicides2 {
+       top: 200px;
     }
-	.order-input-insect1 {
-	  top: 226px;
+    .order-input-fungicides3 {
+       top: 227px;
     }
-	.order-input-insect2 {
-	  top: 253px;
+    .order-input-fungicides4 {
+       top: 254px;
     }
-	.order-input-fertilizer1 {
-	  top: 280px;
+    .order-input-insect1 {
+       top: 281px;
     }
-	.order-input-fertilizer2 {
-	  top: 307px;
+    .order-input-insect2 {
+       top: 308px;
     }
-	.order-input-surfactant {
-	  top: 334px;
+    .order-input-insect3 {
+       top: 335px;
     }
+    .order-input-insect4 {
+       top: 363px;
+    }
+    .order-input-insect5 {
+       top: 389px;
+    }
+    .order-input-fertilizer1 {
+       top: 416px;
+    }
+    .order-input-fertilizer2{
+      top: 443px;
+    }
+    .order-input-fertilizer3{
+      top: 470px;
+    }
+    .order-input-fertilizer4{
+      top: 497px;
+    }
+    .order-input-fertilizer5{
+      top: 524px;
+    }
+    .order-input-surfactant{
+      top: 551px;
+    }
+    .order-input-fungicides5 {
+       top: 605px;
+    }
+    .order-input-insect6 {
+       top: 632px;
+    }
+    .order-input-water-clean-tube {
+      top: 659px;
+    }
+    
 	.div-constant-rate-button {
 	  position: absolute;
 	  left: 650px;

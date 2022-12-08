@@ -102,7 +102,7 @@ class MixingTankImp:
         
     def OpenWaterPump(self, a_volume):
         GPIO.digitalWrite(self.m_waterValveGpioPort, GPIO.LOW)
-        webiopi.sleep(1)
+        webiopi.sleep(3)
         EngineImp.getInstance().OpenWaterPump()
             
         l_flowRateConst = float(self.m_constFlowRate) / float(self.m_rateTime)

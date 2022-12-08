@@ -13,9 +13,10 @@ class ChemicalTankImp:
     s_constRateObj = ConstantRate()
     s_orderNumObj = ChemicalOrderNum()
 	
-    def __init__(self, a_name, a_chipNo, a_motorPortNum, a_volumePortNum, a_rateTime, a_isNC):
+    def __init__(self, a_name, a_gpioSealedValve, a_chipNo, a_motorPortNum, a_volumePortNum, a_rateTime, a_isNC):
         webiopi.debug('ChemicalTankImp create!!')
         self.m_name = a_name
+        self.m_gpioSealedValve = a_gpioSealedValve
         self.m_mcp = webiopi.deviceInstance("mcp%d" % a_chipNo)
         self.m_motorPortNum = a_motorPortNum
         self.m_volumePortNum = a_volumePortNum
@@ -34,12 +35,19 @@ class ChemicalTankImp:
         self.m_mcp.setFunction(self.m_volumePortNum, GPIO.IN)
         self.m_mcp.setFunction(self.m_motorPortNum, GPIO.OUT)    
         self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+        GPIO.setFunction(self.m_gpioSealedValve, GPIO.OUT)
+        GPIO.digitalWrite(self.m_gpioSealedValve, GPIO.HIGH)
+        
 
     def TestFlowRate(self):
         webiopi.debug("TestFlowRate was called !!!!!!")
+        GPIO.digitalWrite(self.m_gpioSealedValve, GPIO.LOW)
+        webiopi.sleep(3)
         self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.LOW)
         webiopi.sleep(self.m_rateTime)
         self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+        webiopi.sleep(3)
+        GPIO.digitalWrite(self.m_gpioSealedValve, GPIO.HIGH)
         
     def SetChemicalVolume(self, a_volume):
         self.m_volume = a_volume
@@ -77,6 +85,9 @@ class ChemicalTankImp:
         webiopi.debug('Call FillChemical')
         webiopi.debug('Volume = %d' % self.m_volume)
         if self.m_volume > 0:
+            webiopi.sleep(2)
+            GPIO.digitalWrite(self.m_gpioSealedValve, GPIO.LOW)
+            webiopi.sleep(3)
             self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.LOW)
             self.m_TankState = ChemicalTankImp.s_TankStateList['Pumping']
 
@@ -88,6 +99,8 @@ class ChemicalTankImp:
                 webiopi.debug('Chemical rate count = %f' % l_rateCount)
                     
             self.m_mcp.digitalWrite(self.m_motorPortNum, GPIO.HIGH)
+            webiopi.sleep(3)
+            GPIO.digitalWrite(self.m_gpioSealedValve, GPIO.HIGH)
             self.m_TankState = ChemicalTankImp.s_TankStateList['Close']
 		
     def IsChemicalTankError(self):

@@ -12,6 +12,8 @@
 20 = OUT 1
 21 = OUT 1
 12 = OUT 1
+16 = OUT 1
+7 = OUT 1
 #------------------------------------------------------------------------#
 
 [~GPIO]
@@ -38,7 +40,7 @@ myscript = /home/pi/MyProject/python/script.py
 [HTTP]
 # HTTP Server configuration
 enabled = true
-port = 8000
+port = 8999
 
 # File containing sha256(base64("user:password"))
 # Use webiopi-passwd command to generate it
@@ -122,7 +124,7 @@ mcp4 = MCP23017 slave:0x24
 # Use gpio-export to limit GPIO available through REST API  
 #gpio-export = 21, 23, 24, 25
 #gpio-export = 2, 3, 4, 17, 27, 22, 5, 6, 13, 14, 15, 18, 23, 24, 25, 12, 16
-gpio-export = 5, 6, 13, 19, 26, 20, 21, 12
+gpio-export = 5, 6, 13, 19, 26, 20, 21, 12, 16, 7
 
 
 # Uncomment to forbid changing GPIO values 
