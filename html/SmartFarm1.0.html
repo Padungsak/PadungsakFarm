@@ -24,48 +24,48 @@
  <script type="text/javascript">
 		var engineArray = { mixEngineGpioPort:26, waterPumpGpioPort:6, windPumpGpioPort:19, chemicalPumpGpioPort:13, coconutWaterPumpPort:12};
 		
-		var onOffButtonArray = {buttonName:"OnOffButton",  waterDelay:900, onImage:"on_button-image", offImage:"off_button-image", autoImage:"auto_button-image"};
+		var onOffButtonArray = {buttonName:"OnOffButton",  waterDelay:1500, onImage:"on_button-image", offImage:"off_button-image", autoImage:"auto_button-image"};
 		
 		var coconutWaterButton = {buttonName:"CoconutWaterButton",  waterDelay:1800, onImage:"coconut_on_button-image", offImage:"coconut_off_button-image", autoImage:"coconut_auto_button-image"};
 								
-		var valveArray = [{valveName:"FontRightValve", valvePort:1, chemicalPort:16, valveImage:"font_right_valve-image", waterImage:"font_right_water-image", executionOrder:4},
-						  {valveName:"FontLeftValve", valvePort:0, chemicalPort:16, valveImage:"font_left_valve-image", waterImage:"font_left_water-image", executionOrder:4},
+		var valveArray = [{valveName:"FontRightValve", valvePort:1, chemicalPort:16, valveImage:"font_right_valve-image", waterImage:"font_right_water-image", executionOrder:1},
+						  {valveName:"FontLeftValve", valvePort:0, chemicalPort:16, valveImage:"font_left_valve-image", waterImage:"font_left_water-image", executionOrder:1},
 						  {valveName:"MiddleRightValve", valvePort:3, chemicalPort:16, valveImage:"middle_right_valve-image", waterImage:"middle_right_water-image", executionOrder:2},
-						  {valveName:"MiddleLeftValve", valvePort:2, chemicalPort:16, valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:5},
-						  {valveName:"BackRightValve", valvePort:6, chemicalPort:16, valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:3},
-						  {valveName:"BackLeftValve", valvePort:5, chemicalPort:16, valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:1},
-						  {valveName:"BackMiddle1Valve", valvePort:4, chemicalPort:16, valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:5}];
+						  {valveName:"MiddleLeftValve", valvePort:2, chemicalPort:16, valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:2},
+						  {valveName:"BackRightValve", valvePort:6, chemicalPort:16, valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:4},
+						  {valveName:"BackLeftValve", valvePort:5, chemicalPort:16, valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:3},
+						  {valveName:"BackMiddle1Valve", valvePort:4, chemicalPort:16, valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:4}];
 						  
         var sensorArray = [{sensorName:"FontRightSensor", analogPort:0}];
 		
 		var chemicalButtonArray = {buttonName:"chemicalButton", stopImage:"chemical_stop_button-image", mixingImage:"chemical_mixing_button-image", pumpingImage:"chemical_pumping_button-image", pauseImage:"chemical_pause_button-image"};
 			
-		var chemicalValveArray = [{valveName:"FontLeftValve", chemicalPort:0, chemicalDelay:70, windPort:15, windDelay:500, valveCloseImage:"font_left_chemical-image", valveOpenImage:"font_left_chemical_running-image", executionOrder:1},
-								  {valveName:"FontRightLeftValve", chemicalPort:1, chemicalDelay:100, windPort:15, windDelay:500, valveCloseImage:"font_right_left_chemical-image", valveOpenImage:"font_right_left_chemical_running-image", executionOrder:2},
-								  {valveName:"FontRightRightValve", chemicalPort:2, chemicalDelay:90, windPort:15, windDelay:500, valveCloseImage:"font_right_right_chemical-image", valveOpenImage:"font_right_right_chemical_running-image", executionOrder:3},
-								  {valveName:"MiddleLeftValve", chemicalPort:3, chemicalDelay:40, windPort:15, windDelay:500, valveCloseImage:"middle_left_chemical-image", valveOpenImage:"middle_left_chemical_running-image", executionOrder:4},
-								  {valveName:"MiddleRightLeftValve", chemicalPort:4, chemicalDelay:70, windPort:15, windDelay:500, valveCloseImage:"middle_right_left_chemical-image", valveOpenImage:"middle_right_left_chemical_running-image", executionOrder:5},
-								  {valveName:"MiddleRightMiddleValve", chemicalPort:5, chemicalDelay:70, windPort:15, windDelay:500, valveCloseImage:"middle_right_middle_chemical-image", valveOpenImage:"middle_right_middle_chemical_running-image", executionOrder:6},
-								  {valveName:"MiddleRightRightValve", chemicalPort:6, chemicalDelay:60, windPort:15, windDelay:500, valveCloseImage:"middle_right_right_chemical-image", valveOpenImage:"middle_right_right_chemical_running-image", executionOrder:7},
-								  {valveName:"BackMiddle1Valve", chemicalPort:8, chemicalDelay:70, windPort:15, windDelay:500, valveCloseImage:"back_middle1_chemical-image", valveOpenImage:"back_middle1_chemical_running-image", executionOrder:8},	
-								  {valveName:"BackMiddle2Valve", chemicalPort:7, chemicalDelay:70, windPort:15, windDelay:500, valveCloseImage:"back_middle2_chemical-image", valveOpenImage:"back_middle2_chemical_running-image", executionOrder:9},
-								  {valveName:"BackLeft1Valve", chemicalPort:9, chemicalDelay:60, windPort:15, windDelay:500, valveCloseImage:"back_left1_chemical-image", valveOpenImage:"back_left1_chemical_running-image", executionOrder:10},
-								  {valveName:"BackLeft2Valve", chemicalPort:14, chemicalDelay:60, windPort:15, windDelay:500, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},
-								  {valveName:"BackRight1Valve", chemicalPort:10, chemicalDelay:130, windPort:15, windDelay:500, valveCloseImage:"back_right1_chemical-image", valveOpenImage:"back_right1_chemical_running-image", executionOrder:12},
-								  {valveName:"BackRight2Valve", chemicalPort:11, chemicalDelay:170, windPort:15, windDelay:500, valveCloseImage:"back_right2_chemical-image", valveOpenImage:"back_right2_chemical_running-image", executionOrder:13},
-								  {valveName:"BackRight3Valve", chemicalPort:12, chemicalDelay:170, windPort:15, windDelay:500, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
-								  {valveName:"BackRight4Valve", chemicalPort:13, chemicalDelay:150, windPort:15, windDelay:500, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15}];
+		var chemicalValveArray = [{valveName:"FontLeftValve", chemicalPort:0, chemicalDelay:70, windPort:15, windDelay:90, valveCloseImage:"font_left_chemical-image", valveOpenImage:"font_left_chemical_running-image", executionOrder:1},
+								  {valveName:"FontRightLeftValve", chemicalPort:1, chemicalDelay:110, windPort:15, windDelay:130, valveCloseImage:"font_right_left_chemical-image", valveOpenImage:"font_right_left_chemical_running-image", executionOrder:2},
+								  {valveName:"FontRightRightValve", chemicalPort:2, chemicalDelay:90, windPort:15, windDelay:90, valveCloseImage:"font_right_right_chemical-image", valveOpenImage:"font_right_right_chemical_running-image", executionOrder:3},
+								  {valveName:"MiddleLeftValve", chemicalPort:3, chemicalDelay:50, windPort:15, windDelay:90, valveCloseImage:"middle_left_chemical-image", valveOpenImage:"middle_left_chemical_running-image", executionOrder:4},
+								  {valveName:"MiddleRightLeftValve", chemicalPort:4, chemicalDelay:90, windPort:15, windDelay:90, valveCloseImage:"middle_right_left_chemical-image", valveOpenImage:"middle_right_left_chemical_running-image", executionOrder:5},
+								  {valveName:"MiddleRightMiddleValve", chemicalPort:5, chemicalDelay:100, windPort:15, windDelay:90, valveCloseImage:"middle_right_middle_chemical-image", valveOpenImage:"middle_right_middle_chemical_running-image", executionOrder:6},
+								  {valveName:"MiddleRightRightValve", chemicalPort:6, chemicalDelay:90, windPort:15, windDelay:90, valveCloseImage:"middle_right_right_chemical-image", valveOpenImage:"middle_right_right_chemical_running-image", executionOrder:7},
+								  {valveName:"BackMiddle1Valve", chemicalPort:8, chemicalDelay:70, windPort:15, windDelay:90, valveCloseImage:"back_middle1_chemical-image", valveOpenImage:"back_middle1_chemical_running-image", executionOrder:8},	
+								  {valveName:"BackMiddle2Valve", chemicalPort:7, chemicalDelay:70, windPort:15, windDelay:90, valveCloseImage:"back_middle2_chemical-image", valveOpenImage:"back_middle2_chemical_running-image", executionOrder:9},
+								  {valveName:"BackLeft1Valve", chemicalPort:9, chemicalDelay:60, windPort:15, windDelay:100, valveCloseImage:"back_left1_chemical-image", valveOpenImage:"back_left1_chemical_running-image", executionOrder:10},
+								  {valveName:"BackLeft2Valve", chemicalPort:14, chemicalDelay:90, windPort:15, windDelay:160, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},
+								  {valveName:"BackRight1Valve", chemicalPort:10, chemicalDelay:130, windPort:15, windDelay:180, valveCloseImage:"back_right1_chemical-image", valveOpenImage:"back_right1_chemical_running-image", executionOrder:12},
+								  {valveName:"BackRight2Valve", chemicalPort:11, chemicalDelay:190, windPort:15, windDelay:180, valveCloseImage:"back_right2_chemical-image", valveOpenImage:"back_right2_chemical_running-image", executionOrder:13},
+								  {valveName:"BackRight3Valve", chemicalPort:12, chemicalDelay:180, windPort:15, windDelay:180, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
+								  {valveName:"BackRight4Valve", chemicalPort:13, chemicalDelay:180, windPort:15, windDelay:180, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15}];
 								  
 								  
 		var chemicalTankArray = [{tankName:"Fungicides1",    gpioSealedValve:7,   chipNo:0, mcpMotorPort:0, mcpVolumePort:8, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides1-const-input", orderBox:"fungicides1-order-input", inputBox:"fungicides1-input", testFlowRateButton:"button-constant-test-fungicides1"},
-				         {tankName:"Fungicides2",    gpioSealedValve:7,   chipNo:0, mcpMotorPort:1, mcpVolumePort:9, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides2-const-input", orderBox:"fungicides2-order-input", inputBox:"fungicides2-input", testFlowRateButton:"button-constant-test-fungicides2"},
-					 {tankName:"Fungicides3",    gpioSealedValve:7,   chipNo:1, mcpMotorPort:6, mcpVolumePort:14, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides3-const-input", orderBox:"fungicides3-order-input", inputBox:"fungicides3-input", testFlowRateButton:"button-constant-test-fungicides3"},
+				         {tankName:"Fungicides2",    gpioSealedValve:7,   chipNo:0, mcpMotorPort:1, mcpVolumePort:9, rateTime:10, orderNum:0, isNC:1, flowRateBox:"fungicides2-const-input", orderBox:"fungicides2-order-input", inputBox:"fungicides2-input", testFlowRateButton:"button-constant-test-fungicides2"},
+					 {tankName:"Fungicides3",    gpioSealedValve:7,   chipNo:1, mcpMotorPort:6, mcpVolumePort:14, rateTime:10, orderNum:0, isNC:1, flowRateBox:"fungicides3-const-input", orderBox:"fungicides3-order-input", inputBox:"fungicides3-input", testFlowRateButton:"button-constant-test-fungicides3"},
 					 {tankName:"Fungicides4",    gpioSealedValve:7,   chipNo:1, mcpMotorPort:7, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides4-const-input", orderBox:"fungicides4-order-input", inputBox:"fungicides4-input", testFlowRateButton:"button-constant-test-fungicides4"},
 					 {tankName:"Insect1",        gpioSealedValve:7,   chipNo:0, mcpMotorPort:2, mcpVolumePort:10, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect1-const-input", orderBox:"insect1-order-input", inputBox:"insect1-input", testFlowRateButton:"button-constant-test-insect1"},
 				         {tankName:"Insect2",        gpioSealedValve:7,   chipNo:0, mcpMotorPort:3, mcpVolumePort:11, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect2-const-input", orderBox:"insect2-order-input", inputBox:"insect2-input", testFlowRateButton:"button-constant-test-insect2"},
 				         {tankName:"Insect3",        gpioSealedValve:7,   chipNo:0, mcpMotorPort:4, mcpVolumePort:12, rateTime:10, orderNum:0, isNC:1, flowRateBox:"insect3-const-input", orderBox:"insect3-order-input", inputBox:"insect3-input", testFlowRateButton:"button-constant-test-insect3"},
 				         {tankName:"Insect4",        gpioSealedValve:7,   chipNo:0, mcpMotorPort:5, mcpVolumePort:13, rateTime:10, orderNum:0, isNC:1, flowRateBox:"insect4-const-input", orderBox:"insect4-order-input", inputBox:"insect4-input", testFlowRateButton:"button-constant-test-insect4"},
-				         {tankName:"Insect5",        gpioSealedValve:7,   chipNo:0, mcpMotorPort:6, mcpVolumePort:14, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect5-const-input", orderBox:"insect5-order-input", inputBox:"insect5-input", testFlowRateButton:"button-constant-test-insect5"},
+				         {tankName:"Insect5",        gpioSealedValve:7,   chipNo:0, mcpMotorPort:6, mcpVolumePort:14, rateTime:10, orderNum:0, isNC:1, flowRateBox:"insect5-const-input", orderBox:"insect5-order-input", inputBox:"insect5-input", testFlowRateButton:"button-constant-test-insect5"},
 					 {tankName:"Fertilizer1",    gpioSealedValve:7,   chipNo:0, mcpMotorPort:7, mcpVolumePort:15, rateTime:10 ,orderNum:0, isNC:1, flowRateBox:"fertilizer1-const-input", orderBox:"fertilizer1-order-input", inputBox:"fertilizer1-input", testFlowRateButton:"button-constant-test-fertilizer1"},
 					 {tankName:"Fertilizer2",    gpioSealedValve:7,   chipNo:1, mcpMotorPort:0, mcpVolumePort:8, rateTime:10, orderNum:0, isNC:1, flowRateBox:"fertilizer2-const-input", orderBox:"fertilizer2-order-input", inputBox:"fertilizer2-input", testFlowRateButton:"button-constant-test-fertilizer2"},
 					 {tankName:"Fertilizer3",    gpioSealedValve:7,   chipNo:1, mcpMotorPort:1, mcpVolumePort:9, rateTime:10, orderNum:0, isNC:1, flowRateBox:"fertilizer3-const-input", orderBox:"fertilizer3-order-input", inputBox:"fertilizer3-input", testFlowRateButton:"button-constant-test-fertilizer3"},
@@ -77,7 +77,7 @@
 		var chemicalFeederArray = [{tankName:"Fungicides5", chipNo:4, mcpMotorPort1:0, mcpMotorPort2:1, mcpMotorEnablePort:2, mcpShakePort:15, mcpShakeEnablePort:14, rateTime:95, orderNum:0, flowRateBox:"fungicides5-const-input", orderBox:"fungicides5-order-input", inputBox:"fungicides5-input", testFlowRateButton:"button-constant-test-fungicides5"},
 							       {tankName:"Insect6", chipNo:4, mcpMotorPort1:8, mcpMotorPort2:9, mcpMotorEnablePort:10,  mcpShakePort:15, mcpShakeEnablePort:14, rateTime:150, orderNum:0, flowRateBox:"insect6-const-input", orderBox:"insect6-order-input", inputBox:"insect6-input", testFlowRateButton:"button-constant-test-insect6"}];
 	
-		var mixingTank = {tankName:"Water", volumeGpioPort:5, maxVolumeGpioPort:11, waterValveGpioPort:20, drainValveGpioPort:21, rateTime:10, initialVolume:80, flowRateBox:"water-const-input", inputBox:"water-input", testFlowRateButton:"button-constant-test-water"};
+		var mixingTank = {tankName:"Water", volumeGpioPort:5, maxVolumeGpioPort:11, waterValveGpioPort:20, drainValveGpioPort:21, windCompressValveGpioPort:8, rateTime:10, initialVolume:80, flowRateBox:"water-const-input", inputBox:"water-input", testFlowRateButton:"button-constant-test-water"};
 		
 		var constRateButtonArray = {buttonId:"button-constant-rate", editText:"To be saved", normalText:"edit rate(L/M)"};
 		
@@ -403,6 +403,7 @@
 													  mixingTank.maxVolumeGpioPort,
 													  mixingTank.waterValveGpioPort,
 													  mixingTank.drainValveGpioPort,
+													  mixingTank.windCompressValveGpioPort,
 													  mixingTank.rateTime,
 													  mixingTank.initialVolume] , function(acro, args, data){isMixingTankAdded++;});
 													  		

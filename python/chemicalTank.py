@@ -12,6 +12,8 @@ class ChemicalTankImp:
     s_countingConfirmation = 4
     s_constRateObj = ConstantRate()
     s_orderNumObj = ChemicalOrderNum()
+    s_waterCleanTubeName = "WaterCleanTube"
+    s_waterCleanTubeRound = 5
 	
     def __init__(self, a_name, a_gpioSealedValve, a_chipNo, a_motorPortNum, a_volumePortNum, a_rateTime, a_isNC):
         webiopi.debug('ChemicalTankImp create!!')
@@ -129,3 +131,11 @@ class ChemicalTankImp:
                     l_countingConfirmation = l_countingConfirmation +1
                 
         return False
+
+    def IsWaterCleanTube(self):
+        return self.m_name == self.s_waterCleanTubeName
+    
+    def CleanChemicalTube(self):
+        for l_num in range(self.s_waterCleanTubeRound):
+            self.FillChemical()
+        

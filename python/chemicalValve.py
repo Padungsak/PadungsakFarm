@@ -3,7 +3,6 @@ GPIO = webiopi.GPIO
 
 class ChemicalValveImp:
     s_mcp1 = webiopi.deviceInstance("mcp2")
-    s_windCompressDelay = 840
     s_sleepModeDelay = 120
     s_valveStateList = {'Open':1,'Normal':0,'Disable':-1}
     
@@ -56,9 +55,6 @@ class ChemicalValveImp:
 
     def GetChemicalDelayTime(self):
         return self.m_chemicalDelay
-
-    def GetWindCompressDelayTime(self):
-        return ChemicalValveImp.s_windCompressDelay
 
     def GetSleepTime(self):
         return ChemicalValveImp.s_sleepModeDelay

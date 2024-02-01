@@ -73,10 +73,10 @@ def InitialMachine(a_waterPumpGpioPort, a_chemicalPumpGpioPort, a_windPumpGpioPo
 
 #Add mixing tank
 @webiopi.macro
-def AddMixingTank(a_name, a_volumeGpioPort, a_maxVolumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime, a_initialWater):
+def AddMixingTank(a_name, a_volumeGpioPort, a_maxVolumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_windCompressValveGpioPort, a_rateTime, a_initialWater):
     global g_mixingTank
     if g_mixingTank == 0:
-        g_mixingTank = MixingTankImp(a_name, int(a_volumeGpioPort), int(a_maxVolumeGpioPort), int(a_waterValveGpioPort), int(a_drainValveGpioPort), int(a_rateTime), int(a_initialWater))
+        g_mixingTank = MixingTankImp(a_name, int(a_volumeGpioPort), int(a_maxVolumeGpioPort), int(a_waterValveGpioPort), int(a_drainValveGpioPort), int(a_windCompressValveGpioPort), int(a_rateTime), int(a_initialWater))
     
 #Add tank valve
 @webiopi.macro
@@ -250,9 +250,9 @@ def DoChemicalAuto():
     global g_chemicalState
     global g_chemicalPauseEvent
     
-    l_sortedValve = sorted(g_chemicalValveDict.values(), key=operator.attrgetter('executionOrder'))
+    g_mixingTank.InitialWind()
     
-    #EngineImp.getInstance().OpenWindPump()
+    l_sortedValve = sorted(g_chemicalValveDict.values(), key=operator.attrgetter('executionOrder'))
     for l_valve in l_sortedValve:
         if l_valve.IsValveClose() == True:
             #loop for openning all valve
@@ -263,24 +263,33 @@ def DoChemicalAuto():
                     break
             
             g_chemicalState = g_chemicalStateList['Pumping']
-
-            #EngineImp.getInstance().OpenWindPump()
-            #webiopi.sleep(l_valve.GetWindCompressDelayTime())
-            g_mixingTank.CompressWind(l_valve.GetWindCompressDelayTime())
+            
+            #Prepare wind
+            EngineImp.getInstance().OpenMixPump()
+            webiopi.sleep(1)
+            webiopi.debug('Prepare wind')
+            g_mixingTank.CompressWind(l_valve.GetWindDelayTime())
+            
+            #Pump Chemical into the pipe
+            webiopi.debug('Pump Chemical into the pipe')
             l_valve.OpenValve()
             webiopi.sleep(3)
-
             EngineImp.getInstance().OpenChemicalPump()
             webiopi.sleep(l_valve.GetChemicalDelayTime())
             EngineImp.getInstance().CloseChemicalPump()
+            webiopi.sleep(3)
+            EngineImp.getInstance().CloseMixPump()
             webiopi.sleep(1)
 
+            #Blow wind into the pipe
+            webiopi.debug('Blow wind into the pipe')
             l_valve.OpenWindValve()
             webiopi.sleep(l_valve.GetWindDelayTime())
-            l_valve.CloseValve()
-            webiopi.sleep(1)
             l_valve.CloseWindValve()
-            EngineImp.getInstance().CloseWindPump()
+            
+            l_valve.CloseValve()
+            webiopi.sleep(3)
+            l_valve.CloseWindValve()
             webiopi.sleep(l_valve.GetSleepTime())
 
             while g_chemicalPauseEvent.is_set():
@@ -291,7 +300,8 @@ def DoChemicalAuto():
     
                     
     if g_chemicalState != g_chemicalStateList['Stop'] and g_chemicalState != g_chemicalStateList['Error']:
-        #EngineImp.getInstance().CloseWindPump()
+        EngineImp.getInstance().CloseWindPump()
+        CleanChemicalTube()
         g_mixingTank.CleanTank()
         g_chemicalState = g_chemicalStateList['Stop']
         ResetChemicalVolume()
@@ -368,8 +378,7 @@ def DoChemicalGroundAuto(a_startOrder):
                 #EngineImp.getInstance().OpenMixPump()
                 #webiopi.sleep(20)
                 #EngineImp.getInstance().CloseMixPump()
-                webiopi.sleep(120)
-                #Put sleep for cool down breaker.
+
                 #Do mixing chemical.Just a workaround for heating on breaker.
                 EngineImp.getInstance().OpenMixPump()
                 webiopi.sleep(60)
@@ -542,6 +551,12 @@ def MixingTankProcessing():
 
     return True
 
+def CleanChemicalTube():
+    l_sortedTank= sorted(g_chemicalTankDict.values(), key=operator.attrgetter('m_orderNum'))              
+    for l_tankObj in l_sortedTank:
+        if l_tankObj.IsWaterCleanTube():
+            l_tankObj.CleanChemicalTube()
+            break
     
 @webiopi.macro
 def PauseChemical():

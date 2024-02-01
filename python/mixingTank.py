@@ -11,13 +11,17 @@ class MixingTankImp:
     #s_mixingTime = 120
     s_drainTime = 2000 
     s_constRateObj = ConstantRate()
+    s_windCompressDelay = 60
+    s_windOwnTankCompressDelay = 60
+    s_windDelayConst = 40
 
-    def __init__(self, a_name, a_volumeGpioPort, a_maxVolumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_rateTime, a_initialWater):
+    def __init__(self, a_name, a_volumeGpioPort, a_maxVolumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_windCompressValveGpioPort, a_rateTime, a_initialWater):
         self.m_name = a_name
         self.m_volumeGpioPort = a_volumeGpioPort
         self.m_maxVolumeGpioPort = a_maxVolumeGpioPort
         self.m_waterValveGpioPort = a_waterValveGpioPort
         self.m_drainValveGpioPort = a_drainValveGpioPort
+        self.m_windCompressValveGpioPort = a_windCompressValveGpioPort
         self.m_constFlowRate = MixingTankImp.s_constRateObj.GetRate(self.m_name)
         self.m_rateTime = a_rateTime
         self.m_initialWater = a_initialWater
@@ -28,6 +32,7 @@ class MixingTankImp:
         GPIO.setFunction(self.m_maxVolumeGpioPort, GPIO.IN)
         GPIO.setFunction(self.m_waterValveGpioPort, GPIO.OUT)
         GPIO.setFunction(self.m_drainValveGpioPort, GPIO.OUT)
+        GPIO.setFunction(self.m_windCompressValveGpioPort, GPIO.OUT)
 
     def DrainChemical(self):
         GPIO.digitalWrite(self.m_drainValveGpioPort, GPIO.LOW)
@@ -91,14 +96,25 @@ class MixingTankImp:
                 return False
                 
         return True
-
-    def CompressWind(self, a_delayTime):
-        self.m_TankState = MixingTankImp.s_TankStateList['Mixing']
+    
+    def InitialWind(self):
+        l_windRateForInitial = 60
+        self.CompressWind(l_windRateForInitial)
+    
+    def CompressWind(self, a_windDelay):
+        self.m_TankState = MixingTankImp.s_TankStateList['Pumping']
         EngineImp.getInstance().OpenWindPump()
         webiopi.sleep(1)
-        EngineImp.getInstance().OpenMixPump()
-        webiopi.sleep(int(a_delayTime))
-        EngineImp.getInstance().CloseMixPump()
+        
+        l_windDelay = int(a_windDelay)
+        while l_windDelay > 0:
+            webiopi.debug('Compress wind at wind delay =  %d' % l_windDelay)
+            GPIO.digitalWrite(self.m_windCompressValveGpioPort, GPIO.LOW)
+            webiopi.sleep(MixingTankImp.s_windCompressDelay)
+            GPIO.digitalWrite(self.m_windCompressValveGpioPort, GPIO.HIGH)
+            webiopi.sleep(MixingTankImp.s_windOwnTankCompressDelay)
+            
+            l_windDelay = l_windDelay - MixingTankImp.s_windDelayConst
         
     def OpenWaterPump(self, a_volume):
         GPIO.digitalWrite(self.m_waterValveGpioPort, GPIO.LOW)
