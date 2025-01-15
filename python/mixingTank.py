@@ -13,7 +13,7 @@ class MixingTankImp:
     s_constRateObj = ConstantRate()
     s_windCompressDelay = 60
     s_windOwnTankCompressDelay = 60
-    s_windDelayConst = 40
+    s_windDelayConst = 20
 
     def __init__(self, a_name, a_volumeGpioPort, a_maxVolumeGpioPort, a_waterValveGpioPort, a_drainValveGpioPort, a_windCompressValveGpioPort, a_rateTime, a_initialWater):
         self.m_name = a_name
@@ -78,7 +78,7 @@ class MixingTankImp:
         return GPIO.digitalRead(self.m_volumeGpioPort) == GPIO.HIGH
 
     def IsWaterOverflow(self):
-        return GPIO.digitalRead(self.m_maxVolumeGpioPort) == GPIO.LOW
+        return GPIO.digitalRead(self.m_maxVolumeGpioPort) == GPIO.HIGH
 
     def IsMixingTankError(self):
         return self.m_TankState == MixingTankImp.s_TankStateList['Error']
