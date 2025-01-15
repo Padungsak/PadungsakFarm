@@ -117,6 +117,9 @@ mcp1 = MCP23017 slave:0x21
 mcp2 = MCP23017 slave:0x22
 mcp3 = MCP23017 slave:0x23
 mcp4 = MCP23017 slave:0x24
+mcp5 = MCP23017 slave:0x25
+mcp6 = MCP23017 slave:0x26
+mcp7 = MCP23017 slave:0x27
 
 #------------------------------------------------------------------------#
 
