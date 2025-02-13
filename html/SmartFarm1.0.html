@@ -24,7 +24,7 @@
  <script type="text/javascript">
 		var engineArray = { mixEngineGpioPort:26, waterPumpGpioPort:6, windPumpGpioPort:19, chemicalPumpGpioPort:13, coconutWaterPumpPort:12};
 		
-		var onOffButtonArray = {buttonName:"OnOffButton",  waterDelay:1200, onImage:"on_button-image", offImage:"off_button-image", autoImage:"auto_button-image"};
+		var onOffButtonArray = {buttonName:"OnOffButton",  waterDelay:700, onImage:"on_button-image", offImage:"off_button-image", autoImage:"auto_button-image"};
 		
 		var coconutWaterButton = {buttonName:"CoconutWaterButton",  waterDelay:1800, onImage:"coconut_on_button-image", offImage:"coconut_off_button-image", autoImage:"coconut_auto_button-image"};
 								
@@ -45,37 +45,41 @@
 		
 		var chemicalButtonArray = {buttonName:"chemicalButton", stopImage:"chemical_stop_button-image", mixingImage:"chemical_mixing_button-image", pumpingImage:"chemical_pumping_button-image", pauseImage:"chemical_pause_button-image"};
 			
-		var chemicalValveArray = [{valveName:"FontLeftValve",           chipNo:0, chemicalPort:0,   chemicalDelay:80,  windGpioPort:15, windDelay:45,  valveCloseImage:"font_left_chemical-image", valveOpenImage:"font_left_chemical_running-image", executionOrder:1},
-					  {valveName:"FontRightLeftValve",      chipNo:0, chemicalPort:1,   chemicalDelay:130, windGpioPort:15, windDelay:60, valveCloseImage:"font_right_left_chemical-image", valveOpenImage:"font_right_left_chemical_running-image", executionOrder:2},
+		var chemicalValveArray = [{valveName:"FontLeftValve",           chipNo:0, chemicalPort:0,   chemicalDelay:90,  windGpioPort:15, windDelay:45,  valveCloseImage:"font_left_chemical-image", valveOpenImage:"font_left_chemical_running-image", executionOrder:1},
+					  {valveName:"FontRightLeftValve",      chipNo:0, chemicalPort:1,   chemicalDelay:150, windGpioPort:15, windDelay:60, valveCloseImage:"font_right_left_chemical-image", valveOpenImage:"font_right_left_chemical_running-image", executionOrder:2},
 					  {valveName:"FontRightRightValve",     chipNo:0, chemicalPort:2,   chemicalDelay:120,  windGpioPort:15, windDelay:60,  valveCloseImage:"font_right_right_chemical-image", valveOpenImage:"font_right_right_chemical_running-image", executionOrder:3},
 					  {valveName:"MiddleLeftValve",         chipNo:0, chemicalPort:3,   chemicalDelay:80,  windGpioPort:15, windDelay:45,  valveCloseImage:"middle_left_chemical-image", valveOpenImage:"middle_left_chemical_running-image", executionOrder:4},
-					  {valveName:"MiddleRightLeftValve",    chipNo:0, chemicalPort:4,   chemicalDelay:90,  windGpioPort:15, windDelay:45,  valveCloseImage:"middle_right_left_chemical-image", valveOpenImage:"middle_right_left_chemical_running-image", executionOrder:5},
-					  {valveName:"MiddleRightMiddleValve",  chipNo:0, chemicalPort:5,   chemicalDelay:120, windGpioPort:15, windDelay:45,  valveCloseImage:"middle_right_middle_chemical-image", valveOpenImage:"middle_right_middle_chemical_running-image", executionOrder:6},
-					  {valveName:"MiddleRightRightValve",   chipNo:0, chemicalPort:6,   chemicalDelay:120,  windGpioPort:15, windDelay:45,  valveCloseImage:"middle_right_right_chemical-image", valveOpenImage:"middle_right_right_chemical_running-image", executionOrder:7},
+					  {valveName:"MiddleRightLeftValve",    chipNo:0, chemicalPort:4,   chemicalDelay:100,  windGpioPort:15, windDelay:45,  valveCloseImage:"middle_right_left_chemical-image", valveOpenImage:"middle_right_left_chemical_running-image", executionOrder:5},
+					  {valveName:"MiddleRightMiddleValve",  chipNo:0, chemicalPort:5,   chemicalDelay:110, windGpioPort:15, windDelay:45,  valveCloseImage:"middle_right_middle_chemical-image", valveOpenImage:"middle_right_middle_chemical_running-image", executionOrder:6},
+					  {valveName:"MiddleRightRightValve",   chipNo:0, chemicalPort:6,   chemicalDelay:110,  windGpioPort:15, windDelay:45,  valveCloseImage:"middle_right_right_chemical-image", valveOpenImage:"middle_right_right_chemical_running-image", executionOrder:7},
 					  {valveName:"BackMiddle1Valve",        chipNo:0, chemicalPort:8,   chemicalDelay:90,  windGpioPort:15, windDelay:60,  valveCloseImage:"back_middle1_chemical-image", valveOpenImage:"back_middle1_chemical_running-image", executionOrder:8},	
 					  {valveName:"BackMiddle2Valve",        chipNo:0, chemicalPort:7,   chemicalDelay:90,  windGpioPort:15, windDelay:60,  valveCloseImage:"back_middle2_chemical-image", valveOpenImage:"back_middle2_chemical_running-image", executionOrder:9},
 					  {valveName:"BackLeft1Valve",          chipNo:0, chemicalPort:9,   chemicalDelay:80,  windGpioPort:15, windDelay:75, valveCloseImage:"back_left1_chemical-image", valveOpenImage:"back_left1_chemical_running-image", executionOrder:10},
-					  {valveName:"BackLeft2Valve",          chipNo:0, chemicalPort:14,  chemicalDelay:130, windGpioPort:15, windDelay:90, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},
+					  {valveName:"BackLeft2Valve",          chipNo:0, chemicalPort:14,  chemicalDelay:100, windGpioPort:15, windDelay:90, valveCloseImage:"back_left2_chemical-image", valveOpenImage:"back_left2_chemical_running-image", executionOrder:11},
 					  {valveName:"BackRight1Valve",         chipNo:0, chemicalPort:10,  chemicalDelay:150, windGpioPort:15, windDelay:120, valveCloseImage:"back_right1_chemical-image", valveOpenImage:"back_right1_chemical_running-image", executionOrder:12},
-					  {valveName:"BackRight2Valve",         chipNo:0, chemicalPort:12,  chemicalDelay:220, windGpioPort:15, windDelay:120, valveCloseImage:"back_right2_chemical-image", valveOpenImage:"back_right2_chemical_running-image", executionOrder:13},
-					  {valveName:"BackRight3Valve",         chipNo:0, chemicalPort:11,  chemicalDelay:220, windGpioPort:15, windDelay:120, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
-					  {valveName:"BackRight4Valve",         chipNo:0, chemicalPort:13,  chemicalDelay:220, windGpioPort:15, windDelay:120, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15},					  
-					  {valveName:"NewPlantCol1Group1Valve", chipNo:1, chemicalPort:0,   chemicalDelay:60,  windGpioPort:15, windDelay:160, valveCloseImage:"new_plant_col1_group1_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:16},
-					  {valveName:"NewPlantCol1Group2Valve", chipNo:1, chemicalPort:1,   chemicalDelay:45,  windGpioPort:15, windDelay:100, valveCloseImage:"new_plant_col1_group2_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:17},
-					  {valveName:"NewPlantCol1Group3Valve", chipNo:1, chemicalPort:2,   chemicalDelay:45,  windGpioPort:15, windDelay:100, valveCloseImage:"new_plant_col1_group3_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:18},
-					  {valveName:"NewPlantCol1Group3Valve", chipNo:1, chemicalPort:2,   chemicalDelay:45,  windGpioPort:15, windDelay:100, valveCloseImage:"new_plant_col1_group3_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:18},
-					  {valveName:"NewPlantCol2Group1Valve", chipNo:1, chemicalPort:3,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col2_group1_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:19},
-					  {valveName:"NewPlantCol2Group2Valve", chipNo:1, chemicalPort:4,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col2_group2_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:20},
-					  {valveName:"NewPlantCol2Group3Valve", chipNo:1, chemicalPort:5,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col2_group3_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:21},
-					  {valveName:"NewPlantCol3Group1Valve", chipNo:1, chemicalPort:6,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col3_group1_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:22},
-					  {valveName:"NewPlantCol3Group2Valve", chipNo:1, chemicalPort:7,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col3_group2_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:23},
-					  {valveName:"NewPlantCol3Group3Valve", chipNo:1, chemicalPort:8,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col3_group3_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:24},
-					  {valveName:"NewPlantCol4Group1Valve", chipNo:1, chemicalPort:9,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col4_group1_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:25},
-					  {valveName:"NewPlantCol4Group2Valve", chipNo:1, chemicalPort:10,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col4_group2_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:26},
-					  {valveName:"NewPlantCol4Group3Valve", chipNo:1, chemicalPort:11,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col4_group3_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:27},
-					  {valveName:"NewPlantCol5Group1Valve", chipNo:1, chemicalPort:12,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col5_group1_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:28},
-					  {valveName:"NewPlantCol5Group2Valve", chipNo:1, chemicalPort:13,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col5_group2_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:29},
-					  {valveName:"NewPlantCol5Group3Valve", chipNo:1, chemicalPort:14,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col5_group3_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:30}];
+					  {valveName:"BackRight2Valve",         chipNo:0, chemicalPort:12,  chemicalDelay:200, windGpioPort:15, windDelay:120, valveCloseImage:"back_right2_chemical-image", valveOpenImage:"back_right2_chemical_running-image", executionOrder:13},
+					  {valveName:"BackRight3Valve",         chipNo:0, chemicalPort:11,  chemicalDelay:180, windGpioPort:15, windDelay:120, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
+					  {valveName:"BackRight4Valve",         chipNo:0, chemicalPort:13,  chemicalDelay:200, windGpioPort:15, windDelay:120, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15},					  
+					  {valveName:"NewPlantCol1Group1Valve", chipNo:0, chemicalPort:15,   chemicalDelay:60, windGpioPort:15, windDelay:160, valveCloseImage:"new_plant_col1_group1_chemical-image", valveOpenImage:"new_plant_col1_group1_chemical_running-image", executionOrder:16},
+					  {valveName:"NewPlantCol1Group2Valve", chipNo:1, chemicalPort:0,   chemicalDelay:45,  windGpioPort:15, windDelay:100, valveCloseImage:"new_plant_col1_group2_chemical-image", valveOpenImage:"new_plant_col1_group2_chemical_running-image", executionOrder:17},
+					  {valveName:"NewPlantCol1Group3Valve", chipNo:1, chemicalPort:1,   chemicalDelay:45,  windGpioPort:15, windDelay:100, valveCloseImage:"new_plant_col1_group3_chemical-image", valveOpenImage:"new_plant_col1_group3_chemical_running-image", executionOrder:18},
+					  {valveName:"NewPlantCol1Group4Valve", chipNo:1, chemicalPort:2,   chemicalDelay:45,  windGpioPort:15, windDelay:100, valveCloseImage:"new_plant_col1_group4_chemical-image", valveOpenImage:"new_plant_col1_group4_chemical_running-image", executionOrder:18},
+					  {valveName:"NewPlantCol2Group1Valve", chipNo:1, chemicalPort:3,   chemicalDelay:45,  windGpioPort:15, windDelay:100, valveCloseImage:"new_plant_col2_group1_chemical-image", valveOpenImage:"new_plant_col2_group1_chemical_running-image", executionOrder:18},
+					  {valveName:"NewPlantCol2Group2Valve", chipNo:1, chemicalPort:4,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col2_group2_chemical-image", valveOpenImage:"new_plant_col2_group2_chemical_running-image", executionOrder:19},
+					  {valveName:"NewPlantCol2Group3Valve", chipNo:1, chemicalPort:5,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col2_group3_chemical-image", valveOpenImage:"new_plant_col2_group3_chemical_running-image", executionOrder:20},
+					  {valveName:"NewPlantCol2Group4Valve", chipNo:1, chemicalPort:6,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col2_group4_chemical-image", valveOpenImage:"new_plant_col2_group4_chemical_running-image", executionOrder:21},
+					  {valveName:"NewPlantCol3Group1Valve", chipNo:1, chemicalPort:7,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col3_group1_chemical-image", valveOpenImage:"new_plant_col3_group1_chemical_running-image", executionOrder:22},
+					  {valveName:"NewPlantCol3Group2Valve", chipNo:1, chemicalPort:8,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col3_group2_chemical-image", valveOpenImage:"new_plant_col3_group2_chemical_running-image", executionOrder:23},
+					  {valveName:"NewPlantCol3Group3Valve", chipNo:1, chemicalPort:9,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col3_group3_chemical-image", valveOpenImage:"new_plant_col3_group3_chemical_running-image", executionOrder:24},
+					  {valveName:"NewPlantCol3Group4Valve", chipNo:1, chemicalPort:10,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col3_group4_chemical-image", valveOpenImage:"new_plant_col3_group4_chemical_running-image", executionOrder:24},
+					  {valveName:"NewPlantCol4Group1Valve", chipNo:1, chemicalPort:11,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col4_group1_chemical-image", valveOpenImage:"new_plant_col4_group1_chemical_running-image", executionOrder:25},
+					  {valveName:"NewPlantCol4Group2Valve", chipNo:1, chemicalPort:12,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col4_group2_chemical-image", valveOpenImage:"new_plant_col4_group2_chemical_running-image", executionOrder:26},
+					  {valveName:"NewPlantCol4Group3Valve", chipNo:1, chemicalPort:13,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col4_group3_chemical-image", valveOpenImage:"new_plant_col4_group3_chemical_running-image", executionOrder:27},
+					  {valveName:"NewPlantCol4Group4Valve", chipNo:1, chemicalPort:14,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col4_group4_chemical-image", valveOpenImage:"new_plant_col4_group4_chemical_running-image", executionOrder:27},
+					  {valveName:"NewPlantCol5Group1Valve", chipNo:1, chemicalPort:15,  chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col5_group1_chemical-image", valveOpenImage:"new_plant_col5_group1_chemical_running-image", executionOrder:28},
+					  {valveName:"NewPlantCol5Group2Valve", chipNo:3, chemicalPort:0,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col5_group2_chemical-image", valveOpenImage:"new_plant_col5_group2_chemical_running-image", executionOrder:29},
+					  {valveName:"NewPlantCol5Group3Valve", chipNo:3, chemicalPort:1,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col5_group3_chemical-image", valveOpenImage:"new_plant_col5_group3_chemical_running-image", executionOrder:29},
+					  {valveName:"NewPlantCol5Group4Valve", chipNo:3, chemicalPort:2,   chemicalDelay:60,  windGpioPort:15, windDelay:120, valveCloseImage:"new_plant_col5_group4_chemical-image", valveOpenImage:"new_plant_col5_group4_chemical_running-image", executionOrder:30}];
 								  
 								  
 		var chemicalTankArray = [{tankName:"Fungicides1",     chipNo:2, mcpMotorPort:0,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides1-const-input", orderBox:"fungicides1-order-input", inputBox:"fungicides1-input", testFlowRateButton:"button-constant-test-fungicides1"},
@@ -93,7 +97,7 @@
 					 {tankName:"Fertilizer4",     chipNo:2, mcpMotorPort:12, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer4-const-input", orderBox:"fertilizer4-order-input", inputBox:"fertilizer4-input", testFlowRateButton:"button-constant-test-fertilizer4"},
 					 {tankName:"Fertilizer5",     chipNo:2, mcpMotorPort:13, mcpVolumePort:15,  rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer5-const-input", orderBox:"fertilizer5-order-input", inputBox:"fertilizer5-input", testFlowRateButton:"button-constant-test-fertilizer5"},
 					 {tankName:"Surfactant",      chipNo:2, mcpMotorPort:3,  mcpVolumePort:15,  rateTime:10, orderNum:0, isNC:0, flowRateBox:"surfactant-const-input", orderBox:"surfactant-order-input", inputBox:"surfactant-input", testFlowRateButton:"button-constant-test-surfactant"},
-					 {tankName:"WaterCleanTube",  chipNo:3, mcpMotorPort:0,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:1, flowRateBox:"water-clean-tube-const-input", orderBox:"water-clean-tube-order-input", inputBox:"water-clean-tube-input", testFlowRateButton:"button-constant-test-water-clean-tube"}];
+					 {tankName:"WaterCleanTube",  chipNo:2, mcpMotorPort:15,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"water-clean-tube-const-input", orderBox:"water-clean-tube-order-input", inputBox:"water-clean-tube-input", testFlowRateButton:"button-constant-test-water-clean-tube"}];
 		
 		var chemicalFeederArray = [{tankName:"Fungicides5", chipNo:3, mcpMotorPort1:8, mcpMotorPort2:9, mcpMotorEnablePort:2, mcpShakePort:15, mcpShakeEnablePort:14, rateTime:95, orderNum:0, flowRateBox:"fungicides5-const-input", orderBox:"fungicides5-order-input", inputBox:"fungicides5-input", testFlowRateButton:"button-constant-test-fungicides5"},
 							       {tankName:"Insect6", chipNo:3, mcpMotorPort1:10, mcpMotorPort2:11, mcpMotorEnablePort:10,  mcpShakePort:15, mcpShakeEnablePort:14, rateTime:150, orderNum:0, flowRateBox:"insect6-const-input", orderBox:"insect6-order-input", inputBox:"insect6-input", testFlowRateButton:"button-constant-test-insect6"}];
@@ -292,18 +296,23 @@
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col1_group1_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col1-group1">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col1_group2_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col1-group2">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col1_group3_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col1-group3">
+	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col1_group4_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col1-group4">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col2_group1_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col2-group1">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col2_group2_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col2-group2">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col2_group3_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col2-group3">
+	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col2_group4_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col2-group4">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col3_group1_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col3-group1">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col3_group2_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col3-group2">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col3_group3_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col3-group3">
+	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col3_group4_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col3-group4">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col4_group1_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col4-group1">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col4_group2_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col4-group2">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col4_group3_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col4-group3">
+	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col4_group4_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col4-group4">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col5_group1_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col5-group1">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col5_group2_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col5-group2">
 	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col5_group3_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col5-group3">
+	  <img is="gwd-image" source="assets/chemical.jpg" id="new_plant_col5_group4_chemical-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col5-group4">
 	
 	  <img is="gwd-image" source="assets/chemical_running.gif" id="font_right_left_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-1268 gwd-img-dunx img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="font_left_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-1268 gwd-img-1y25 gwd-img-1uls img-hide">
@@ -323,18 +332,23 @@
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col1_group1_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col1-group1 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col1_group2_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col1-group2 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col1_group3_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col1-group3 img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col1_group4_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col1-group4 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col2_group1_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col2-group1 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col2_group2_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col2-group2 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col2_group3_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col2-group3 img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col2_group4_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col2-group4 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col3_group1_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col3-group1 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col3_group2_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col3-group2 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col3_group3_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col3-group3 img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col3_group4_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col3-group4 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col4_group1_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col4-group1 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col4_group2_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col4-group2 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col4_group3_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col4-group3 img-hide">
+          <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col4_group4_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col4-group4 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col5_group1_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col5-group1 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col5_group2_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col5-group2 img-hide">
           <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col5_group3_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col5-group3 img-hide">
+	  <img is="gwd-image" source="assets/chemical_running.gif" id="new_plant_col5_group4_chemical_running-image" class="gwd-img-chemical-valve-base gwd-img-new-plant-col5-group4 img-hide">
         
 		</div>
       </div>
@@ -1633,64 +1647,90 @@
 		ToggeChemicalValveState(chemicalValveArray[17].valveName);
     };
     
-    gwd.NewPlantCol2Group1ChemicalImageClick = function(event) 
+    gwd.NewPlantCol1Group4ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[18].valveName);
     };
     
-    gwd.NewPlantCol2Group2ChemicalImageClick = function(event) 
+    gwd.NewPlantCol2Group1ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[19].valveName);
     };
     
-    gwd.NewPlantCol2Group3ChemicalImageClick = function(event) 
+    gwd.NewPlantCol2Group2ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[20].valveName);
     };
     
-    gwd.NewPlantCol3Group1ChemicalImageClick = function(event) 
+    gwd.NewPlantCol2Group3ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[21].valveName);
     };
     
-    gwd.NewPlantCol3Group2ChemicalImageClick = function(event) 
+    gwd.NewPlantCol2Group4ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[22].valveName);
     };
     
-    gwd.NewPlantCol3Group3ChemicalImageClick = function(event) 
+    
+    gwd.NewPlantCol3Group1ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[23].valveName);
     };
-	
-    gwd.NewPlantCol4Group1ChemicalImageClick = function(event) 
+    
+    gwd.NewPlantCol3Group2ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[24].valveName);
     };
     
-    gwd.NewPlantCol4Group2ChemicalImageClick = function(event) 
+    gwd.NewPlantCol3Group3ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[25].valveName);
     };
     
-    gwd.NewPlantCol4Group3ChemicalImageClick = function(event) 
+    gwd.NewPlantCol3Group4ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[26].valveName);
     };
     
-    gwd.NewPlantCol5Group1ChemicalImageClick = function(event) 
+    gwd.NewPlantCol4Group1ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[27].valveName);
     };
     
-    gwd.NewPlantCol5Group2ChemicalImageClick = function(event) 
+    gwd.NewPlantCol4Group2ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[28].valveName);
     };
     
-    gwd.NewPlantCol5Group3ChemicalImageClick = function(event) 
+    gwd.NewPlantCol4Group3ChemicalImageClick = function(event) 
     {
 		ToggeChemicalValveState(chemicalValveArray[29].valveName);
+    };
+    
+    gwd.NewPlantCol4Group4ChemicalImageClick = function(event) 
+    {
+		ToggeChemicalValveState(chemicalValveArray[30].valveName);
+    };
+    
+    gwd.NewPlantCol5Group1ChemicalImageClick = function(event) 
+    {
+		ToggeChemicalValveState(chemicalValveArray[31].valveName);
+    };
+    
+    gwd.NewPlantCol5Group2ChemicalImageClick = function(event) 
+    {
+		ToggeChemicalValveState(chemicalValveArray[32].valveName);
+    };
+    
+    gwd.NewPlantCol5Group3ChemicalImageClick = function(event) 
+    {
+		ToggeChemicalValveState(chemicalValveArray[33].valveName);
+    };
+    
+    gwd.NewPlantCol5Group4ChemicalImageClick = function(event) 
+    {
+		ToggeChemicalValveState(chemicalValveArray[34].valveName);
     };
     
   </script>
@@ -1789,18 +1829,23 @@
       gwd.actions.events.addHandler(chemicalValveArray[15].valveCloseImage, 'click', gwd.NewPlantCol1Group1ChemicalImageClick, false);
       gwd.actions.events.addHandler(chemicalValveArray[16].valveCloseImage, 'click', gwd.NewPlantCol1Group2ChemicalImageClick, false);
       gwd.actions.events.addHandler(chemicalValveArray[17].valveCloseImage, 'click', gwd.NewPlantCol1Group3ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[18].valveCloseImage, 'click', gwd.NewPlantCol2Group1ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[19].valveCloseImage, 'click', gwd.NewPlantCol2Group2ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[20].valveCloseImage, 'click', gwd.NewPlantCol2Group3ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[21].valveCloseImage, 'click', gwd.NewPlantCol3Group1ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[22].valveCloseImage, 'click', gwd.NewPlantCol3Group2ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[23].valveCloseImage, 'click', gwd.NewPlantCol3Group3ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[24].valveCloseImage, 'click', gwd.NewPlantCol4Group1ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[25].valveCloseImage, 'click', gwd.NewPlantCol4Group2ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[26].valveCloseImage, 'click', gwd.NewPlantCol4Group3ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[27].valveCloseImage, 'click', gwd.NewPlantCol5Group1ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[28].valveCloseImage, 'click', gwd.NewPlantCol5Group2ChemicalImageClick, false);
-      gwd.actions.events.addHandler(chemicalValveArray[29].valveCloseImage, 'click', gwd.NewPlantCol5Group3ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[18].valveCloseImage, 'click', gwd.NewPlantCol1Group4ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[19].valveCloseImage, 'click', gwd.NewPlantCol2Group1ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[20].valveCloseImage, 'click', gwd.NewPlantCol2Group2ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[21].valveCloseImage, 'click', gwd.NewPlantCol2Group3ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[22].valveCloseImage, 'click', gwd.NewPlantCol2Group4ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[23].valveCloseImage, 'click', gwd.NewPlantCol3Group1ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[24].valveCloseImage, 'click', gwd.NewPlantCol3Group2ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[25].valveCloseImage, 'click', gwd.NewPlantCol3Group3ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[26].valveCloseImage, 'click', gwd.NewPlantCol3Group4ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[27].valveCloseImage, 'click', gwd.NewPlantCol4Group1ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[28].valveCloseImage, 'click', gwd.NewPlantCol4Group2ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[29].valveCloseImage, 'click', gwd.NewPlantCol4Group3ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[30].valveCloseImage, 'click', gwd.NewPlantCol4Group4ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[31].valveCloseImage, 'click', gwd.NewPlantCol5Group1ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[32].valveCloseImage, 'click', gwd.NewPlantCol5Group2ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[33].valveCloseImage, 'click', gwd.NewPlantCol5Group3ChemicalImageClick, false);
+      gwd.actions.events.addHandler(chemicalValveArray[34].valveCloseImage, 'click', gwd.NewPlantCol5Group4ChemicalImageClick, false);
       
 	  
     };
@@ -1891,21 +1936,27 @@
       gwd.actions.events.removeHandler(chemicalValveArray[13].valveCloseImage, 'click', gwd.BackRight3ChemicalImageClick, false);
       gwd.actions.events.removeHandler(chemicalValveArray[14].valveCloseImage, 'click', gwd.BackRight4ChemicalImageClick, false);
 	  
+      
       gwd.actions.events.removeHandler(chemicalValveArray[15].valveCloseImage, 'click', gwd.NewPlantCol1Group1ChemicalImageClick, false);
       gwd.actions.events.removeHandler(chemicalValveArray[16].valveCloseImage, 'click', gwd.NewPlantCol1Group2ChemicalImageClick, false);
       gwd.actions.events.removeHandler(chemicalValveArray[17].valveCloseImage, 'click', gwd.NewPlantCol1Group3ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[18].valveCloseImage, 'click', gwd.NewPlantCol2Group1ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[19].valveCloseImage, 'click', gwd.NewPlantCol2Group2ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[20].valveCloseImage, 'click', gwd.NewPlantCol2Group3ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[21].valveCloseImage, 'click', gwd.NewPlantCol3Group1ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[22].valveCloseImage, 'click', gwd.NewPlantCol3Group2ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[23].valveCloseImage, 'click', gwd.NewPlantCol3Group3ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[24].valveCloseImage, 'click', gwd.NewPlantCol4Group1ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[25].valveCloseImage, 'click', gwd.NewPlantCol4Group2ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[26].valveCloseImage, 'click', gwd.NewPlantCol4Group3ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[27].valveCloseImage, 'click', gwd.NewPlantCol5Group1ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[28].valveCloseImage, 'click', gwd.NewPlantCol5Group2ChemicalImageClick, false);
-      gwd.actions.events.removeHandler(chemicalValveArray[29].valveCloseImage, 'click', gwd.NewPlantCol5Group3ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[18].valveCloseImage, 'click', gwd.NewPlantCol1Group4ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[19].valveCloseImage, 'click', gwd.NewPlantCol2Group1ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[20].valveCloseImage, 'click', gwd.NewPlantCol2Group2ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[21].valveCloseImage, 'click', gwd.NewPlantCol2Group3ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[22].valveCloseImage, 'click', gwd.NewPlantCol2Group4ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[23].valveCloseImage, 'click', gwd.NewPlantCol3Group1ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[24].valveCloseImage, 'click', gwd.NewPlantCol3Group2ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[25].valveCloseImage, 'click', gwd.NewPlantCol3Group3ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[26].valveCloseImage, 'click', gwd.NewPlantCol3Group4ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[27].valveCloseImage, 'click', gwd.NewPlantCol4Group1ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[28].valveCloseImage, 'click', gwd.NewPlantCol4Group2ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[29].valveCloseImage, 'click', gwd.NewPlantCol4Group3ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[30].valveCloseImage, 'click', gwd.NewPlantCol4Group4ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[31].valveCloseImage, 'click', gwd.NewPlantCol5Group1ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[32].valveCloseImage, 'click', gwd.NewPlantCol5Group2ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[33].valveCloseImage, 'click', gwd.NewPlantCol5Group3ChemicalImageClick, false);
+      gwd.actions.events.removeHandler(chemicalValveArray[34].valveCloseImage, 'click', gwd.NewPlantCol5Group4ChemicalImageClick, false);
 	  
     };
     document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
