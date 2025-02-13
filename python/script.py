@@ -533,6 +533,8 @@ def MixingTankProcessing():
         l_tankObj.FillChemical()
         if g_mixingTank.IsMixingTankError():
             return False
+        if l_tankObj.IsVolumeSet():
+            CleanChemicalTube()
 
     EngineImp.getInstance().CloseMixPump()
     #start motor for 10 min
@@ -580,7 +582,7 @@ def CleanChemicalTube():
     l_sortedTank= sorted(g_chemicalTankDict.values(), key=operator.attrgetter('m_orderNum'))              
     for l_tankObj in l_sortedTank:
         if l_tankObj.IsWaterCleanTube():
-            l_tankObj.CleanChemicalTube()
+            l_tankObj.FillChemical()
             break
     
 @webiopi.macro
