@@ -95,10 +95,10 @@ def AddChemicalFeeder(a_name, a_chipNo, a_mcpMotorPort1, a_mcpMotorPort2, a_mcpM
 		
 #Add chemical valve
 @webiopi.macro
-def AddChemicalValve(a_name, a_chipNo, a_chemicalPort, a_chemicalDelay, a_windGpioPort, a_windDelay, a_executionOrder):
+def AddChemicalValve(a_name, a_chipNo, a_chemicalPort, a_chemicalDelay, a_windGpioPort, a_flushGpioPort, a_windDelay, a_executionOrder):
     global g_chemicalValveDict
     if(a_name not in g_chemicalValveDict):
-        g_chemicalValveDict[a_name] = ChemicalValveImp(int(a_chipNo), int(a_chemicalPort), int(a_chemicalDelay), int(a_windGpioPort), int(a_windDelay), int(a_executionOrder))
+        g_chemicalValveDict[a_name] = ChemicalValveImp(int(a_chipNo), int(a_chemicalPort), int(a_chemicalDelay), int(a_windGpioPort), int(a_flushGpioPort), int(a_windDelay), int(a_executionOrder))
 
 #Add sensor macro
 @webiopi.macro
@@ -199,6 +199,7 @@ def DoExecutionAuto(a_delayTime, a_startOrder):
             l_previousOrderIndex = l_orderIndex - 1
             for l_valveName, l_valveObj in g_valveDict.items():
                 if(l_valveObj.executionOrder == l_previousOrderIndex):
+                    #To prevent big plasure when close valve. Add delay for close water vave
                     webiopi.sleep(30)
                     l_valveObj.CloseValve()
                     webiopi.sleep(0.5)
@@ -280,10 +281,10 @@ def DoChemicalAuto():
             webiopi.debug('Pump Chemical into the pipe')
             webiopi.sleep(2)
             l_valve.OpenValve()
-            webiopi.sleep(7)
-            EngineImp.getInstance().OpenMixPump()
-            webiopi.sleep(2)
+            webiopi.sleep(1)
             EngineImp.getInstance().OpenChemicalPump()
+            webiopi.sleep(2)
+            EngineImp.getInstance().OpenMixPump()
             webiopi.sleep(l_valve.GetChemicalDelayTime())
             EngineImp.getInstance().CloseChemicalPump()
             webiopi.sleep(2)
@@ -296,7 +297,8 @@ def DoChemicalAuto():
             webiopi.sleep((int)(l_valve.GetWindDelayTime()))
             
             l_valve.CloseValve()
-            webiopi.sleep(3)
+            #No need to wait to close motor valve
+            webiopi.sleep(1)
             l_valve.CloseWindValve()
             webiopi.sleep(l_valve.GetSleepTime())
 
@@ -553,6 +555,8 @@ def FlushRemainChemicalInPipe():
         g_chemicalState = g_chemicalStateList['Pumping']
         if l_valve.IsValveClose() == True:
             #Try to blow wind to the pipe to clear solution
+            l_valve.OpenFlushValve()
+            webiopi.sleep(1)
             l_valve.OpenValve()
             webiopi.debug('Blow wind into the pipe')
             webiopi.sleep(2)
@@ -571,6 +575,8 @@ def FlushRemainChemicalInPipe():
             g_mixingTank.CompressWind(l_valve.GetWindDelayTime()//2)
             webiopi.sleep(2)
             l_valve.CloseValve()
+            webiopi.sleep(1)
+            l_valve.CloseFlushValve()
             
             while g_chemicalPauseEvent.is_set():
                 ClearChemicalEngine()

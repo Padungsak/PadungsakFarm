@@ -6,19 +6,22 @@ class ChemicalValveImp:
     s_sleepModeDelay = 30
     s_valveStateList = {'Open':1,'Normal':0,'Disable':-1}
     
-    def __init__(self, a_chipNo, a_chemicalPortNum, a_chemicalDelay, a_windGpioPortNum, a_windDelay, a_executionOrder):
+    def __init__(self, a_chipNo, a_chemicalPortNum, a_chemicalDelay, a_windGpioPortNum, a_flushGpioPortNum, a_windDelay, a_executionOrder):
         self.m_mcp = webiopi.deviceInstance("mcp%d" % a_chipNo)
         self.m_chemicalPortNum = a_chemicalPortNum
         self.m_chemicalDelay = a_chemicalDelay
         self.m_windGpioPortNum = a_windGpioPortNum
+        self.m_flushGpioPortNum = a_flushGpioPortNum
         self.m_windDelay = a_windDelay
         self.executionOrder = a_executionOrder
         self.m_valveState = ChemicalValveImp.s_valveStateList['Disable']
         
         self.m_mcp.setFunction(self.m_chemicalPortNum, GPIO.OUT)
         GPIO.setFunction(self.m_windGpioPortNum, GPIO.OUT)
+        GPIO.setFunction(self.m_flushGpioPortNum, GPIO.OUT)
         self.m_mcp.digitalWrite(self.m_chemicalPortNum, GPIO.HIGH)
         GPIO.digitalWrite(self.m_windGpioPortNum, GPIO.HIGH)
+        GPIO.digitalWrite(self.m_flushGpioPortNum, GPIO.HIGH)
         
 		
     def IsValveOpen(self):
@@ -35,6 +38,8 @@ class ChemicalValveImp:
             self.m_mcp.digitalWrite(self.m_chemicalPortNum, GPIO.LOW)
             self.m_valveState = ChemicalValveImp.s_valveStateList['Open']
             webiopi.debug('Open valve port %d' % self.m_chemicalPortNum)
+            #Wait for fully open motor valve
+            webiopi.sleep(15)
 	
     def CloseValve(self):
         if self.m_valveState != ChemicalValveImp.s_valveStateList['Disable']:
@@ -46,12 +51,23 @@ class ChemicalValveImp:
     def OpenWindValve(self):
         GPIO.digitalWrite(self.m_windGpioPortNum, GPIO.LOW)
         webiopi.debug('Open wind valve port %d' % self.m_windGpioPortNum)
+        #Wait for fully open motor valve
+        webiopi.sleep(15)
     
     def CloseWindValve(self):
         GPIO.digitalWrite(self.m_windGpioPortNum, GPIO.HIGH)
         webiopi.debug('Close wind valve port %d' % self.m_windGpioPortNum)
-            
+    
+    def OpenFlushValve(self):
+        GPIO.digitalWrite(self.m_flushGpioPortNum, GPIO.LOW)
+        webiopi.debug('Open flush valve port %d' % self.m_flushGpioPortNum)
+        #Wait for fully open motor valve
+        webiopi.sleep(15)
 
+    def CloseFlushValve(self):
+        GPIO.digitalWrite(self.m_flushGpioPortNum, GPIO.HIGH)
+        webiopi.debug('Close flush valve port %d' % self.m_flushGpioPortNum)
+        
     def GetWindDelayTime(self):
         return self.m_windDelay
 
