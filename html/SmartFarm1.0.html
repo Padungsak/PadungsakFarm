@@ -28,18 +28,18 @@
 		
 		var coconutWaterButton = {buttonName:"CoconutWaterButton",  waterDelay:1800, onImage:"coconut_on_button-image", offImage:"coconut_off_button-image", autoImage:"coconut_auto_button-image"};
 								
-		var valveArray = [{valveName:"FontRightValve",   chipNo:4, valvePort:6,  valveImage:"font_right_valve-image", waterImage:"font_right_water-image", executionOrder:1},
-				  {valveName:"FontLeftValve",    chipNo:4, valvePort:7,  valveImage:"font_left_valve-image", waterImage:"font_left_water-image", executionOrder:1},
-				  {valveName:"MiddleRightValve", chipNo:4, valvePort:5,  valveImage:"middle_right_valve-image", waterImage:"middle_right_water-image", executionOrder:2},
-				  {valveName:"MiddleLeftValve",  chipNo:4, valvePort:8,  valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:2},
-				  {valveName:"BackRightValve",   chipNo:4, valvePort:10,  valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:4},
-				  {valveName:"BackLeftValve",    chipNo:4, valvePort:11,  valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:3},
-				  {valveName:"BackMiddle1Valve", chipNo:4, valvePort:9,  valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:4},
-				  {valveName:"NewPlantValve1",   chipNo:4, valvePort:0,  valveImage:"new_zone_valve1-image", waterImage:"new_zone_water1-image", executionOrder:5},
-				  {valveName:"NewPlantValve2",   chipNo:4, valvePort:1,  valveImage:"new_zone_valve2-image", waterImage:"new_zone_water2-image", executionOrder:6},
-				  {valveName:"NewPlantValve3",   chipNo:4, valvePort:2,  valveImage:"new_zone_valve3-image", waterImage:"new_zone_water3-image", executionOrder:7},
-				  {valveName:"NewPlantValve4",   chipNo:4, valvePort:3, valveImage:"new_zone_valve4-image", waterImage:"new_zone_water4-image", executionOrder:8},
-				  {valveName:"NewPlantValve5",   chipNo:4, valvePort:4, valveImage:"new_zone_valve5-image", waterImage:"new_zone_water5-image", executionOrder:9}];
+		var valveArray = [{valveName:"FontRightValve",   chipNo:0, valvePort:6,  valveImage:"font_right_valve-image", waterImage:"font_right_water-image", executionOrder:1},
+				  {valveName:"FontLeftValve",    chipNo:0, valvePort:7,  valveImage:"font_left_valve-image", waterImage:"font_left_water-image", executionOrder:1},
+				  {valveName:"MiddleRightValve", chipNo:0, valvePort:5,  valveImage:"middle_right_valve-image", waterImage:"middle_right_water-image", executionOrder:2},
+				  {valveName:"MiddleLeftValve",  chipNo:0, valvePort:8,  valveImage:"middle_left_valve-image", waterImage:"middle_left_water-image", executionOrder:2},
+				  {valveName:"BackRightValve",   chipNo:0, valvePort:10,  valveImage:"back_right_valve-image", waterImage:"back_right_water-image", executionOrder:4},
+				  {valveName:"BackLeftValve",    chipNo:0, valvePort:11,  valveImage:"back_left_valve-image", waterImage:"back_left_water-image", executionOrder:3},
+				  {valveName:"BackMiddle1Valve", chipNo:0, valvePort:9,  valveImage:"back_middle1_valve-image", waterImage:"back_middle1_water-image", executionOrder:4},
+				  {valveName:"NewPlantValve1",   chipNo:0, valvePort:0,  valveImage:"new_zone_valve1-image", waterImage:"new_zone_water1-image", executionOrder:5},
+				  {valveName:"NewPlantValve2",   chipNo:0, valvePort:1,  valveImage:"new_zone_valve2-image", waterImage:"new_zone_water2-image", executionOrder:6},
+				  {valveName:"NewPlantValve3",   chipNo:0, valvePort:2,  valveImage:"new_zone_valve3-image", waterImage:"new_zone_water3-image", executionOrder:7},
+				  {valveName:"NewPlantValve4",   chipNo:0, valvePort:3, valveImage:"new_zone_valve4-image", waterImage:"new_zone_water4-image", executionOrder:8},
+				  {valveName:"NewPlantValve5",   chipNo:0, valvePort:4, valveImage:"new_zone_valve5-image", waterImage:"new_zone_water5-image", executionOrder:9}];
 						  
 		var sensorArray = [{sensorName:"FontRightSensor", analogPort:0}];
 		
@@ -61,47 +61,47 @@
 					  {valveName:"BackRight3Valve",         chipNo:0, chemicalPort:11,  chemicalDelay:200, windGpioPort:15, flushGpioPort:18, windDelay:120, valveCloseImage:"back_right3_chemical-image", valveOpenImage:"back_right3_chemical_running-image", executionOrder:14},
 					  {valveName:"BackRight4Valve",         chipNo:0, chemicalPort:13,  chemicalDelay:200, windGpioPort:15, flushGpioPort:18, windDelay:120, valveCloseImage:"back_right4_chemical-image", valveOpenImage:"back_right4_chemical_running-image", executionOrder:15},					  
 					  {valveName:"NewPlantCol1Group1Valve", chipNo:0, chemicalPort:15,  chemicalDelay:50,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col1_group1_chemical-image", valveOpenImage:"new_plant_col1_group1_chemical_running-image", executionOrder:16},
-					  {valveName:"NewPlantCol1Group2Valve", chipNo:1, chemicalPort:0,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col1_group2_chemical-image", valveOpenImage:"new_plant_col1_group2_chemical_running-image", executionOrder:17},
-					  {valveName:"NewPlantCol1Group3Valve", chipNo:1, chemicalPort:1,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col1_group3_chemical-image", valveOpenImage:"new_plant_col1_group3_chemical_running-image", executionOrder:18},
-					  {valveName:"NewPlantCol1Group4Valve", chipNo:1, chemicalPort:2,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col1_group4_chemical-image", valveOpenImage:"new_plant_col1_group4_chemical_running-image", executionOrder:19},
-					  {valveName:"NewPlantCol2Group1Valve", chipNo:1, chemicalPort:3,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col2_group1_chemical-image", valveOpenImage:"new_plant_col2_group1_chemical_running-image", executionOrder:20},
-					  {valveName:"NewPlantCol2Group2Valve", chipNo:1, chemicalPort:4,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col2_group2_chemical-image", valveOpenImage:"new_plant_col2_group2_chemical_running-image", executionOrder:21},
-					  {valveName:"NewPlantCol2Group3Valve", chipNo:1, chemicalPort:5,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col2_group3_chemical-image", valveOpenImage:"new_plant_col2_group3_chemical_running-image", executionOrder:22},
-					  {valveName:"NewPlantCol2Group4Valve", chipNo:1, chemicalPort:6,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col2_group4_chemical-image", valveOpenImage:"new_plant_col2_group4_chemical_running-image", executionOrder:23},
-					  {valveName:"NewPlantCol3Group1Valve", chipNo:1, chemicalPort:7,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col3_group1_chemical-image", valveOpenImage:"new_plant_col3_group1_chemical_running-image", executionOrder:24},
-					  {valveName:"NewPlantCol3Group2Valve", chipNo:1, chemicalPort:8,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col3_group2_chemical-image", valveOpenImage:"new_plant_col3_group2_chemical_running-image", executionOrder:25},
-					  {valveName:"NewPlantCol3Group3Valve", chipNo:1, chemicalPort:9,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col3_group3_chemical-image", valveOpenImage:"new_plant_col3_group3_chemical_running-image", executionOrder:26},
-					  {valveName:"NewPlantCol3Group4Valve", chipNo:1, chemicalPort:10,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col3_group4_chemical-image", valveOpenImage:"new_plant_col3_group4_chemical_running-image", executionOrder:27},
-					  {valveName:"NewPlantCol4Group1Valve", chipNo:1, chemicalPort:11,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col4_group1_chemical-image", valveOpenImage:"new_plant_col4_group1_chemical_running-image", executionOrder:28},
-					  {valveName:"NewPlantCol4Group2Valve", chipNo:1, chemicalPort:12,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col4_group2_chemical-image", valveOpenImage:"new_plant_col4_group2_chemical_running-image", executionOrder:29},
-					  {valveName:"NewPlantCol4Group3Valve", chipNo:1, chemicalPort:13,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col4_group3_chemical-image", valveOpenImage:"new_plant_col4_group3_chemical_running-image", executionOrder:30},
-					  {valveName:"NewPlantCol4Group4Valve", chipNo:1, chemicalPort:14,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col4_group4_chemical-image", valveOpenImage:"new_plant_col4_group4_chemical_running-image", executionOrder:31},
-					  {valveName:"NewPlantCol5Group1Valve", chipNo:1, chemicalPort:15,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col5_group1_chemical-image", valveOpenImage:"new_plant_col5_group1_chemical_running-image", executionOrder:32},
-					  {valveName:"NewPlantCol5Group2Valve", chipNo:3, chemicalPort:0,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col5_group2_chemical-image", valveOpenImage:"new_plant_col5_group2_chemical_running-image", executionOrder:33},
-					  {valveName:"NewPlantCol5Group3Valve", chipNo:3, chemicalPort:1,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col5_group3_chemical-image", valveOpenImage:"new_plant_col5_group3_chemical_running-image", executionOrder:34},
+					  {valveName:"NewPlantCol1Group2Valve", chipNo:0, chemicalPort:0,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col1_group2_chemical-image", valveOpenImage:"new_plant_col1_group2_chemical_running-image", executionOrder:17},
+					  {valveName:"NewPlantCol1Group3Valve", chipNo:0, chemicalPort:1,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col1_group3_chemical-image", valveOpenImage:"new_plant_col1_group3_chemical_running-image", executionOrder:18},
+					  {valveName:"NewPlantCol1Group4Valve", chipNo:0, chemicalPort:2,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col1_group4_chemical-image", valveOpenImage:"new_plant_col1_group4_chemical_running-image", executionOrder:19},
+					  {valveName:"NewPlantCol2Group1Valve", chipNo:0, chemicalPort:3,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col2_group1_chemical-image", valveOpenImage:"new_plant_col2_group1_chemical_running-image", executionOrder:20},
+					  {valveName:"NewPlantCol2Group2Valve", chipNo:0, chemicalPort:4,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col2_group2_chemical-image", valveOpenImage:"new_plant_col2_group2_chemical_running-image", executionOrder:21},
+					  {valveName:"NewPlantCol2Group3Valve", chipNo:0, chemicalPort:5,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col2_group3_chemical-image", valveOpenImage:"new_plant_col2_group3_chemical_running-image", executionOrder:22},
+					  {valveName:"NewPlantCol2Group4Valve", chipNo:0, chemicalPort:6,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col2_group4_chemical-image", valveOpenImage:"new_plant_col2_group4_chemical_running-image", executionOrder:23},
+					  {valveName:"NewPlantCol3Group1Valve", chipNo:0, chemicalPort:7,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col3_group1_chemical-image", valveOpenImage:"new_plant_col3_group1_chemical_running-image", executionOrder:24},
+					  {valveName:"NewPlantCol3Group2Valve", chipNo:0, chemicalPort:8,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col3_group2_chemical-image", valveOpenImage:"new_plant_col3_group2_chemical_running-image", executionOrder:25},
+					  {valveName:"NewPlantCol3Group3Valve", chipNo:0, chemicalPort:9,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col3_group3_chemical-image", valveOpenImage:"new_plant_col3_group3_chemical_running-image", executionOrder:26},
+					  {valveName:"NewPlantCol3Group4Valve", chipNo:0, chemicalPort:10,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col3_group4_chemical-image", valveOpenImage:"new_plant_col3_group4_chemical_running-image", executionOrder:27},
+					  {valveName:"NewPlantCol4Group1Valve", chipNo:0, chemicalPort:11,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col4_group1_chemical-image", valveOpenImage:"new_plant_col4_group1_chemical_running-image", executionOrder:28},
+					  {valveName:"NewPlantCol4Group2Valve", chipNo:0, chemicalPort:12,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col4_group2_chemical-image", valveOpenImage:"new_plant_col4_group2_chemical_running-image", executionOrder:29},
+					  {valveName:"NewPlantCol4Group3Valve", chipNo:0, chemicalPort:13,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col4_group3_chemical-image", valveOpenImage:"new_plant_col4_group3_chemical_running-image", executionOrder:30},
+					  {valveName:"NewPlantCol4Group4Valve", chipNo:0, chemicalPort:14,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col4_group4_chemical-image", valveOpenImage:"new_plant_col4_group4_chemical_running-image", executionOrder:31},
+					  {valveName:"NewPlantCol5Group1Valve", chipNo:0, chemicalPort:15,  chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col5_group1_chemical-image", valveOpenImage:"new_plant_col5_group1_chemical_running-image", executionOrder:32},
+					  {valveName:"NewPlantCol5Group2Valve", chipNo:0, chemicalPort:0,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col5_group2_chemical-image", valveOpenImage:"new_plant_col5_group2_chemical_running-image", executionOrder:33},
+					  {valveName:"NewPlantCol5Group3Valve", chipNo:0, chemicalPort:1,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col5_group3_chemical-image", valveOpenImage:"new_plant_col5_group3_chemical_running-image", executionOrder:34},
 					  //Chip3 Port2 is broken. So I skip to port3 and waiting for fixing
-					  {valveName:"NewPlantCol5Group4Valve", chipNo:3, chemicalPort:3,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col5_group4_chemical-image", valveOpenImage:"new_plant_col5_group4_chemical_running-image", executionOrder:35}];
+					  {valveName:"NewPlantCol5Group4Valve", chipNo:0, chemicalPort:3,   chemicalDelay:45,  windGpioPort:15, flushGpioPort:18, windDelay:80, valveCloseImage:"new_plant_col5_group4_chemical-image", valveOpenImage:"new_plant_col5_group4_chemical_running-image", executionOrder:35}];
 							    
 								  
-		var chemicalTankArray = [{tankName:"Fungicides1",     chipNo:2, mcpMotorPort:0,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides1-const-input", orderBox:"fungicides1-order-input", inputBox:"fungicides1-input", testFlowRateButton:"button-constant-test-fungicides1"},
-				         {tankName:"Fungicides2",     chipNo:2, mcpMotorPort:1,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides2-const-input", orderBox:"fungicides2-order-input", inputBox:"fungicides2-input", testFlowRateButton:"button-constant-test-fungicides2"},
-					 {tankName:"Fungicides3",     chipNo:2, mcpMotorPort:2,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides3-const-input", orderBox:"fungicides3-order-input", inputBox:"fungicides3-input", testFlowRateButton:"button-constant-test-fungicides3"},
-					 {tankName:"Fungicides4",     chipNo:2, mcpMotorPort:14, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides4-const-input", orderBox:"fungicides4-order-input", inputBox:"fungicides4-input", testFlowRateButton:"button-constant-test-fungicides4"},
-					 {tankName:"Insect1",         chipNo:2, mcpMotorPort:4,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect1-const-input", orderBox:"insect1-order-input", inputBox:"insect1-input", testFlowRateButton:"button-constant-test-insect1"},
-				         {tankName:"Insect2",         chipNo:2, mcpMotorPort:5,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect2-const-input", orderBox:"insect2-order-input", inputBox:"insect2-input", testFlowRateButton:"button-constant-test-insect2"},
-				         {tankName:"Insect3",         chipNo:2, mcpMotorPort:6,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect3-const-input", orderBox:"insect3-order-input", inputBox:"insect3-input", testFlowRateButton:"button-constant-test-insect3"},
-				         {tankName:"Insect4",         chipNo:2, mcpMotorPort:7,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect4-const-input", orderBox:"insect4-order-input", inputBox:"insect4-input", testFlowRateButton:"button-constant-test-insect4"},
-				         {tankName:"Insect5",         chipNo:2, mcpMotorPort:8,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect5-const-input", orderBox:"insect5-order-input", inputBox:"insect5-input", testFlowRateButton:"button-constant-test-insect5"},
-					 {tankName:"Fertilizer1",     chipNo:2, mcpMotorPort:9,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer1-const-input", orderBox:"fertilizer1-order-input", inputBox:"fertilizer1-input", testFlowRateButton:"button-constant-test-fertilizer1"},
-					 {tankName:"Fertilizer2",     chipNo:2, mcpMotorPort:10, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer2-const-input", orderBox:"fertilizer2-order-input", inputBox:"fertilizer2-input", testFlowRateButton:"button-constant-test-fertilizer2"},
-					 {tankName:"Fertilizer3",     chipNo:2, mcpMotorPort:11, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer3-const-input", orderBox:"fertilizer3-order-input", inputBox:"fertilizer3-input", testFlowRateButton:"button-constant-test-fertilizer3"},
-					 {tankName:"Fertilizer4",     chipNo:2, mcpMotorPort:12, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer4-const-input", orderBox:"fertilizer4-order-input", inputBox:"fertilizer4-input", testFlowRateButton:"button-constant-test-fertilizer4"},
-					 {tankName:"Fertilizer5",     chipNo:2, mcpMotorPort:13, mcpVolumePort:15,  rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer5-const-input", orderBox:"fertilizer5-order-input", inputBox:"fertilizer5-input", testFlowRateButton:"button-constant-test-fertilizer5"},
-					 {tankName:"Surfactant",      chipNo:2, mcpMotorPort:3,  mcpVolumePort:15,  rateTime:10, orderNum:0, isNC:0, flowRateBox:"surfactant-const-input", orderBox:"surfactant-order-input", inputBox:"surfactant-input", testFlowRateButton:"button-constant-test-surfactant"},
-					 {tankName:"WaterCleanTube",  chipNo:2, mcpMotorPort:15,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"water-clean-tube-const-input", orderBox:"water-clean-tube-order-input", inputBox:"water-clean-tube-input", testFlowRateButton:"button-constant-test-water-clean-tube"}];
+		var chemicalTankArray = [{tankName:"Fungicides1",     chipNo:0, mcpMotorPort:0,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides1-const-input", orderBox:"fungicides1-order-input", inputBox:"fungicides1-input", testFlowRateButton:"button-constant-test-fungicides1"},
+				         {tankName:"Fungicides2",     chipNo:0, mcpMotorPort:1,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides2-const-input", orderBox:"fungicides2-order-input", inputBox:"fungicides2-input", testFlowRateButton:"button-constant-test-fungicides2"},
+					 {tankName:"Fungicides3",     chipNo:0, mcpMotorPort:2,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides3-const-input", orderBox:"fungicides3-order-input", inputBox:"fungicides3-input", testFlowRateButton:"button-constant-test-fungicides3"},
+					 {tankName:"Fungicides4",     chipNo:0, mcpMotorPort:14, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fungicides4-const-input", orderBox:"fungicides4-order-input", inputBox:"fungicides4-input", testFlowRateButton:"button-constant-test-fungicides4"},
+					 {tankName:"Insect1",         chipNo:0, mcpMotorPort:4,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect1-const-input", orderBox:"insect1-order-input", inputBox:"insect1-input", testFlowRateButton:"button-constant-test-insect1"},
+				         {tankName:"Insect2",         chipNo:0, mcpMotorPort:5,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect2-const-input", orderBox:"insect2-order-input", inputBox:"insect2-input", testFlowRateButton:"button-constant-test-insect2"},
+				         {tankName:"Insect3",         chipNo:0, mcpMotorPort:6,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect3-const-input", orderBox:"insect3-order-input", inputBox:"insect3-input", testFlowRateButton:"button-constant-test-insect3"},
+				         {tankName:"Insect4",         chipNo:0, mcpMotorPort:7,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect4-const-input", orderBox:"insect4-order-input", inputBox:"insect4-input", testFlowRateButton:"button-constant-test-insect4"},
+				         {tankName:"Insect5",         chipNo:0, mcpMotorPort:8,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"insect5-const-input", orderBox:"insect5-order-input", inputBox:"insect5-input", testFlowRateButton:"button-constant-test-insect5"},
+					 {tankName:"Fertilizer1",     chipNo:0, mcpMotorPort:9,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer1-const-input", orderBox:"fertilizer1-order-input", inputBox:"fertilizer1-input", testFlowRateButton:"button-constant-test-fertilizer1"},
+					 {tankName:"Fertilizer2",     chipNo:0, mcpMotorPort:10, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer2-const-input", orderBox:"fertilizer2-order-input", inputBox:"fertilizer2-input", testFlowRateButton:"button-constant-test-fertilizer2"},
+					 {tankName:"Fertilizer3",     chipNo:0, mcpMotorPort:11, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer3-const-input", orderBox:"fertilizer3-order-input", inputBox:"fertilizer3-input", testFlowRateButton:"button-constant-test-fertilizer3"},
+					 {tankName:"Fertilizer4",     chipNo:0, mcpMotorPort:12, mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer4-const-input", orderBox:"fertilizer4-order-input", inputBox:"fertilizer4-input", testFlowRateButton:"button-constant-test-fertilizer4"},
+					 {tankName:"Fertilizer5",     chipNo:0, mcpMotorPort:13, mcpVolumePort:15,  rateTime:10, orderNum:0, isNC:0, flowRateBox:"fertilizer5-const-input", orderBox:"fertilizer5-order-input", inputBox:"fertilizer5-input", testFlowRateButton:"button-constant-test-fertilizer5"},
+					 {tankName:"Surfactant",      chipNo:0, mcpMotorPort:3,  mcpVolumePort:15,  rateTime:10, orderNum:0, isNC:0, flowRateBox:"surfactant-const-input", orderBox:"surfactant-order-input", inputBox:"surfactant-input", testFlowRateButton:"button-constant-test-surfactant"},
+					 {tankName:"WaterCleanTube",  chipNo:0, mcpMotorPort:15,  mcpVolumePort:15, rateTime:10, orderNum:0, isNC:0, flowRateBox:"water-clean-tube-const-input", orderBox:"water-clean-tube-order-input", inputBox:"water-clean-tube-input", testFlowRateButton:"button-constant-test-water-clean-tube"}];
 		
-		var chemicalFeederArray = [{tankName:"Fungicides5", chipNo:3, mcpMotorPort1:8, mcpMotorPort2:9, mcpMotorEnablePort:2, mcpShakePort:15, mcpShakeEnablePort:14, rateTime:95, orderNum:0, flowRateBox:"fungicides5-const-input", orderBox:"fungicides5-order-input", inputBox:"fungicides5-input", testFlowRateButton:"button-constant-test-fungicides5"},
-							       {tankName:"Insect6", chipNo:3, mcpMotorPort1:10, mcpMotorPort2:11, mcpMotorEnablePort:10,  mcpShakePort:15, mcpShakeEnablePort:14, rateTime:150, orderNum:0, flowRateBox:"insect6-const-input", orderBox:"insect6-order-input", inputBox:"insect6-input", testFlowRateButton:"button-constant-test-insect6"}];
+		var chemicalPowderTankArray = [{tankName:"PowderMixingTank1", chipNo:0, mcpPumpMotorPort:0,  mcpMixingMotorPort:8, rateTime:10,  orderNum:0,  flowRateBox:"powder-mixing-tank1-const-input", orderBox:"powder-mixing-tank1-order-input", inputBox:"powder-mixing-tank1-input", testFlowRateButton:"button-constant-test-powder-mixing-tank1"},
+					   {tankName:"PowderMixingTank2", chipNo:0, mcpPumpMotorPort:1,  mcpMixingMotorPort:8, rateTime:10, orderNum:0,  flowRateBox:"powder-mixing-tank2-const-input", orderBox:"powder-mixing-tank2-order-input", inputBox:"powder-mixing-tank2-input", testFlowRateButton:"button-constant-test-powder-mixing-tank2"}];
 	
 		var mixingTank = {tankName:"Water", volumeGpioPort:5, maxVolumeGpioPort:11, waterValveGpioPort:20, drainValveGpioPort:21, windCompressValveGpioPort:8, rateTime:10, initialVolume:80, flowRateBox:"water-const-input", inputBox:"water-input", testFlowRateButton:"button-constant-test-water"};
 		
@@ -183,12 +183,12 @@
 					<div class="div-test-constant-rate-template div-test-constant-rate-fungicides4"><button class="button-test-constant-rate" id="button-constant-test-fungicides4">Test</button></div>
 						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides4-const-input" class="input-constant-template constant-rate-input-fungicides4" Onkeypress="return IsNumberKey(event)" disabled=true>
 						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides4-order-input" class="input-order-template order-input-fungicides4" Onkeypress="return IsNumberKey(event)" disabled=true>
-		  <span class="span-label-template span-fungicides5-label">ยาเชื้อรา5(ผง)</span>
-			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides5-input" class="input-volume-template input-fungicides5"> 
-				<span class="span-unit span-unit-fungicides5-input ">CC</span> 
-					<div class="div-test-constant-rate-template div-test-constant-rate-fungicides5"><button class="button-test-constant-rate" id="button-constant-test-fungicides5">Test</button></div>
-						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides5-const-input" class="input-constant-template constant-rate-input-fungicides5" Onkeypress="return IsNumberKey(event)" disabled=true>
-						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="fungicides5-order-input" class="input-order-template order-input-fungicides5" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-powder-mixing-tank1-label">ยาผง1</span>
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="powder-mixing-tank1-input" class="input-volume-template input-powder-mixing-tank1"> 
+				<span class="span-unit span-unit-powder-mixing-tank1-input ">CC</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-powder-mixing-tank1"><button class="button-test-constant-rate" id="button-constant-test-powder-mixing-tank1">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="powder-mixing-tank1-const-input" class="input-constant-template constant-rate-input-powder-mixing-tank1" Onkeypress="return IsNumberKey(event)" disabled=true>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="powder-mixing-tank1-order-input" class="input-order-template order-input-powder-mixing-tank1" Onkeypress="return IsNumberKey(event)" disabled=true>
 		  
 		  <span class="span-label-template span-insect1-label">ยาแมลง1</span> 
 			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect1-input" class="input-volume-template input-insect1"> 
@@ -220,12 +220,12 @@
 					<div class="div-test-constant-rate-template div-test-constant-rate-insect5"><button class="button-test-constant-rate" id="button-constant-test-insect5">Test</button></div>
 						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect5-const-input" class="input-constant-template constant-rate-input-insect5" Onkeypress="return IsNumberKey(event)" disabled=true>
 						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect5-order-input" class="input-order-template order-input-insect5" Onkeypress="return IsNumberKey(event)" disabled=true>
-		  <span class="span-label-template span-insect6-label">ยาแมลง6(ผง)</span> 
-			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect6-input" class="input-volume-template input-insect6"> 
-				<span class="span-unit span-unit-insect6-input ">CC</span> 
-					<div class="div-test-constant-rate-template div-test-constant-rate-insect6"><button class="button-test-constant-rate" id="button-constant-test-insect6">Test</button></div>
-						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect6-const-input" class="input-constant-template constant-rate-input-insect6" Onkeypress="return IsNumberKey(event)" disabled=true>
-						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="insect6-order-input" class="input-order-template order-input-insect6" Onkeypress="return IsNumberKey(event)" disabled=true>
+		  <span class="span-label-template span-powder-mixing-tank2-label">ยาผง2</span> 
+			<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="powder-mixing-tank2-input" class="input-volume-template input-powder-mixing-tank2"> 
+				<span class="span-unit span-unit-powder-mixing-tank2-input ">CC</span> 
+					<div class="div-test-constant-rate-template div-test-constant-rate-powder-mixing-tank2"><button class="button-test-constant-rate" id="button-constant-test-powder-mixing-tank2">Test</button></div>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="powder-mixing-tank2-const-input" class="input-constant-template constant-rate-input-powder-mixing-tank2" Onkeypress="return IsNumberKey(event)" disabled=true>
+						<input type="text" value="0" Onkeypress="return IsNumberKey(event)" id="powder-mixing-tank2-order-input" class="input-order-template order-input-powder-mixing-tank2" Onkeypress="return IsNumberKey(event)" disabled=true>
 		  
 		  
 		  <span class="span-label-template span-fertilizer1-label">ปุ๋ย1</span> 
@@ -393,7 +393,7 @@
         handleAdInitialized, false);
     })();
   </script>
-</body>
+
 
  <script type="text/javascript">
 		
@@ -459,19 +459,16 @@
 				}
 	
 				
-				var chemicalFeederLen = chemicalFeederArray.length;
-				var chemicalFeederAddedCount = 0;
-				for(index = 0; index < chemicalFeederLen; index++)
+				var chemicalPowderTankLen = chemicalPowderTankArray.length;
+				var chemicalPowderTankAddedCount = 0;
+				for(index = 0; index < chemicalPowderTankLen; index++)
 				{
-					webiopi().callMacro("AddChemicalFeeder", [chemicalFeederArray[index].tankName, 
-										  chemicalFeederArray[index].chipNo,
-										  chemicalFeederArray[index].mcpMotorPort1,
-										  chemicalFeederArray[index].mcpMotorPort2,
-										  chemicalFeederArray[index].mcpMotorEnablePort,
-										  chemicalFeederArray[index].mcpShakePort,
-										  chemicalFeederArray[index].mcpShakeEnablePort,
-										  chemicalFeederArray[index].rateTime], function(acro, args, data){chemicalFeederAddedCount++;});
-					//chemicalFeederAddedCount++;
+					webiopi().callMacro("AddChemicalPowderTank", [chemicalPowderTankArray[index].tankName, 
+										  chemicalPowderTankArray[index].chipNo,
+										  chemicalPowderTankArray[index].mcpPumpMotorPort,
+										  chemicalPowderTankArray[index].mcpMixingMotorPort,
+										  chemicalPowderTankArray[index].rateTime], function(acro, args, data){chemicalPowderTankAddedCount++;});
+					//chemicalPowderTankAddedCount++;
 				}
 				
 			
@@ -491,35 +488,28 @@
 									function()
 									{
 										if(isMachineInitialed && isMixingTankAdded &&
-										   (chemicalFeederAddedCount == chemicalFeederLen) &&
+										   (chemicalPowderTankAddedCount == chemicalPowderTankLen) &&
 										   (chemicalTankAddedCount == chemicalTankLen) &&  
-										   (chemicalValveAddedCount == chemicalValveLen))
+										   (chemicalValveAddedCount == chemicalValveLen)&&
+										   (document.readyState === "complete" || document.readyState === "interactie") )
 										{
-										 
-										    UpdateChemicalRunningStatus();
-										    RestoreChemicalTankVolume();
-										    RestoreChemicalFeederVolume();
-										    RestoreMixingTankVolume();
-										    clearInterval(chemicalAllSetHandle);
+										  //Add timeout to fix error getElementByID function return null due to DOM is not read to load 
+										  setTimeout(function() {
+													  UpdateChemicalRunningStatus();
+													  RestoreChemicalTankVolume();
+													  RestoreChemicalPowderTankVolume();
+													  RestoreMixingTankVolume(); },1800);
+										  clearInterval(chemicalAllSetHandle);
 																
 											
 										}
 									}, 1000);
 				
 				
-				//var sensorLen = sensorArray.length
-				//for(index = 0; index < sensorLen; index++)
-				//{
-				//	webiopi().callMacro("AddSensor", [sensorArray[index].sensorName, sensorArray[index].analogPort] , null);
-				//}
-				
-				//setInterval(UpdateSensor, 2000);	
-
-                // Refresh GPIO buttons
-                // pass true to refresh repeatedly of false to refresh once
+		// pass true to refresh repeatedly of false to refresh once
                 webiopi().refreshGPIO(true);
-        });
-        
+        });									    
+										    
         function UpdateValveStateCallback(macro, args, data)
 		{
 			UpdateValveState(args, data);
@@ -710,7 +700,7 @@
 												gwd.actions.events.setInlineStyle(chemicalButtonArray.pumpingImage, 'visibility: visible; ');
 												//UpdateChemicalValveStatus();
 												//UpdateChemicalTankStatus();
-												//UpdateChemicaFeederStatus();
+												//UpdateChemicaPowderTankStatus();
 											}
 										});
 					webiopi().callMacro("IsChemicalModeError", 
@@ -763,7 +753,7 @@
 												gwd.actions.events.setInlineStyle(chemicalButtonArray.pumpingImage, 'visibility: hidden; ');
 												gwd.actions.events.setInlineStyle(chemicalButtonArray.pauseImage, 'visibility: hidden; ');
 												//UpdateChemicalTankStatus();
-												//UpdateChemicaFeederStatus();
+												//UpdateChemicaPowderTankStatus();
 												//UpdateChemicalValveStatus();
 											}
 										});
@@ -779,13 +769,13 @@
 												gwd.actions.events.setInlineStyle(chemicalButtonArray.pumpingImage, 'visibility: hidden; ');
 												gwd.actions.events.setInlineStyle(chemicalButtonArray.pauseImage, 'visibility: visible; ');
 											    //UpdateChemicalTankStatus();
-												//UpdateChemicaFeederStatus();
+												//UpdateChemicaPowderTankStatus();
 												//UpdateChemicalValveStatus();
 											}
 										});
 				    UpdateChemicalValveStatus();
 				    UpdateChemicalTankStatus();
-					UpdateChemicalFeederStatus();
+					UpdateChemicalPowderTankStatus();
 					
 				}, 
 				3000);
@@ -939,29 +929,29 @@
 			}
 		}
 		
-		function UpdateChemicalFeederStatus()
+		function UpdateChemicalPowderTankStatus()
 		{
 			var index;
-			var chemicalFeederLen = chemicalFeederArray.length;
-			for(index = 0; index < chemicalFeederLen; index++)
+			var chemicalPowderTankLen = chemicalPowderTankArray.length;
+			for(index = 0; index < chemicalPowderTankLen; index++)
 			{
 				webiopi().callMacro("IsChemicalInTankEnough", 
-										chemicalFeederArray[index].tankName, 
+										chemicalPowderTankArray[index].tankName, 
 										function(acro, args, data)
 										{
-											for(index = 0; index < chemicalFeederLen; index++)
+											for(index = 0; index < chemicalPowderTankLen; index++)
 											{	
-												if(chemicalFeederArray[index].tankName == args)
+												if(chemicalPowderTankArray[index].tankName == args)
 												{
 													if(data)
 													{								
-														document.getElementById(chemicalFeederArray[index].inputBox).disabled = false;
-														//document.getElementById(chemicalFeederArray[index].inputBox).value = '0';
+														document.getElementById(chemicalPowderTankArray[index].inputBox).disabled = false;
+														//document.getElementById(chemicalPowderTankArray[index].inputBox).value = '0';
 													}
 													else
 													{	
-														//document.getElementById(chemicalFeederArray[index].inputBox).value = 'None';
-														document.getElementById(chemicalFeederArray[index].inputBox).disabled = true;
+														//document.getElementById(chemicalPowderTankArray[index].inputBox).value = 'None';
+														document.getElementById(chemicalPowderTankArray[index].inputBox).disabled = true;
 													}	
 													return;						
 												}
@@ -985,7 +975,9 @@
 												if((chemicalTankArray[index].tankName == args) && (data != null))
 												{				 
 													var splitedOutput = data.split(',');
-													console.log(splitedOutput[0]);												
+													console.log(splitedOutput[0]);
+													console.log("Element: ",chemicalTankArray[index].inputBox);
+													console.log("Element: ",document.getElementById(chemicalTankArray[index].inputBox));												
 													document.getElementById(chemicalTankArray[index].inputBox).value = splitedOutput[0];
 													document.getElementById(chemicalTankArray[index].flowRateBox).value = splitedOutput[1];
 													document.getElementById(chemicalTankArray[index].orderBox).value = splitedOutput[2];
@@ -996,24 +988,24 @@
 			}
 		}
 		
-		function RestoreChemicalFeederVolume()
+		function RestoreChemicalPowderTankVolume()
 		{
 			var index;
-			var chemicalFeederLen = chemicalFeederArray.length;
-			for(index = 0; index < chemicalFeederLen; index++)
+			var chemicalPowderTankLen = chemicalPowderTankArray.length;
+			for(index = 0; index < chemicalPowderTankLen; index++)
 			{
 				webiopi().callMacro("GetChemicalValumeComponent", 
-										chemicalFeederArray[index].tankName, 
+										chemicalPowderTankArray[index].tankName, 
 										function(acro, args, data)
 										{
-											for(index = 0; index < chemicalFeederLen; index++)
+											for(index = 0; index < chemicalPowderTankLen; index++)
 											{	
-												if((chemicalFeederArray[index].tankName == args)  && (data != null))
+												if((chemicalPowderTankArray[index].tankName == args)  && (data != null))
 												{				 
 													var splitedOutput = data.split(',');
-													document.getElementById(chemicalFeederArray[index].inputBox).value = splitedOutput[0];
-													document.getElementById(chemicalFeederArray[index].flowRateBox).value = splitedOutput[1];
-													document.getElementById(chemicalFeederArray[index].orderBox).value = splitedOutput[2];
+													document.getElementById(chemicalPowderTankArray[index].inputBox).value = splitedOutput[0];
+													document.getElementById(chemicalPowderTankArray[index].flowRateBox).value = splitedOutput[1];
+													document.getElementById(chemicalPowderTankArray[index].orderBox).value = splitedOutput[2];
 													return;						
 												}
 											}
@@ -1155,14 +1147,14 @@
 		
 		}
 		
-		var chemicalFeederLen = chemicalFeederArray.length;
-		for(index = 0; index < chemicalFeederLen; index++)
+		var chemicalPowderTankLen = chemicalPowderTankArray.length;
+		for(index = 0; index < chemicalPowderTankLen; index++)
 		{
 			webiopi().callMacro("SetChemicalVolumeComponent", 
-								[chemicalFeederArray[index].tankName, 
-								 document.getElementById(chemicalFeederArray[index].inputBox).value, 
-								 document.getElementById(chemicalFeederArray[index].flowRateBox).value , 
-								 document.getElementById(chemicalFeederArray[index].orderBox).value] , 
+								[chemicalPowderTankArray[index].tankName, 
+								 document.getElementById(chemicalPowderTankArray[index].inputBox).value, 
+								 document.getElementById(chemicalPowderTankArray[index].flowRateBox).value , 
+								 document.getElementById(chemicalPowderTankArray[index].orderBox).value] , 
 								function(acro, args, data)
 								{
 									callingVolumeCount++;
@@ -1183,7 +1175,7 @@
 		var chemicalAllValueSetHandle = setInterval(
 													function()
 													{
-														if(callingVolumeCount >= chemicalTankLen + chemicalFeederLen + 1)
+														if(callingVolumeCount >= chemicalTankLen + chemicalPowderTankLen + 1)
 														{
 															webiopi().callMacro("ExecutionChemicalAuto", 
 																				 null, 
@@ -1197,11 +1189,11 @@
 																					
 																					}
 																					
-																					for(index = 0; index < chemicalFeederLen; index++)
+																					for(index = 0; index < chemicalPowderTankLen; index++)
 																					{
-																						document.getElementById(chemicalFeederArray[index].flowRateBox).disabled = true;
-																						document.getElementById(chemicalFeederArray[index].orderBox).disabled = true;
-																						document.getElementById(chemicalFeederArray[index].testFlowRateButton).style.visibility = 'hidden';
+																						document.getElementById(chemicalPowderTankArray[index].flowRateBox).disabled = true;
+																						document.getElementById(chemicalPowderTankArray[index].orderBox).disabled = true;
+																						document.getElementById(chemicalPowderTankArray[index].testFlowRateButton).style.visibility = 'hidden';
 																					
 																					}
 																					
@@ -1258,14 +1250,14 @@
 		
 		}
 		
-		var chemicalFeederLen = chemicalFeederArray.length;
-		for(index = 0; index < chemicalFeederLen; index++)
+		var chemicalPowderTankLen = chemicalPowderTankArray.length;
+		for(index = 0; index < chemicalPowderTankLen; index++)
 		{
 			webiopi().callMacro("SetChemicalVolumeComponent", 
-								[chemicalFeederArray[index].tankName, 
-								 document.getElementById(chemicalFeederArray[index].inputBox).value, 
-								 document.getElementById(chemicalFeederArray[index].flowRateBox).value ,
-								 document.getElementById(chemicalFeederArray[index].orderBox).value] , 
+								[chemicalPowderTankArray[index].tankName, 
+								 document.getElementById(chemicalPowderTankArray[index].inputBox).value, 
+								 document.getElementById(chemicalPowderTankArray[index].flowRateBox).value ,
+								 document.getElementById(chemicalPowderTankArray[index].orderBox).value] , 
 								function(acro, args, data)
 								{
 									callingVolumeCount++;
@@ -1286,7 +1278,7 @@
 		var groundChemicalAllValueSetHandle = setInterval(
 													function()
 													{
-														if(callingVolumeCount >= chemicalTankLen + chemicalFeederLen + 1)
+														if(callingVolumeCount >= chemicalTankLen + chemicalPowderTankLen + 1)
 														{
 															webiopi().callMacro("ExecutionChemicalGroundAuto", 
 																				 1, 
@@ -1448,12 +1440,12 @@
 				document.getElementById(chemicalTankArray[index].testFlowRateButton).style.visibility = 'visible';
 			}
 			
-			var chemicalFeederLen = chemicalFeederArray.length;
-			for(index = 0; index < chemicalFeederLen; index++)
+			var chemicalPowderTankLen = chemicalPowderTankArray.length;
+			for(index = 0; index < chemicalPowderTankLen; index++)
 			{
-				document.getElementById(chemicalFeederArray[index].flowRateBox).disabled = false;
-				document.getElementById(chemicalFeederArray[index].orderBox).disabled = false;
-				document.getElementById(chemicalFeederArray[index].testFlowRateButton).style.visibility = 'visible';
+				document.getElementById(chemicalPowderTankArray[index].flowRateBox).disabled = false;
+				document.getElementById(chemicalPowderTankArray[index].orderBox).disabled = false;
+				document.getElementById(chemicalPowderTankArray[index].testFlowRateButton).style.visibility = 'visible';
 			}
 			
 			document.getElementById(mixingTank.flowRateBox).disabled = false;
@@ -1483,9 +1475,9 @@
 		webiopi().callMacro("TestChemicalRate", chemicalTankArray[3].tankName, null);
     };
     
-    gwd.Fungicides5FlowRateButtonClick = function(event) 
+    gwd.PowderMixingTank1FlowRateButtonClick = function(event) 
     {
-		webiopi().callMacro("TestChemicalRate", chemicalFeederArray[0].tankName, null);
+		webiopi().callMacro("TestChemicalRate", chemicalPowderTankArray[0].tankName, null);
     };
     
     gwd.Insect1FlowRateButtonClick = function(event) 
@@ -1513,9 +1505,9 @@
 		webiopi().callMacro("TestChemicalRate", chemicalTankArray[8].tankName, null);
     };
     
-    gwd.Insect6FlowRateButtonClick = function(event) 
+    gwd.PowderMixingTank2FlowRateButtonClick = function(event) 
     {
-		webiopi().callMacro("TestChemicalRate", chemicalFeederArray[1].tankName, null);
+		webiopi().callMacro("TestChemicalRate", chemicalPowderTankArray[1].tankName, null);
     };
     
     gwd.Fertilizer1FlowRateButtonClick = function(event) 
@@ -1796,13 +1788,13 @@
       gwd.actions.events.addHandler(chemicalTankArray[1].testFlowRateButton, 'click', gwd.Fungicides2FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[2].testFlowRateButton, 'click', gwd.Fungicides3FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[3].testFlowRateButton, 'click', gwd.Fungicides4FlowRateButtonClick, false);
-      gwd.actions.events.addHandler(chemicalFeederArray[0].testFlowRateButton, 'click', gwd.Fungicides5FlowRateButtonClick, false);
+      gwd.actions.events.addHandler(chemicalPowderTankArray[0].testFlowRateButton, 'click', gwd.PowderMixingTank1FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[4].testFlowRateButton, 'click', gwd.Insect1FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[5].testFlowRateButton, 'click', gwd.Insect2FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[6].testFlowRateButton, 'click', gwd.Insect3FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[7].testFlowRateButton, 'click', gwd.Insect4FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[8].testFlowRateButton, 'click', gwd.Insect5FlowRateButtonClick, false);
-      gwd.actions.events.addHandler(chemicalFeederArray[1].testFlowRateButton, 'click', gwd.Insect6FlowRateButtonClick, false);
+      gwd.actions.events.addHandler(chemicalPowderTankArray[1].testFlowRateButton, 'click', gwd.PowderMixingTank2FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[9].testFlowRateButton, 'click', gwd.Fertilizer1FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[10].testFlowRateButton, 'click', gwd.Fertilizer2FlowRateButtonClick, false);
       gwd.actions.events.addHandler(chemicalTankArray[11].testFlowRateButton, 'click', gwd.Fertilizer3FlowRateButtonClick, false);
@@ -1906,13 +1898,13 @@
       gwd.actions.events.removeHandler(chemicalTankArray[1].testFlowRateButton, 'click', gwd.Fungicides2FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[2].testFlowRateButton, 'click', gwd.Fungicides3FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[3].testFlowRateButton, 'click', gwd.Fungicides4FlowRateButtonClick, false);
-      gwd.actions.events.removeHandler(chemicalFeederArray[0].testFlowRateButton, 'click', gwd.Fungicides5FlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(chemicalPowderTankArray[0].testFlowRateButton, 'click', gwd.PowderMixingTank1FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[4].testFlowRateButton, 'click', gwd.Insect1FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[5].testFlowRateButton, 'click', gwd.Insect2FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[6].testFlowRateButton, 'click', gwd.Insect3FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[7].testFlowRateButton, 'click', gwd.Insect4FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[8].testFlowRateButton, 'click', gwd.Insect5FlowRateButtonClick, false);
-      gwd.actions.events.removeHandler(chemicalFeederArray[1].testFlowRateButton, 'click', gwd.Insect6FlowRateButtonClick, false);
+      gwd.actions.events.removeHandler(chemicalPowderTankArray[1].testFlowRateButton, 'click', gwd.PowderMixingTank2FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[9].testFlowRateButton, 'click', gwd.Fertilizer1FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[10].testFlowRateButton, 'click', gwd.Fertilizer2FlowRateButtonClick, false);
       gwd.actions.events.removeHandler(chemicalTankArray[11].testFlowRateButton, 'click', gwd.Fertilizer3FlowRateButtonClick, false);
@@ -1964,5 +1956,5 @@
     document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
     document.addEventListener("unload", gwd.actions.events.deregisterEventHandlers);
   </script>
-
+</body>
 </html>

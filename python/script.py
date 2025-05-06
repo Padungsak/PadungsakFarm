@@ -8,7 +8,7 @@ from valve import ValveImp
 from sensor import SensorImp
 from chemicalValve import ChemicalValveImp
 from chemicalTank import ChemicalTankImp
-from chemicalFeeder import ChemicalFeederImp
+from chemicalPowderTank import ChemicalPowderTankImp
 from mixingTank import MixingTankImp
 from constantRate import ConstantRate
 from chemicalOrderNum import ChemicalOrderNum
@@ -19,7 +19,7 @@ GPIO = webiopi.GPIO
 g_valveDict = {}
 g_sensorDict = {}
 g_chemicalValveDict = {}
-g_chemicalFeederDict = {}
+g_chemicalPowderTankDict = {}
 g_chemicalTankDict = {}
 g_mixingTank = 0
 g_chemicalMessage = ''
@@ -85,12 +85,12 @@ def AddChemicalTank(a_name, a_chipNo, a_mcpMotorPort, a_mcpVolumePort, a_rateTim
     if(a_name not in g_chemicalTankDict):
         g_chemicalTankDict[a_name] = ChemicalTankImp(a_name, int(a_chipNo), int(a_mcpMotorPort), int(a_mcpVolumePort), int(a_rateTime), int(a_isNC))
 
-#Add chemical feeder
+#Add chemical powder tank
 @webiopi.macro
-def AddChemicalFeeder(a_name, a_chipNo, a_mcpMotorPort1, a_mcpMotorPort2, a_mcpMotorEnablePort, a_mcpShakePort, a_mcpShakeEnablePort, a_rateTime):
-    global g_chemicalFeederDict
-    if(a_name not in g_chemicalFeederDict):
-        g_chemicalFeederDict[a_name] = ChemicalFeederImp(a_name, int(a_chipNo), int(a_mcpMotorPort1), int(a_mcpMotorPort2), int(a_mcpMotorEnablePort), int(a_mcpShakePort), int(a_mcpShakeEnablePort), int(a_rateTime))
+def AddChemicalPowderTank(a_name, a_chipNo, a_mcpPumpMotorPort, a_mcpMixingMotorPort, a_rateTime):
+    global g_chemicalPowderTankDict
+    if(a_name not in g_chemicalPowderTankDict):
+        g_chemicalPowderTankDict[a_name] = ChemicalPowderTankImp(a_name, int(a_chipNo), int(a_mcpPumpMotorPort), int(a_mcpMixingMotorPort), int(a_rateTime))
 
 		
 #Add chemical valve
@@ -493,10 +493,10 @@ def VerifyChemicalInputData():
             g_chemicalState = g_chemicalStateList['Error']
             return False
 
-    for l_feederObj in g_chemicalFeederDict.values():
-        l_chemicalInspectRet = l_feederObj.Inspection()
+    for l_powderTankObj in g_chemicalPowderTankDict.values():
+        l_chemicalInspectRet = l_powderTankObj.Inspection()
         if l_chemicalInspectRet == False:
-            g_chemicalMessage = l_feederObj.GetErrorMessage()
+            g_chemicalMessage = l_powderTankObj.GetErrorMessage()
             g_chemicalState = g_chemicalStateList['Error']
             return False
         
@@ -508,35 +508,25 @@ def VerifyChemicalInputData():
     return True
 
 def MixingTankProcessing():
-    #Check if chemical in tank is enough
-    l_isChemicalEnough = False
-    while l_isChemicalEnough == False:
-        for l_tankIndex, l_tankKey in enumerate(g_chemicalTankDict):           
-            if g_chemicalTankDict[l_tankKey].NeedToFillChemical():
-                webiopi.debug('NeedToFillChemical %d!!' % l_tankIndex)
-                l_isChemicalEnough = False
-                webiopi.sleep(1)
-                break
-            else:
-                l_isChemicalEnough = True
-                
     g_mixingTank.InitialWater()
     if g_mixingTank.IsMixingTankError():
         return False
 
-    l_sortedFeeder= sorted(g_chemicalFeederDict.values(), key=operator.attrgetter('m_orderNum'))
-    for l_feederObj in l_sortedFeeder:
+    l_mergedChemicalTank = {**g_chemicalPowderTankDict, **g_chemicalTankDict}
+    l_sortedChemicalTank = sorted(l_mergedChemicalTank.values(), key=lambda obj: obj.m_orderNum)
+    
+    for l_tankObj in l_sortedChemicalTank:
         EngineImp.getInstance().OpenMixPump()
-        l_feederObj.FeedChemical()
-
-    l_sortedTank= sorted(g_chemicalTankDict.values(), key=operator.attrgetter('m_orderNum'))              
-    for l_tankObj in l_sortedTank:
-        EngineImp.getInstance().OpenMixPump()
-        l_tankObj.FillChemical()
+        
+        if isinstance(l_tankObj, ChemicalTankImp):
+            l_tankObj.FillChemical()
+            if l_tankObj.IsVolumeSet():
+                CleanChemicalTube()
+        elif isinstance(l_tankObj, ChemicalPowderTankImp):
+            l_tankObj.FillPowderChemical()
+            
         if g_mixingTank.IsMixingTankError():
             return False
-        if l_tankObj.IsVolumeSet():
-            CleanChemicalTube()
 
     EngineImp.getInstance().CloseMixPump()
     #start motor for 10 min
@@ -613,16 +603,16 @@ def ClearChemicalEngine():
         l_tankObj.StopPump()
         webiopi.sleep(0.5)
 
-    for l_feederObj in g_chemicalFeederDict.values():
-        l_feederObj.StopFeeder()
+    for l_poederTankObj in g_chemicalPowderTankDict.values():
+        l_poederTankObj.StopPowderTank()
         webiopi.sleep(0.5)
 
 def ResetChemicalVolume():
     for l_tankObj in g_chemicalTankDict.values():
         l_tankObj.ResetChemicalVolume()
 
-    for l_feederObj in g_chemicalFeederDict.values():
-        l_feederObj.ResetChemicalVolume()
+    for l_poederTankObj in g_chemicalPowderTankDict.values():
+        l_poederTankObj.ResetChemicalVolume()
         
     g_mixingTank.ResetWaterVolume()
 	
@@ -630,8 +620,8 @@ def ResetChemicalVolume():
 def TestChemicalRate(a_name):
     if(a_name in g_chemicalTankDict):
         g_chemicalTankDict[a_name].TestFlowRate()
-    elif(a_name in g_chemicalFeederDict):
-        g_chemicalFeederDict[a_name].TestFeedRate()
+    elif(a_name in g_chemicalPowderTankDict):
+        g_chemicalPowderTankDict[a_name].TestFlowRate()
         
 
 @webiopi.macro
@@ -643,16 +633,16 @@ def SetChemicalVolumeComponent(a_name, a_volume, a_constRate, a_order):
     if(a_name in g_chemicalTankDict):
         g_chemicalTankDict[a_name].SetChemicalVolume(float(a_volume))
         g_chemicalTankDict[a_name].SetChemicalConstRate(float(a_constRate), int(a_order))
-    elif(a_name in g_chemicalFeederDict):
-        g_chemicalFeederDict[a_name].SetChemicalVolume(float(a_volume))
-        g_chemicalFeederDict[a_name].SetChemicalConstRate(float(a_constRate), int(a_order))
+    elif(a_name in g_chemicalPowderTankDict):
+        g_chemicalPowderTankDict[a_name].SetChemicalVolume(float(a_volume))
+        g_chemicalPowderTankDict[a_name].SetChemicalConstRate(float(a_constRate), int(a_order))
 
 @webiopi.macro
 def GetChemicalValumeComponent(a_name):
     if(a_name in g_chemicalTankDict):
         return g_chemicalTankDict[a_name].GetChemicalVolume()
-    elif(a_name in g_chemicalFeederDict):
-        return g_chemicalFeederDict[a_name].GetChemicalVolume()
+    elif(a_name in g_chemicalPowderTankDict):
+        return g_chemicalPowderTankDict[a_name].GetChemicalVolume()
     return "0,0,0"
         
 @webiopi.macro
@@ -679,8 +669,8 @@ def GetGroundChemicalVolumeComponent(a_name):
 def IsChemicalInTankEnough(a_name):
     if(a_name in g_chemicalTankDict):
         return g_chemicalTankDict[a_name].IsChemicalInTankEnough()
-    elif(a_name in g_chemicalFeederDict):
-        return g_chemicalFeederDict[a_name].IsChemicalInTankEnough()
+    elif(a_name in g_chemicalPowderTankDict):
+        return g_chemicalPowderTankDict[a_name].IsChemicalInTankEnough()
     return False
 
 @webiopi.macro
