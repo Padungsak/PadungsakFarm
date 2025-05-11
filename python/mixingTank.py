@@ -98,7 +98,7 @@ class MixingTankImp:
         return True
     
     def InitialWind(self):
-        l_windRateForInitial = 60
+        l_windRateForInitial = 20
         self.CompressWind(l_windRateForInitial)
     
     def CompressWind(self, a_windDelay):

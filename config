@@ -4,7 +4,8 @@
 #23 = OUT 0
 #24 = OUT 0
 #25 = OUT 1
-5 = IN
+9 = IN
+10 = IN
 6 = OUT 1
 13 = OUT 1
 19 = OUT 1
@@ -131,7 +132,7 @@ mcp7 = MCP23017 slave:0x27
 # Use gpio-export to limit GPIO available through REST API  
 #gpio-export = 21, 23, 24, 25
 #gpio-export = 2, 3, 4, 17, 27, 22, 5, 6, 13, 14, 15, 18, 23, 24, 25, 12, 16
-gpio-export = 5, 6, 13, 19, 26, 20, 21, 12, 16, 7, 8, 15, 18
+gpio-export = 9, 10, 6, 13, 19, 26, 20, 21, 12, 16, 7, 8, 15, 18
 
 
 # Uncomment to forbid changing GPIO values 
